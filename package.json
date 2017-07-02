@@ -72,7 +72,6 @@
     "karma-xml-reporter": "0.1.4",
     "mockery": "2.0.0",
     "npm-html2js": "0.1.8",
-    "phantomjs-polyfill-find": "ptim/phantomjs-polyfill-find",
     "phantomjs-polyfill-find": "0.0.1",
     "phantomjs-prebuilt": "2.1.14",
     "requirejs": "2.3.3",
