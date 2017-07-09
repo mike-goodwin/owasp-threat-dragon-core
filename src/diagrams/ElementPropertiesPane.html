@@ -1,4 +1,5 @@
 ﻿<form name="elementPropertiesEditForm">
+    // Show these properties for all selected items (except trust boundaries)
     <div>
         <div class="form-group">
             <label>Name</label>
@@ -14,12 +15,14 @@
         <label>Reason for out of scope</label>
         <textarea name="textareaReasonOutOfScope" ng-disabled="!selected.outOfScope" rows="4" class="form-control" type="text" ng-model="selected.reasonOutOfScope" ng-change="edit()" placeholder="Reason for out of scope"></textarea>
     </div>
+     // Show this property if selected item is a process type
     <div ng-show="elementType === 'tm.Process'">
         <div class="form-group">
             <label>Privilege level</label>
             <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" class="form-control" type="text" ng-model="selected.privilegeLevel" ng-change="edit()" placeholder="Privilege level" />
         </div>
     </div>
+    // Show this property if selected item is a external / internal actor type
     <div ng-show="elementType === 'tm.Actor'">
         <div class="checkbox">
             <label>
@@ -27,6 +30,7 @@
             </label>
         </div>
     </div>
+    // Show these properties if selected item is a data store type
     <div ng-show="elementType === 'tm.Store'">
         <div class="checkbox">
             <label>
@@ -48,13 +52,14 @@
                 <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSigned" ng-change="edit()" /> Is signed
             </label>
         </div>
-    </div>
+    </div>    
+    // Show these properties if selected item is a data flow type
     <div ng-show="elementType === 'tm.Flow'">
         <div class="form-group">
             <label>Protocol</label>
             <input name="inputProtocol" ng-disabled="selected.outOfScope" class="form-control" type="text" ng-model="selected.protocol" ng-change="edit()" placeholder="Protocol" />
         </div>
-        <div class="checkbox">
+        <div class="checkbox"> 
             <label>
                 <input name="checkboxIsEncryptedFlow" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncrypted" ng-change="edit()" /> Is encrypted
             </label>
@@ -65,4 +70,5 @@
             </label>
         </div>
     </div>
+    // Note: At present no properties to show for trust boundaries 
 </form>
