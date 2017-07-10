@@ -3,6 +3,16 @@
         <div class="col-lg-2">
             <!--Diagram stencil-->
             <uib-accordion close-others="true">
+                <!--Project pane-->
+                <div uib-accordion-group is-open="vm.viewThreats">
+                    <uib-accordion-heading>
+                        Edit project <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.viewThreats, 'glyphicon-chevron-right': !vm.viewThreats}"></i>
+                    </uib-accordion-heading>
+                    <div>
+                        <em>This is a placeholder to allow editing of the project details</em>
+                    </div>
+                </div>
+                <!--Diagram pane-->
                 <div uib-accordion-group is-open="vm.viewStencil">
                     <uib-accordion-heading>
                         Edit diagram <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.viewStencil, 'glyphicon-chevron-right': !vm.viewStencil}"></i>
@@ -12,7 +22,7 @@
                             <tmt-stencil class="stencil" shape="stencil.shape" padding="5" scale="0.9" action="stencil.action()" />
                         </div>
                     </div>
-                </div
+                </div>
                 <!--Threat pane-->
                 <div uib-accordion-group is-open="vm.viewThreats">
                     <uib-accordion-heading>
