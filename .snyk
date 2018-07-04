@@ -1,8 +1,17 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.8.0
+version: v1.12.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:uglify-js:20151024':
     - nools > uglify-js:
         patched: '2017-11-29T22:08:34.143Z'
+  'npm:lodash:20180130':
+    - jointjs > lodash:
+        patched: '2018-07-04T01:13:05.254Z'
+    - jointjs > graphlib > lodash:
+        patched: '2018-07-04T01:13:05.254Z'
+    - jointjs > dagre > lodash:
+        patched: '2018-07-04T01:13:05.254Z'
+    - jointjs > dagre > graphlib > lodash:
+        patched: '2018-07-04T01:13:05.254Z'

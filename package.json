@@ -16,7 +16,8 @@
     "citest": "./node_modules/.bin/karma start --single-run false --browsers Chrome",
     "codecov": "./node_modules/.bin/codecov",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "prepare": "npm run snyk-protect"
   },
   "description": "OWASP Threat Dragon core module",
   "author": {
@@ -41,7 +42,7 @@
     "lodash": "4.13.1",
     "nools": "0.4.4",
     "toastr": "2.1.2",
-    "snyk": "^1.52.0"
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "angular-mocks": "1.6.7",
