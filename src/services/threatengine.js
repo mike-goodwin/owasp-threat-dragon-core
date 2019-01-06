@@ -48,7 +48,20 @@ function threatengine() {
 
     function initialiseFlow(flowName) {
         return nools.flow(flowName, function (flow) {
-
+            flow.rule('Plain Text Password Storage', [
+                ['and',
+                    [Element, 'el', 'el.element.attributes.type == "tm.Store"'],
+                    [Element, 'el', 'isTrue(el.element.storesCredentials)']
+                ],
+                [Threats, 'threats']
+            ], function (facts) {
+                facts.threats.collection.push({ ruleId: 'b2a6d40d-d3f8-4750-8e4d-c02ca84b13dd', 
+                title: 'User Password Disclosure Threat', 
+                type: 'Spoofing', 
+                status: 'Open', 
+                severity: 'High', 
+                description: 'Passwords should not be stored as plain text' });
+            });
             flow.rule('Generic Spoofing Threat Rule', [
                 ['or',
                     [Element, 'el', 'el.element.attributes.type == "tm.Process"'],
