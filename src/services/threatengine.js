@@ -57,7 +57,7 @@ function threatengine() {
                 type: 'Spoofing', 
                 status: 'Open', 
                 severity: 'High', 
-                description: 'Passwords should not be stored as plain text' });
+                description: 'Passwords should not be stored as plain text. \nTesting' });
             });
             flow.rule('Generic Spoofing Threat Rule', [
                 ['or',
