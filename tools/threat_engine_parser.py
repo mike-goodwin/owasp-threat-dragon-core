@@ -24,7 +24,7 @@ class rule:
         rule_string = rule_string+'\t\t\ttype:\''+self.type+'\',\n' 
         rule_string = rule_string+'\t\t\tstatus:\''+self.status+'\',\n'     
         rule_string = rule_string+'\t\t\tseverity:\''+self.severity+'\',\n'
-        rule_string = rule_string+'\t\t\tdescription:\''+self.description.replace('.','. ')+'\'});\n\n'
+        rule_string = rule_string+'\t\t\tdescription:\''+self.description.replace('.','. ').replace('\'','\\''')+'\'});});\n\n'
         self.rule_string = rule_string
     
 
