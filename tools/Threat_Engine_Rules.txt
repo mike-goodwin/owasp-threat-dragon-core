@@ -1,0 +1,480 @@
+Threat Engine Rule Generation Logic
+The following rules are primarily derived from vulnerabilities documented in OWASP archives and chosen in their application to eHealth systems.
+Authentication and Authorization 
+1. Empty String Password
+Title
+Empty String Password
+Rule Activation Logic
+el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)
+Rule ID
+1.1
+STRIDE Type
+Information disclosure
+Status
+Open
+Severity
+High
+Description
+Using an empty string as a password is insecure.
+It is never appropriate to use an empty string as a password. It is too easy to guess. An empty string password makes the authentication as weak as the user names, which are normally public or guessable. This makes a brute-force attack against the login interface much easier.
+ 
+2. Password in Configuration File
+Title
+Password in Configuration File
+Rule Activation Logic
+el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)
+Rule ID
+1.2
+STRIDE Type
+Information disclosure
+Status
+Open
+Severity
+Medium
+Description
+Storing a password in a configuration file allows anyone who can read the file access to the password-protected resource. Developers sometimes believe that they cannot defend the application from someone who has access to the configuration, but this attitude makes an attacker's job easier. 
+ 
+3. Hardcoded Password
+Title
+Hardcoded Password
+Rule Activation Logic
+el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)
+Rule ID
+1.3
+STRIDE Type
+Information disclosure
+Status
+Open
+Severity
+High
+Description
+Hardcoded passwords may compromise system security in a way that cannot be easily remedied.
+It is never a good idea to hardcode a password. Not only does hardcoding a password allow all the project\'s developers to view the password, it also makes fixing the problem extremely difficult. Once the code is in production, the password cannot be changed without patching the software. If the account protected by the password is compromised, the owners of the system will be forced to choose between security and availability.
+ 
+4. Password Plaintext Storage
+Title
+Password Plaintext Storage
+Rule Activation Logic
+el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)
+Rule ID
+1.4
+STRIDE Type
+Information disclosure
+Status
+Open
+Severity
+High
+Description
+Storing a password in plaintext may result in a system compromise.
+Password management issues occur when a password is stored in plaintext in an application's properties or configuration file. A programmer can attempt to remedy the password management problem by obscuring the password with an encoding function, such as base 64 encoding, but this effort does not adequately protect the password.
+5. Least Privilege Violation 
+Title
+Least Privilege Violation
+Rule Activation Logic
+el.element.attributes.type == "tm.Process" 
+Rule ID
+1.5
+STRIDE Type
+Elevation of privilege
+Status
+Open
+Severity
+Medium
+Description
+The elevated privilege level required to perform operations such as chroot() should be dropped immediately after the operation is performed.
+When a program calls a privileged function, such as chroot(), it must first acquire root privilege. As soon as the privileged operation has completed, the program should drop root privilege and return to the privilege level of the invoking user.
+ 
+6. Code Permission (Development Lifecycle)
+Title
+Code Permission
+Rule Activation Logic
+el.element.attributes.type == "tm.Actor" 
+Rule ID
+1.6
+STRIDE Type
+Tampering
+Status
+Open
+Severity
+High
+Description
+An active developer with access to unrelated module code may tamper or disclose sensitive project information (Interproject Code Access).
+ 
+Code Quality
+1. Double Free Error
+Title
+Double Free Error
+Rule Activation Logic
+el.element.attributes.type == "tm.Process" 
+Rule ID
+2.1
+STRIDE Type
+Tampering
+Status
+Open
+Severity
+High
+Description
+Double free errors occur when free() is called more than once with the same memory address as an argument.
+Calling free() twice on the same value can lead to memory leak. When a program calls free() twice with the same argument, the program's memory management data structures become corrupted and could allow a malicious user to write values in arbitrary memory spaces. This corruption can cause the program to crash or, in some circumstances, alter the execution flow. By overwriting registers or memory spaces, an attacker can trick the program into executing code of his/her own choosing, often resulting in an interactive shell with elevated permissions.
+When a buffer is free()'d, a linked list of free buffers is read to rearrange and combine the chunks of free memory (to be able to allocate larger buffers in the future). These chunks are laid out in a double linked list which points to previous and next chunks. Unlinking an unused buffer (which is what happens when free() is called) could allow an attacker to write arbitrary values in memory; essentially overwriting valuable registers, calling shellcode from its own buffer.
+
+(Double Free Suggestion) Implementation: Ensure that each allocation is freed only once. After freeing a chunk, set the pointer to NULL to ensure the pointer cannot be freed again. In complicated error conditions, be sure that clean-up routines respect the state of allocation properly. If the language is object oriented, ensure that object destructors delete each chunk of memory only once.
+ 
+2. Leftover Debug Code
+Title
+Leftover Debug Code
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"
+Rule ID
+2.2
+STRIDE Type
+Tampering
+Status
+Open
+Severity
+Medium
+Description
+Debug code can create unintended entry points in a deployed web application.
+A common development practice is to add "back door" code specifically designed for debugging or testing purposes that is not intended to be shipped or deployed with the application. When this sort of debug code is accidentally left in the application, the application is open to unintended modes of interaction. These back-door entry points create security risks because they are not considered during design or testing and fall outside of the expected operating conditions of the application.
+ 
+3. Memory Leak
+Title
+Memory Leak
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"
+Rule ID
+2.3
+STRIDE Type
+Denial of service
+Status
+Open
+Severity
+High
+Description
+A memory leak is an unintentional form of memory consumption whereby the developer fails to free an allocated block of memory when no longer needed. The consequences of such an issue depend on the application itself. Consider the following general three cases:
+ 
+Short Lived User-land Application: Little if any noticeable effect. Modern operating system recollects lost memory after program termination.
+ 
+Long Lived User-land Application: Potentially dangerous. These applications continue to waste memory over time, eventually consuming all RAM resources. Leads to abnormal system behavior.
+ 
+Kernel-land Process: Memory leaks in the kernel level lead to serious system stability issues. Kernel memory is very limited compared to user land memory and should be handled cautiously.
+ 
+Memory is allocated but never freed. Memory leaks have two common and sometimes overlapping causes:
+ 
+-Error conditions and other exceptional circumstances.
+-Confusion over which part of the program is responsible for freeing the memory.
+ 
+Most memory leaks result in general software reliability problems, but if an attacker can intentionally trigger a memory leak, the attacker might be able to launch a denial of service attack (by crashing the program) or take advantage of other unexpected program behavior resulting from a low memory condition.
+ 
+ 
+4. Null Dereference
+Title
+Null Dereference
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"
+Rule ID
+2.4
+STRIDE Type
+Denial of service
+Status
+Open
+Severity
+Medium
+Description
+The program can potentially dereference a null pointer, thereby raising a NullPointerException. Null pointer errors are usually the result of one or more programmer assumptions being violated. Most null pointer issues result in general software reliability problems, but if an attacker can intentionally trigger a null pointer dereference, the attacker might be able to use the resulting exception to bypass security logic or to cause the application to reveal debugging information that will be valuable in planning subsequent attacks.
+ 
+A null-pointer dereference takes place when a pointer with a value of NULL is used as though it pointed to a valid memory area.
+ 
+Null-pointer dereferences, while common, can generally be found and corrected in a simple way. They will always result in the crash of the process, unless exception handling (on some platforms) is invoked, and even then, little can be done to salvage the process.
+ 
+5. Logging Practices
+Title
+Logging Practices
+Rule Activation Logic
+el.element.attributes.type == "tm.Store" && isTrue(el.element.isALog)
+Rule ID
+2.5
+STRIDE Type
+Denial of service
+Status
+Open
+Severity
+Low
+Description
+Declare Logger Object as Static and Final:
+It is good programming practice to share a single logger object between all of the instances of a particular class and to use the same logger for the duration of the program.
+Don’t Use Multiple Loggers:
+It is a poor logging practice to use multiple loggers rather than logging levels in a single class.
+Good logging practice dictates the use of a single logger that supports different logging levels for each class.
+Don’t Use System Output Stream:
+Using System.out or System.err rather than a dedicated logging facility makes it difficult to monitor the behavior of the program. It can also cause log messages accidentally returned to the end users, revealing internal information to attackers. While most programmers go on to learn many nuances and subtleties about Java, a surprising number hang on to this first lesson and never give up on writing messages to standard output using System.out.println().
+The problem is that writing directly to standard output or standard error is often used as an unstructured form of logging. Structured logging facilities provide features like logging levels, uniform formatting, a logger identifier, timestamps, and, perhaps most critically, the ability to direct the log messages to the right place. When the use of system output streams is jumbled together with the code that uses loggers properly, the result is often a well-kept log that is missing critical information. In addition, using system output streams can also cause log messages accidentally returned to end users, revealing application internal information to attackers.
+Developers widely accept the need for structured logging, but many continue to use system output streams in their "pre-production" development. If the code you are reviewing is past the initial phases of development, use of System.out or System.err may indicate an oversight in the move to a structured logging system.
+ 
+ 
+6. Portability
+Title
+Portability
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"
+Rule ID
+2.6
+STRIDE Type
+Tampering
+Status
+Open
+Severity
+Low
+Description
+Functions with inconsistent implementations across operating systems and operating system versions cause portability problems.
+ 
+The behavior of functions in this category varies by operating system, and at times, even by operating system version. Implementation differences can include:
+-Slight differences in the way parameters are interpreted, leading to inconsistent results.
+-Some implementations of the function carry significant security risks.
+-The function might not be defined on all platforms.
+ 
+7. Undefined Behavior **elaborate description
+Title
+Undefined Behavior
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"|| el.element.attributes.type == "tm.Store"
+Rule ID
+2.7
+STRIDE Type
+Tampering
+Status
+Open
+Severity
+Low
+Description
+The behavior of this function is undefined unless its control parameter is set to a specific value.
+The Linux Standard Base Specification 2.0.1 for libc places constraints on the arguments to some internal functions .
+
+ 
+8. Unreleased Resource
+Title
+Unreleased Resource
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"|| el.element.attributes.type == "tm.Store"
+Rule ID
+2.8
+STRIDE Type
+Denial of service
+Status
+Open
+Severity
+Medium
+Description
+Most unreleased resource issues result in general software reliability problems, but if an attacker can intentionally trigger a resource leak, the attacker might be able to launch a denial of service attack by depleting the resource pool. 
+Resource leaks have at least two common causes: 
+ -Error conditions and other exceptional circumstances. 
+ -Confusion over which part of the program is responsible for releasing the resource.
+ 
+
+9. Use of Obsolete Methods
+Title
+Use of Obsolete Methods
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"
+Rule ID
+2.9
+STRIDE Type
+Denial of service
+Status
+Open
+Severity
+Medium
+Description
+The use of deprecated or obsolete functions may indicate neglected code.
+ 
+As programming languages evolve, functions occasionally become obsolete due to:
+ 
+-Advances in the language
+-Improved understanding of how operations should be performed effectively and securely
+-Changes in the conventions that govern certain operations
+-Functions that are removed are usually replaced by newer counterparts that perform the same task in some different and hopefully improved way.
+
+Refer to the documentation for this function in order to determine why it is deprecated or obsolete and to learn about alternative ways to achieve the same functionality. The remainder of this text discusses general problems that stem from the use of deprecated or obsolete functions.
+
+Cryptography
+1. Sensitive Parameters in URI
+Title
+Sensitive Parameters in URI
+Rule Activation Logic
+el.element.attributes.type == "tm.Process"
+Rule ID
+3.1
+STRIDE Type
+Information Disclosure
+Status
+Open
+Severity
+Medium
+Description
+Information exposure through query strings in URL is when sensitive data is passed to parameters in the URL. This allows attackers to obtain sensitive data such as usernames, passwords, tokens (authX), database details, and any other potentially sensitive data. Simply using HTTPS does not resolve this vulnerability.
+
+
+
+
+2. Insecure Randomness
+Title
+Insecure Randomness
+Rule Activation Logic
+ (el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))
+Rule ID
+3.2
+STRIDE Type
+Information Disclosure
+Status
+Open
+Severity
+Medium
+Description
+Standard pseudo-random number generators cannot withstand cryptographic attacks.
+Insecure randomness errors occur when a function that can produce predictable values is used as a source of randomness in security-sensitive context.
+Computers are deterministic machines, and as such are unable to produce true randomness. Pseudo-Random Number Generators (PRNGs) approximate randomness algorithmically, starting with a seed from which subsequent values are calculated.
+There are two types of PRNGs: statistical and cryptographic. Statistical PRNGs provide useful statistical properties, but their output is highly predictable and forms an easy to reproduce numeric stream that is unsuitable for use in cases where security depends on generated values being unpredictable. Cryptographic PRNGs address this problem by generating output that is more difficult to predict. For a value to be cryptographically secure, it must be impossible or highly improbable for an attacker to distinguish between it and a truly random value. In general, if a PRNG algorithm is not advertised as being cryptographically secure, then it is probably a statistical PRNG and should not be used in security-sensitive contexts.
+
+3. Insufficient Entropy
+Title
+Insufficient Entropy
+Rule Activation Logic
+ (el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))
+Rule ID
+3.3
+STRIDE Type
+Information Disclosure
+Status
+Open
+Severity
+Medium
+Description
+When an undesirably low amount of entropy is available. Pseudo Random Number Generators are susceptible to suffering from insufficient entropy when they are initialized, because entropy data may not be available to them yet.
+In many cases a PRNG uses a combination of the system clock and entropy to create seed data. If insufficient entropy is available, an attacker can reduce the size magnitude of the seed value considerably. Furthermore, by guessing values of the system clock, they can create a manageable set of possible PRNG outputs.
+
+
+4. Testing for SSL-TLS
+Title
+Testing for SSL-TLS
+Rule Activation Logic
+ (el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))
+Rule ID
+3.4
+STRIDE Type
+Information Disclosure
+Status
+Open
+Severity
+Medium
+Description
+Visit https://www.owasp.org/index.php/Testing_for_SSL-TLS_(OWASP-CM-001) for more information.
+
+
+5. Testing for Weak SSL/TLS Ciphers, Insufficient TLS Protection
+Title
+Insufficient TLS Protection
+Rule Activation Logic
+ (el.element.attributes.type == "tm.Flow" && isFalse(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isFalse(el.element.isEncrypted))
+Rule ID
+3.5
+STRIDE Type
+Information Disclosure
+Status
+Open
+Severity
+High
+Description
+Sensitive data must be protected when it is transmitted through the network. Such data can include user credentials and credit cards. As a rule of thumb, if data must be protected when it is stored, it must be protected also during transmission.
+
+HTTP is a clear-text protocol and it is normally secured via an SSL/TLS tunnel, resulting in HTTPS traffic. The use of this protocol ensures not only confidentiality, but also authentication. Servers are authenticated using digital certificates and it is also possible to use client certificate for mutual authentication.
+
+Even if high grade ciphers are today supported and normally used, some misconfiguration in the server can be used to force the use of a weak cipher - or at worst no encryption - permitting to an attacker to gain access to the supposed secure communication channel. Other misconfiguration can be used for a Denial of Service attack.
+
+See: https://www.owasp.org/index.php/Testing_for_Weak_SSL/TLS_Ciphers,_Insufficient_Transport_Layer_Protection_(OTG-CRYPST-001) 
+ for more information
+
+
+6. Use of hard-coded cryptographic key
+Title
+Hard-coded Cryptographic Key
+Rule Activation Logic
+(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))
+Rule ID
+3.6
+STRIDE Type
+Information Disclosure
+Status
+Open
+Severity
+High
+Description
+The use of a hard-coded cryptographic key tremendously increases the possibility that encrypted data may be recovered.
+Authentication: If hard-coded cryptographic keys are used, it is almost certain that malicious users will gain access through the account in question.
+
+7. Using faulty cryptographic algorithm
+Title
+Faulty Cryptographic Algorithm
+Rule Activation Logic
+(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))
+Rule ID
+3.7
+STRIDE Type
+Information Disclosure
+Status
+Open
+Severity
+High
+Description
+Attempting to create non-standard and non-tested algorithms, using weak algorithms, or applying algorithms incorrectly will pose a high weakness to data that is meant to be secure.
+
+To do...
+Environment (Platform Vulnerabilities)
+1. Insecure Compiler Optimization
+2. Insecure Transport
+3. Insufficient Session-ID Length
+4. Undefined Behavior
+5. Path Vulnerability
+6. Mishandling Private Information (Privacy Violation)*
+ 
+Error Handling 
+1. Catch NullPointerException
+2. Empty Catch Block
+3. Missing Error Handling
+4. Return Inside Finally Block
+5. Unchecked Error Condition
+Input Validation
+1. Deserialization of untrusted data
+2. Expression Language Injection
+3. Form action hijacking
+4. Improper Data Validation
+5. Missing XML Validation
+6. Overly Permissive Regular Expression
+7. Process Control
+8. String Termination Error
+9. Unchecked Return Value
+10. Unsafe JNI
+11. Unsafe use of reflection
+Session Management
+1. Session Variable Overloading
+2. Insufficient Session-ID Length
+Mobile Risk *(separate)
+1. Weak Server Side Controls
+2. Insecure Data Storage
+3. Insufficient Transport Layer Protection
+4. Unintended Data Leakage
+5. Poor Authorization and Authentication
+6. Broken Cryptography
+7. Client Side Injection
+8. Security Decisions Via Untrusted Inputs
+9. Improper Session Handling
+10. Lack of Binary Protections
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
