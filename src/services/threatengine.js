@@ -52,7 +52,7 @@ function threatengine() {
                 [Element, 'el', 'el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)'],
                 [Threats, 'threats']
             ], function (facts) {
-                facts.threats.collection.push({ ruleId: 'b2a6d40d-d3f8-4750-8e4d-c02ca84b13dd', 
+                facts.threats.collection.push({ ruleId: '1.1', 
                 title: 'User Password Disclosure Threat', 
                 type: 'Spoofing', 
                 status: 'Open', 
@@ -66,7 +66,12 @@ function threatengine() {
                 ],
                 [Threats, 'threats']
             ], function (facts) {
-                facts.threats.collection.push({ ruleId: 'b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc', title: 'Generic spoofing threat', type: 'Spoofing', status: 'Open', severity: 'Medium', description: 'A generic spoofing threat' });
+                facts.threats.collection.push({ ruleId: 'b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc',
+                title: 'Generic spoofing threat',
+                type: 'Spoofing',
+                status: 'Open',
+                severity: 'Medium',
+                description: 'A generic spoofing threat' });
             });
 
             flow.rule('Generic Tampering Threat Rule', [
