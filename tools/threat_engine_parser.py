@@ -33,10 +33,11 @@ def parse():
 
     all_rule_string = ''
     rules = 'Threat_Engine_Rules.txt'
-    target_length = 7
+    
     targets = []
     grab_off = ['1. ','2. ','3. ','4. ','5. ','6. ','7. ','8. ','9. ','10. ','11. ','12. ','13. ','14. ','15. ','16. ','17. ','18. ','19. ','20. ','To do...']
     key_words = ['Title','Rule Activation Logic','Rule ID','STRIDE Type','Status','Severity','Description']
+    target_length = len(key_words)
     with open(rules,'r') as f:
         buffer = ''
         empty_buffer = ''
