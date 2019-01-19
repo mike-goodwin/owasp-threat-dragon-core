@@ -1,7 +1,7 @@
 #this script parses rule engine file and creates rules in json for for threatengine.js
 import time
 class rule:
-    def __init__(self,title,logic,id,type,status,severity,description):
+    def __init__(self,title,logic,id,type,status,severity,description, mitigation):
         self.title = title
         self.logic = logic
         self.id = id
@@ -9,6 +9,7 @@ class rule:
         self.status = status
         self.severity = severity
         self.description = description
+        self.mitigation = mitigation
         self.build_rule_string()
 
     def build_rule_string(self):
@@ -24,7 +25,8 @@ class rule:
         rule_string = rule_string+'\t\t\ttype:\''+self.type+'\',\n' 
         rule_string = rule_string+'\t\t\tstatus:\''+self.status+'\',\n'     
         rule_string = rule_string+'\t\t\tseverity:\''+self.severity+'\',\n'
-        rule_string = rule_string+'\t\t\tdescription:\''+self.description.replace('.','. ').replace('\'','\\''')+'\'});});\n\n'
+        rule_string = rule_string+'\t\t\tdescription:\''+self.description+'\',\n'
+        rule_string = rule_string+'\t\t\tmitigation:\''+self.mitigation.replace('.','. ').replace('\'','\\''')+'\'});});\n\n'
         self.rule_string = rule_string
     
 
@@ -33,11 +35,10 @@ def parse():
 
     all_rule_string = ''
     rules = 'Threat_Engine_Rules.txt'
-    
+    target_length = 8
     targets = []
     grab_off = ['1. ','2. ','3. ','4. ','5. ','6. ','7. ','8. ','9. ','10. ','11. ','12. ','13. ','14. ','15. ','16. ','17. ','18. ','19. ','20. ','To do...']
-    key_words = ['Title','Rule Activation Logic','Rule ID','STRIDE Type','Status','Severity','Description']
-    target_length = len(key_words)
+    key_words = ['Title','Rule Activation Logic','Rule ID','STRIDE Type','Status','Severity','Description', 'Mitigation(s)']
     with open(rules,'r') as f:
         buffer = ''
         empty_buffer = ''
@@ -62,7 +63,7 @@ def parse():
                 print('Rule Data Collection Complete')
                 print(count)
                 count = count + 1
-                new_rule = rule(targets[0],targets[1],targets[2],targets[3],targets[4],targets[5],targets[6])
+                new_rule = rule(targets[0],targets[1],targets[2],targets[3],targets[4],targets[5],targets[6], targets[7])
                 all_rule_string = all_rule_string + new_rule.rule_string
                 targets = []
     print(all_rule_string)
