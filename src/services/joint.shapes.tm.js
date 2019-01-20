@@ -142,7 +142,7 @@ Object.defineProperty(joint.shapes.tm.Flow.prototype, 'name', {
 
 joint.shapes.tm.utils.defineOutOfScope(joint.shapes.tm.Flow.prototype, 'connection');
 joint.shapes.tm.utils.defineHasOpenThreats(joint.shapes.tm.Flow.prototype, ['connection', 'marker-target']);
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Flow.prototype, ['reasonOutOfScope', 'protocol', 'isEncrypted', 'isPublicNetwork', 'threats']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Flow.prototype, ['reasonOutOfScope', 'protocol', 'isEncrypted', 'isPublicNetwork', 'threats','bluetoothInterface','wifiInterface','cellularInterface']);
 
 //trust boundary shape
 
@@ -228,7 +228,9 @@ joint.shapes.tm.Process = joint.shapes.tm.toolElement.extend({
 
 //define process element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Process.prototype, ['privilegeLevel']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Process.prototype, ['privilegeLevel','isAWebApplication', 'isASwitchingProcess', 'isARoutingProcess', 'isAWirelessAccessProcess', 'isAConfigurationProcess','isAIPSecHostProcess']);
+
+
 
 //data store element shape
 
@@ -250,7 +252,7 @@ joint.shapes.tm.Store = joint.shapes.tm.toolElement.extend({
 
 //data store properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned','remoteMedicalRecordStorage']);
 
 //actor element shape
 
@@ -271,7 +273,7 @@ joint.shapes.tm.Actor = joint.shapes.tm.toolElement.extend({
 
 //actor properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['providesAuthentication']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['providesAuthentication','clientEHealthDevice','mobileDevice','desktopDevice','storesHealthDataLocally','forwardsHealthDataCloud']);
 
 //custom views
 

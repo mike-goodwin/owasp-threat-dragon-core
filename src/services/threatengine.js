@@ -48,7 +48,7 @@ function threatengine() {
 
     function initialiseFlow(flowName) {
         return nools.flow(flowName, function (flow) {
-            flow.rule('Empty String Password', [[Element, 'el','el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)'],
+            flow.rule('Empty String Password', [[Element, 'el','el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials) && isTrue(el.element.remoteMedicalRecordStorage)'],
                 [Threats, 'threats']
             ], function (facts) {
                 facts.threats.collection.push({ ruleId: '1.1',
