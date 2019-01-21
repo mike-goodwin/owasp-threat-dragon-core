@@ -48,16 +48,15 @@ function threatengine() {
 
     function initialiseFlow(flowName) {
         return nools.flow(flowName, function (flow) {
-            flow.rule('Empty String Password', [[Element, 'el','el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials) && isTrue(el.element.remoteMedicalRecordStorage)'],
+            flow.rule('Empty String Password', [[Element, 'el','el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)'],
                 [Threats, 'threats']
             ], function (facts) {
                 facts.threats.collection.push({ ruleId: '1.1',
-                    title:'Empty String Password',
-                    type:'Information disclosure',
-                    status:'Open',
-                    severity:'High',
-                    description:'Using an empty string as a password is insecure.It is never appropriate to use an empty string as a password. It is too easy to guess. An empty string password makes the authentication as weak as the user names, which are normally public or guessable. This makes a brute-force attack against the login interface much easier.',
-                    mitigation:'To counter this threat, a password policy (rules to make strong passwords) should in place to make a password much harder to guess for an attacker. Such an example of a password policy is as follows:All passwords should be reasonably complex and difficult for unauthorized people to guess.  Employees and pupils should choose passwords that are at least eight characters long and contain a combination of upper- and lower-case letters, numbers, and punctuation marks and other special characters.  These requirements will be enforced with software when possible.  [1]'});});
+                title:'Empty String Password',
+                type:'Information disclosure',
+                status:'Open',
+                severity:'High',
+                description:'Using an empty string as a password is insecure. It is never appropriate to use an empty string as a password.  It is too easy to guess.  An empty string password makes the authentication as weak as the user names, which are normally public or guessable.  This makes a brute-force attack against the login interface much easier. '});});
 
             flow.rule('Password in Configuration File', [[Element, 'el','el.element.attributes.type == "tm.Store" && isTrue(el.element.storesCredentials)'],
                 [Threats, 'threats']
@@ -565,11 +564,11 @@ function threatengine() {
                     description:'This category covers misuse of a platform feature or failure to use platform security controls. It might include Android intents, platform permissions, misuse of TouchID, the Keychain, or some other security control that is part of the mobile operating system. The defining characteristic of risks in this category is that the platform (iOS, Android, Windows Phone, etc.) provides a feature or a capability that is documented and well understood. The app fails to use that capability or uses it incorrectly. This differs from other mobile top ten risks because the design and implementation is not strictly the app developer\'s issue.There are several ways that mobile apps can experience this risk.Violation of published guidelines. All platforms have development guidelines for security (((Android)), ((iOS)), ((Windows Phone))). If an app contradicts the best practices recommended by the manufacturer, it will be exposed to this risk. For example, there are guidelines on how to use the iOS Keychain or how to secure exported services on Android. Apps that do not follow these guidelines will experience this risk.Violation of convention or common practice: Not all best practices are codified in manufacturer guidance. In some instances, there are de facto best practices that are common in mobile apps.Unintentional Misuse: Some apps intend to do the right thing but get some part of the implementation wrong. This could be a simple bug, like setting the wrong flag on an API call, or it could be a misunderstanding of how the protections work.  [47]',
                     mitigation:'To mitigate this threat, secure coding and proper configurations must be used on the server side of the mobile application [47]. '});});
 
-            flow.rule('Improper Platform Usage', [[Element, 'el','(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))'],
+            flow.rule('Insecure Communication', [[Element, 'el','(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))'],
                 [Threats, 'threats']
             ], function (facts) {
                 facts.threats.collection.push({ ruleId: '8.4',
-                    title:'Improper Platform Usage',
+                    title:'Insecure Communication',
                     type:'Information disclosure',
                     status:'Open',
                     severity:'High',
@@ -686,11 +685,11 @@ function threatengine() {
                     description:'Typically, an attacker seeks to understand extraneous functionality within a mobile app in order to discover hidden functionality in in backend systems. The attacker will typically exploit extraneous functionality directly from their own systems without any involvement by end-users. An attacker will download and examine the mobile app within their own local environment. They will examine log files, configuration files, and perhaps the binary itself to discover any hidden switches or test code that was left behind by the developers. [57]',
                     mitigation:'Best way to prevent this vulnerability is to perform manual secure code review using security champs or subject matter experts most knowledgeable with this code.   This should be done by:Examine the app\\s configuration settings to discover any hidden switches;Verify that all test code is not included in the final production build of the app;Examine all API endpoints accessed by the mobile app to verify that these endpoints are well documented and publicly available;Examine all log statements to ensure nothing overly descriptive about the backend is being written to the logs[57]'});});
 
-            flow.rule('Unintended Data Leakage', [[Element, 'el','(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))'],
+            flow.rule('Security Decisions Via Untrusted Inputs', [[Element, 'el','(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))'],
                 [Threats, 'threats']
             ], function (facts) {
                 facts.threats.collection.push({ ruleId: '8.15',
-                    title:'Unintended Data Leakage',
+                    title:'Security Decisions Via Untrusted Inputs',
                     type:'Tampering',
                     status:'Open',
                     severity:'High',
@@ -708,6 +707,26 @@ function threatengine() {
                     description:'Anyone or any mobile app with access to HTTP/S traffic, cookie data, etc.  Possible attack vectors include physical access to the device, and network traffic capture, or malware on the mobile device. Essentially an adversary that has access to the session tokens can impersonate the user by submitting the token to the backend server for any sensitive transactions such as credit card payments or health information like EKG results sent to a doctor. [59]',
                     mitigation:'Validate sessions on the backend by ensuring all session invalidation events are executed on the server side and not just on the mobile app. Add adequate timeout protection to prevent the malicious potential for an unauthorized user to gain access to an existing session and assume the role of that user.  Timeout periods vary accordingly based on the application, but some good guidelines are: 15 minutes for high security apps, 30 minutes for medium security apps, and 1 hour for low security apps. Properly reset cookies during authentication state changes, by destroying sessions on the server side and making sure that the cookies presented as a part of the previous sessions are no longer acceptedIn addition to properly invalidating tokens on the server side during key application events, make sure tokens are generated properly by using well-established and industry standard methods of creating tokens.  Visit the following websites for more details: https://www. pcisecuritystandards. org/documents/Tokenization_Product_Security_Guidelines. pdf and https://tools. ietf. org/html/rfc7519 for JSON Web Token (JWT) and https://www. ietf. org/rfc/rfc6750. txt for Bearer Token Usage[59]'});});
 
+            flow.rule('Lack of Binary Protections', [[Element, 'el','(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncrypted)) || (el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncrypted))'],
+                [Threats, 'threats']
+            ], function (facts) {
+                facts.threats.collection.push({ ruleId: '8.17',
+                    title:'Lack of Binary Protections',
+                    type:'Information Disclosure',
+                    status:'Open',
+                    severity:'High',
+                    description: 'This threat involves an adversary who will analyze and reverse engineer a mobile app\'s code, then modify it to perform some hidden functionality. The majority of mobile apps do not prevent an adversary from successfully analyzing, reverse engineering or modifying the app\'s binary code. [60]',
+                    mitigation:'To mitigate this threat from an adversary from analysis and reversing engineering the code, or unauthorized code modification, an application must follow very secure guidelines to activate the following mechanisms in a platform:  \n' +
+                        '\n' +
+                        'Jailbreak Detection Controls; \n' +
+                        '\n' +
+                        'Checksum Controls; \n' +
+                        '\n' +
+                        'Certificate Pinning Controls; \n' +
+                        '\n' +
+                        'Debugger Detection Controls \n' +
+                        '\n' +
+                        'These controls also require that the application have two more additional requirements. Firstly, the organization that is making the app must attempt to deny the adversary to analyze and reverse engineer the app using analysis techniques that can be static or dynamic. Lastly, the app must be able to determine at runtime if it\'s application code has been modified or added and react accordingly. [60]'});});
 
         });
     }
