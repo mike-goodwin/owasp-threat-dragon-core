@@ -181,7 +181,7 @@ angular.module('templates', [])
     '    <div ng-show="elementType === \'tm.Actor\'">\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
-    '                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" /> Provides authentication\n' +
+    '                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" /> Provides Authentication\n' +
     '            </label>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +

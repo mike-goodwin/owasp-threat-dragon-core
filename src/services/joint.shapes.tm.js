@@ -273,7 +273,7 @@ joint.shapes.tm.Actor = joint.shapes.tm.toolElement.extend({
 
 //actor properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['providesAuthentication','clientEHealthDevice','mobileDevice','desktopDevice','storesHealthDataLocally','forwardsHealthDataCloud']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Actor.prototype, ['providesAuthentication','clientEHealthDevice','mobileDevice','desktopDevice','storesHealthDataLocally','forwardsHealthDataCloud']);
 
 //custom views
 
