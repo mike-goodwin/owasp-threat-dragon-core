@@ -12,7 +12,7 @@
                             <tmt-stencil class="stencil" shape="stencil.shape" padding="5" scale="0.9" action="stencil.action()" />
                         </div>
                     </div>
-                </div
+                </div>
                 <!--Threat pane-->
                 <div uib-accordion-group is-open="vm.viewThreats">
                     <uib-accordion-heading>
@@ -30,6 +30,7 @@
                         <em>Select an element in the diagram to see or edit its threats</em>
                     </div>
                 </div>
+                <a class="btn btn-primary center-block" ng-click="vm.generateThreatsForEmptyNodesAndViewReport()" role="button">View Threat Report</a>
             </uib-accordion>
         </div>
         <!--Diagram area-->
@@ -71,7 +72,7 @@
                         </div>
                     </form>
                     <div class="tmt-diagram-container">
-                        <tmt-diagram graph="vm.graph" select="vm.select(element)" new-flow="vm.newFlow(source, target)" initialise-graph="vm.initialise(diagram)" height="600" width="800" grid-size="1" interactive="true"/>
+                        <tmt-diagram graph="vm.graph" select="vm.select(element)" new-flow="vm.newFlow(source, target)" initialise-graph="vm.initialise(diagram)" height="600" width="800" grid-size="1" interactive="true"></tmt-diagram>
                     </div>
                 </div>
             </div>
@@ -82,7 +83,7 @@
                 <div class="panel-heading panel-title">Properties</div>
                 <div class="panel-body">
                     <div ng-if="vm.selected && vm.selected.attributes.type != 'tm.Boundary' ">
-                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}">
+                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}"> </tmt-element-properties>
                     </div>
                     <div ng-if="!vm.selected || vm.selected.attributes.type === 'tm.Boundary'">
                         <em>Select an element in the diagram to see or edit its properties</em>

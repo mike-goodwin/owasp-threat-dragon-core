@@ -10,5 +10,6 @@ require('./services/joint.shapes.tm');
 require('./config');
 require('./services');
 require('./diagrams');
+require('./report');
 require('./layout');
 require('./threatmodels');

@@ -1,0 +1,130 @@
+<div data-ng-controller="ThreatReport as vm" class="container-fluid diagram-container">
+    <div class="tab">
+        <button class="tablinks" id="defaultTab" ng-click="vm.activateTab($event, 'Threats')">Threats</button>
+        <button class="tablinks" ng-click="vm.activateTab($event, 'Countermeasures')">Countermeasures</button>
+    </div>
+    <div id="Threats" class="tabcontent">
+        <table class="tg" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>COMPONENT</th>
+                    <th>THREAT TYPE</th>
+                    <th>DESCRIPTION</th>
+                    <th>STATUS</th>
+                    <th>SEVERITY</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="element in vm.getNonFlowOrBoundaryElements()">
+                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">
+                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>
+                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">
+                        <div style="margin-right: 36px;">
+                            <span>{{ element.name }}</span>
+                        </div>
+                        <div class="bottom-right">
+                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
+                    </td>
+                    <td><span>{{element.threats[0].type}}</span></td>
+                    <td><span>{{element.threats[0].description}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>
+                </tr>
+                <tr ng-if="$even" class="even" ng-click="vm.editThreat(element.threats[0])">
+                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>
+                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">
+                        <div style="margin-right: 36px;">
+                            <span>{{ element.name }}</span>
+                        </div>
+                        <div class="bottom-right">
+                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
+                    </td>
+                    <td><span>{{element.threats[0].type}}</span></td>
+                    <td><span>{{element.threats[0].description}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>
+                </tr>
+                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.type}}</span></td>
+                    <td><span>{{threat.description}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[threat.severity]">{{threat.severity}}</span></td>
+                </tr>
+                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.type}}</span></td>
+                    <td><span>{{threat.description}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[threat.severity]">{{threat.severity}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="Countermeasures" class="tabcontent">
+        <table class="tg" style="width:100%">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>COMPONENT</th>
+                <th>THREAT TYPE</th>
+                <th>COUNTERMEASURE</th>
+                <th>STATUS</th>
+                <th>SEVERITY</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="element in vm.getNonFlowOrBoundaryElements()">
+                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">
+                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>
+                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">
+                        <div style="margin-right: 36px;">
+                            <span>{{ element.name }}</span>
+                        </div>
+                        <div class="bottom-right">
+                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
+                    </td>
+                    <td><span>{{element.threats[0].type}}</span></td>
+                    <td><span>{{element.threats[0].mitigation}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>
+                </tr>
+                <tr ng-if="$even" class="even" ng-click="vm.editThreat(element.threats[0])">
+                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>
+                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">
+                        <div style="margin-right: 36px;">
+                            <span>{{ element.name }}</span>
+                        </div>
+                        <div class="bottom-right">
+                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
+                    </td>
+                    <td><span>{{element.threats[0].type}}</span></td>
+                    <td><span>{{element.threats[0].mitigation}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>
+                </tr>
+                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.type}}</span></td>
+                    <td><span>{{threat.mitigation}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[threat.severity]">{{threat.severity}}</span></td>
+                </tr>
+                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.type}}</span></td>
+                    <td><span>{{threat.mitigation}}</span></td>
+                    <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
+                    <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[threat.severity]">{{threat.severity}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
