@@ -554,8 +554,8 @@
                   "ruleId": "1.5",
                   "title": "Least Privilege Violation",
                   "type": "Elevation of privilege",
-                  "status": "Open",
-                  "severity": "Medium",
+                  "status": "Mitigated",
+                  "severity": "Low",
                   "description": "The elevated privilege level required to perform operations such as chroot() should be dropped immediately after the operation is performed.When a program calls a privileged function, such as chroot(), it must first acquire root privilege. As soon as the privileged operation has completed, the program should drop root privilege and return to the privilege level of the invoking user.",
                   "mitigation": "There are several ways to mitigate the least privilege violation:Split an individual components into several components, and assign lower privilege levels to those components [8]. Identify areas in the system which have that elevated privilege and use those  components instead to accomplish the task [8]. Create a separate environment within the system/program where only within that area or environment has an elevated privilege [8]. "
                 },
@@ -1735,10 +1735,6 @@
               }
             }
           ]
-        },
-        "size": {
-          "height": 615.0400390625,
-          "width": 928.6400756835938
         }
       }
     ]
