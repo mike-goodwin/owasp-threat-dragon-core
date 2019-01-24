@@ -1,0 +1,27 @@
+{
+  "summary": {
+    "title": "eHealth Devices in Clinical Network",
+    "owner": "notagoodcoder",
+    "description": "This system models variety of eHealth actors in their interactions within a clinical network environment."
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "virajdave"
+      },
+      {
+        "name": "Franklin95"
+      },
+      {
+        "name": "surveshS"
+      }
+    ],
+    "diagrams": [
+      {
+        "title": "Clinic",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ]
+  }
+}
