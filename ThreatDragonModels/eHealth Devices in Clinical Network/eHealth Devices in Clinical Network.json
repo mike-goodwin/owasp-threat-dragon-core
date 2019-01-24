@@ -612,6 +612,14 @@
                   "severity": "Medium",
                   "description": "Information exposure through query strings in URL is when sensitive data is passed to parameters in the URL. This allows attackers to obtain sensitive data such as usernames, passwords, tokens (authX), database details, and any other potentially sensitive data. Simply using HTTPS does not resolve this vulnerability. A very common example is in GET requests.",
                   "mitigation": "To mitigate this threat, it is recommended to use a POST method, as those parameters that are passed in through the URL are not saved, and therefore cannot be exposed.  [28]"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "Test title",
+                  "type": "Tampering",
+                  "description": "Test description",
+                  "mitigation": "Test mitigation"
                 }
               ],
               "attrs": {
