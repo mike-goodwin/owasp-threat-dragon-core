@@ -448,7 +448,7 @@ angular.module('templates', [])
     '                    <th>SEVERITY</th>\n' +
     '                </tr>\n' +
     '            </thead>\n' +
-    '            <tbody ng-repeat="element in vm.getNonFlowOrBoundaryElements()">\n' +
+    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
     '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
     '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
     '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
@@ -510,7 +510,7 @@ angular.module('templates', [])
     '                <th>SEVERITY</th>\n' +
     '            </tr>\n' +
     '            </thead>\n' +
-    '            <tbody ng-repeat="element in vm.getNonFlowOrBoundaryElements()">\n' +
+    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
     '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
     '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
     '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +

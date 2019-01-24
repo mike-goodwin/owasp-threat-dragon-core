@@ -187,7 +187,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
 
     function generateThreatsForEmptyNodesAndViewReport() {
         var elementsWithoutThreats = vm.graph.getCells().filter(function(element) {
-            if (isFlowOrBoundaryElement(element)) {
+            if (isFlowOrBoundaryElement(element) || element.outOfScope) {
                 return false;
             }
             return element.threats == null || element.threats.length === 0;

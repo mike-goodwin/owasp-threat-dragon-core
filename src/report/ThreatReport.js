@@ -18,7 +18,7 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
     vm.activateTab = activateTab;
     vm.editThreat = editThreat;
     vm.onAddNewThreat = onAddNewThreat;
-    vm.getNonFlowOrBoundaryElements = getNonFlowOrBoundaryElements;
+    vm.getScopedNonFlowOrBoundaryElements = getScopedNonFlowOrBoundaryElements;
 
     activate();
 
@@ -54,9 +54,9 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
         }
     }
 
-    function getNonFlowOrBoundaryElements() {
+    function getScopedNonFlowOrBoundaryElements() {
         return vm.graph.getCells().filter(function(element) {
-            return !isFlowOrBoundaryElement(element);
+            return !isFlowOrBoundaryElement(element) && !element.outOfScope;
         });
     }
 
