@@ -526,6 +526,7 @@
               "id": "e86db692-495e-4c15-9664-aba1416d95ed",
               "z": 18,
               "hasOpenThreats": false,
+              "isAWebApplication": true,
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
