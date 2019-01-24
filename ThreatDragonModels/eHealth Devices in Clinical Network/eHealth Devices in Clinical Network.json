@@ -225,7 +225,7 @@
                   "position": 0.5,
                   "attrs": {
                     "text": {
-                      "text": "L2 Access Port",
+                      "text": "L2 Access",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -242,12 +242,662 @@
                   "class": "connection hasNoOpenThreats isInScope"
                 }
               }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 693,
+                "y": 623
+              },
+              "angle": 0,
+              "id": "b064aa07-6650-4252-a717-2a93466807c8",
+              "z": 8,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Wi-Fi Access\nPoint"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 806,
+                "y": 494
+              },
+              "angle": 0,
+              "id": "c5f10c62-1aaf-4816-ac46-fe8fbcf93dd7",
+              "z": 9,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 806,
+                "y": 341
+              },
+              "angle": 0,
+              "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345",
+              "z": 10,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 804,
+                "y": 193
+              },
+              "angle": 0,
+              "id": "a9ff96e3-7bbc-4d84-bb60-72fe1375c753",
+              "z": 11,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1016,
+                "y": 343
+              },
+              "angle": 0,
+              "id": "b649fe3f-d254-4e78-acb1-26ed0a72e0ed",
+              "z": 12,
+              "hasOpenThreats": false,
+              "privilegeLevel": "",
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO ASA\n5500 FW"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 1167,
+                "y": 490
+              },
+              "angle": 0,
+              "id": "4b8569aa-920e-481d-a8e3-e2f269b95f01",
+              "z": 13,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Electronic Health\nRecords"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1192,
+                "y": 348
+              },
+              "angle": 0,
+              "id": "36ba4aaf-ac63-4fad-b5d5-239779ce275e",
+              "z": 14,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Med. Records\nWeb App"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1102,
+                "y": 3
+              },
+              "angle": 0,
+              "id": "83ab179e-9bdc-4bdf-8e38-71049f127b79",
+              "z": 15,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "IBM SIEM"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 1075,
+                "y": 178
+              },
+              "angle": 0,
+              "id": "99a1188b-260e-424d-83d2-9edbbde7d593",
+              "z": 16,
+              "hasOpenThreats": false,
+              "isALog": true,
+              "outOfScope": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "Network Data  Storage"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 415,
+                "y": 86
+              },
+              "angle": 0,
+              "id": "c9b0de8f-ea5a-41c9-99af-f948130d2016",
+              "z": 17,
+              "hasOpenThreats": false,
+              "isARoutingProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Cisco NCS 5500"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 154,
+                "y": 61
+              },
+              "angle": 0,
+              "id": "e86db692-495e-4c15-9664-aba1416d95ed",
+              "z": 18,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "3rd Party Web\nApplication"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "x": 613,
+                "y": 392
+              },
+              "target": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "vertices": [],
+              "id": "471d8ab5-0bba-4287-880a-257df922b9f6",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 19,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "target": {
+                "id": "b649fe3f-d254-4e78-acb1-26ed0a72e0ed"
+              },
+              "vertices": [],
+              "id": "0a1f16de-7383-402f-a13b-4de001f0877c",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Access",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 20,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "target": {
+                "id": "c5f10c62-1aaf-4816-ac46-fe8fbcf93dd7"
+              },
+              "vertices": [],
+              "id": "73aa64bc-c11f-4ec4-aad9-780e90d13c46",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 21,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 775,
+                "y": 778
+              },
+              "angle": 0,
+              "id": "60f8eae7-e1ce-42fe-84c5-4b5d1c3fe870",
+              "z": 23,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "actor 22"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 538,
+                "y": 780
+              },
+              "angle": 0,
+              "id": "c32d3247-80cd-4561-ab4c-6aaa0807a59c",
+              "z": 24,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "actor 22"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "c9b0de8f-ea5a-41c9-99af-f948130d2016"
+              },
+              "target": {
+                "id": "255bb5c0-db2d-4ab1-a214-bd8addecf4b0"
+              },
+              "vertices": [],
+              "id": "8b4af471-362a-4fd6-ba43-f674dcfa2ece",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L3 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 25,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "c9b0de8f-ea5a-41c9-99af-f948130d2016"
+              },
+              "target": {
+                "id": "56d624fd-4604-4d2b-82db-c0fb575c45ca"
+              },
+              "vertices": [],
+              "id": "84e12131-77a4-40a7-b829-6c3acf700247",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L3 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 26,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "target": {
+                "id": "a9ff96e3-7bbc-4d84-bb60-72fe1375c753"
+              },
+              "vertices": [],
+              "id": "4b83edfa-ff86-4b38-b8a4-f6835792d05e",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 27,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "a9ff96e3-7bbc-4d84-bb60-72fe1375c753"
+              },
+              "target": {
+                "id": "83ab179e-9bdc-4bdf-8e38-71049f127b79"
+              },
+              "vertices": [],
+              "id": "e9306a43-dbc0-46da-af4d-d32d93bccb43",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.4005695489612849,
+                    "offset": -7.165812863968313
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Access",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 28,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "83ab179e-9bdc-4bdf-8e38-71049f127b79"
+              },
+              "target": {
+                "id": "99a1188b-260e-424d-83d2-9edbbde7d593"
+              },
+              "vertices": [],
+              "id": "e73704e6-bb4e-4dd5-a0d2-02b16a90845a",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Abstracted",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 29,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "reasonOutOfScope": "Third Party Solution",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 1082,
+                "y": 3
+              },
+              "target": {
+                "x": 1277,
+                "y": 287
+              },
+              "vertices": [
+                {
+                  "x": 1011,
+                  "y": 180
+                },
+                {
+                  "x": 1043,
+                  "y": 305
+                }
+              ],
+              "id": "91c92eb2-7e83-4898-80d6-937595cfa785",
+              "z": 30,
+              "attrs": {}
             }
           ]
         },
         "size": {
           "height": 590,
-          "width": 790
+          "width": 805.887939453125
         }
       }
     ]
