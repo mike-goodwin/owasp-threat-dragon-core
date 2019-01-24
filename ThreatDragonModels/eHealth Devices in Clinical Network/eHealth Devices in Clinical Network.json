@@ -1,0 +1,1525 @@
+{
+  "summary": {
+    "title": "eHealth Devices in Clinical Network",
+    "owner": "notagoodcoder",
+    "description": "This system models variety of eHealth actors in their interactions within a clinical network environment."
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "virajdave"
+      },
+      {
+        "name": "Franklin95"
+      },
+      {
+        "name": "surveshS"
+      }
+    ],
+    "diagrams": [
+      {
+        "title": "Clinic",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0,
+        "diagramJson": {
+          "cells": [
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 77,
+                "y": 681
+              },
+              "angle": 0,
+              "id": "01641559-690e-43cc-acfe-bc17790321e5",
+              "z": 1,
+              "hasOpenThreats": false,
+              "providesAuthentication": true,
+              "desktopDevice": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Windows 10 Health\nClinic PC"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 103,
+                "y": 511
+              },
+              "angle": 0,
+              "id": "325d6101-f63d-48b0-9783-e97171a7a310",
+              "z": 2,
+              "hasOpenThreats": false,
+              "isAIPSecHostProcess": true,
+              "isASwitchingProcess": true,
+              "privilegeLevel": "Restricted",
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 323,
+                "y": 341
+              },
+              "angle": 0,
+              "id": "56d624fd-4604-4d2b-82db-c0fb575c45ca",
+              "z": 3,
+              "hasOpenThreats": false,
+              "isASwitchingProcess": true,
+              "outOfScope": true,
+              "reasonOutOfScope": "Aggregation switching is beyond scope",
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "CISCO CatL3\nCore&Dist"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "325d6101-f63d-48b0-9783-e97171a7a310"
+              },
+              "target": {
+                "id": "56d624fd-4604-4d2b-82db-c0fb575c45ca"
+              },
+              "vertices": [],
+              "id": "dd05f9a9-afd9-40d3-8748-22e87d945a84",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 4,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 519,
+                "y": 340
+              },
+              "angle": 0,
+              "id": "255bb5c0-db2d-4ab1-a214-bd8addecf4b0",
+              "z": 5,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "isASwitchingProcess": true,
+              "reasonOutOfScope": "Aggregation and load distribution are beyond scope.",
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "CISCO CatL3\nCore&Dist"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "56d624fd-4604-4d2b-82db-c0fb575c45ca"
+              },
+              "target": {
+                "id": "255bb5c0-db2d-4ab1-a214-bd8addecf4b0"
+              },
+              "vertices": [],
+              "id": "4947efcc-965e-4832-9935-ad53eea6e954",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L3 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 6,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "reasonOutOfScope": "Inter-VLAN routing",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "01641559-690e-43cc-acfe-bc17790321e5"
+              },
+              "target": {
+                "id": "325d6101-f63d-48b0-9783-e97171a7a310"
+              },
+              "vertices": [],
+              "id": "eb5ccded-f073-41c0-aa1c-e9d456326fd2",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 7,
+              "hasOpenThreats": false,
+              "protocol": "",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 531,
+                "y": 604
+              },
+              "angle": 0,
+              "id": "b064aa07-6650-4252-a717-2a93466807c8",
+              "z": 8,
+              "hasOpenThreats": false,
+              "isAWirelessAccessProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Guest Wi-Fi\nAccess Point"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 806,
+                "y": 494
+              },
+              "angle": 0,
+              "id": "c5f10c62-1aaf-4816-ac46-fe8fbcf93dd7",
+              "z": 9,
+              "hasOpenThreats": false,
+              "isASwitchingProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 711,
+                "y": 346
+              },
+              "angle": 0,
+              "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345",
+              "z": 10,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 804,
+                "y": 193
+              },
+              "angle": 0,
+              "id": "a9ff96e3-7bbc-4d84-bb60-72fe1375c753",
+              "z": 11,
+              "hasOpenThreats": false,
+              "isASwitchingProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 921,
+                "y": 355
+              },
+              "angle": 0,
+              "id": "b649fe3f-d254-4e78-acb1-26ed0a72e0ed",
+              "z": 12,
+              "hasOpenThreats": false,
+              "privilegeLevel": "",
+              "isAIPSecHostProcess": true,
+              "isAConfigurationProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO ASA\n5500 FW"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 1285,
+                "y": 558
+              },
+              "angle": 0,
+              "id": "4b8569aa-920e-481d-a8e3-e2f269b95f01",
+              "z": 13,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Electronic Health Record\nStorage"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1307,
+                "y": 355
+              },
+              "angle": 0,
+              "id": "36ba4aaf-ac63-4fad-b5d5-239779ce275e",
+              "z": 14,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Med. Records\nWeb App"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1108,
+                "y": 3
+              },
+              "angle": 0,
+              "id": "83ab179e-9bdc-4bdf-8e38-71049f127b79",
+              "z": 15,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "reasonOutOfScope": "Managed by 3rd Party",
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "IBM SIEM"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 1075,
+                "y": 178
+              },
+              "angle": 0,
+              "id": "99a1188b-260e-424d-83d2-9edbbde7d593",
+              "z": 16,
+              "hasOpenThreats": false,
+              "isALog": true,
+              "outOfScope": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "Network Data  Storage"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 418,
+                "y": 177
+              },
+              "angle": 0,
+              "id": "c9b0de8f-ea5a-41c9-99af-f948130d2016",
+              "z": 17,
+              "hasOpenThreats": false,
+              "isARoutingProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Cisco NCS 5500"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 100,
+                "y": 1
+              },
+              "angle": 0,
+              "id": "e86db692-495e-4c15-9664-aba1416d95ed",
+              "z": 18,
+              "hasOpenThreats": false,
+              "isAWebApplication": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "eHealth Web\nApplication"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "x": 613,
+                "y": 392
+              },
+              "target": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "vertices": [],
+              "id": "471d8ab5-0bba-4287-880a-257df922b9f6",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 19,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "target": {
+                "id": "b649fe3f-d254-4e78-acb1-26ed0a72e0ed"
+              },
+              "vertices": [],
+              "id": "0a1f16de-7383-402f-a13b-4de001f0877c",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Access",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 20,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "target": {
+                "id": "c5f10c62-1aaf-4816-ac46-fe8fbcf93dd7"
+              },
+              "vertices": [],
+              "id": "73aa64bc-c11f-4ec4-aad9-780e90d13c46",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 21,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 607,
+                "y": 798
+              },
+              "angle": 0,
+              "id": "60f8eae7-e1ce-42fe-84c5-4b5d1c3fe870",
+              "z": 23,
+              "hasOpenThreats": false,
+              "mobileDevice": true,
+              "storesHealthDataLocally": true,
+              "forwardsHealthDataCloud": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Google Pixel"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 327,
+                "y": 802
+              },
+              "angle": 0,
+              "id": "c32d3247-80cd-4561-ab4c-6aaa0807a59c",
+              "z": 24,
+              "hasOpenThreats": false,
+              "storesHealthDataLocally": true,
+              "clientEHealthDevice": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "ECG Watch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "c9b0de8f-ea5a-41c9-99af-f948130d2016"
+              },
+              "target": {
+                "id": "255bb5c0-db2d-4ab1-a214-bd8addecf4b0"
+              },
+              "vertices": [],
+              "id": "8b4af471-362a-4fd6-ba43-f674dcfa2ece",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L3 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 25,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "c9b0de8f-ea5a-41c9-99af-f948130d2016"
+              },
+              "target": {
+                "id": "56d624fd-4604-4d2b-82db-c0fb575c45ca"
+              },
+              "vertices": [],
+              "id": "84e12131-77a4-40a7-b829-6c3acf700247",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L3 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 26,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "902b499f-4b44-4f09-81ce-3d2a7f9fb345"
+              },
+              "target": {
+                "id": "a9ff96e3-7bbc-4d84-bb60-72fe1375c753"
+              },
+              "vertices": [],
+              "id": "4b83edfa-ff86-4b38-b8a4-f6835792d05e",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Trunk",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 27,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "a9ff96e3-7bbc-4d84-bb60-72fe1375c753"
+              },
+              "target": {
+                "id": "83ab179e-9bdc-4bdf-8e38-71049f127b79"
+              },
+              "vertices": [],
+              "id": "e9306a43-dbc0-46da-af4d-d32d93bccb43",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.4005695489612849,
+                    "offset": -7.165812863968313
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Access",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 28,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "83ab179e-9bdc-4bdf-8e38-71049f127b79"
+              },
+              "target": {
+                "id": "99a1188b-260e-424d-83d2-9edbbde7d593"
+              },
+              "vertices": [],
+              "id": "e73704e6-bb4e-4dd5-a0d2-02b16a90845a",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Abstracted",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 29,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "reasonOutOfScope": "Third Party Solution",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 1082,
+                "y": 3
+              },
+              "target": {
+                "x": 1277,
+                "y": 287
+              },
+              "vertices": [
+                {
+                  "x": 1011,
+                  "y": 180
+                },
+                {
+                  "x": 1043,
+                  "y": 305
+                }
+              ],
+              "id": "91c92eb2-7e83-4898-80d6-937595cfa785",
+              "z": 30,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "af552699-b8b1-4e97-ac74-dbccd624fcc8"
+              },
+              "target": {
+                "id": "36ba4aaf-ac63-4fad-b5d5-239779ce275e"
+              },
+              "vertices": [],
+              "id": "dde6d679-8633-489d-b07e-92f4c9778c29",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 31,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "36ba4aaf-ac63-4fad-b5d5-239779ce275e"
+              },
+              "target": {
+                "id": "4b8569aa-920e-481d-a8e3-e2f269b95f01"
+              },
+              "vertices": [],
+              "id": "4edfaeb2-fd3a-4b11-92aa-68e7c8fa10ef",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 32,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 67,
+                "y": 170
+              },
+              "angle": 0,
+              "id": "d7866423-c28e-4aee-834a-e0bd3f5a5e01",
+              "z": 33,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Electronic Health\nRecords"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 562,
+                "y": 1
+              },
+              "angle": 0,
+              "id": "a2640908-08ca-47b2-a395-1e205da3c849",
+              "z": 34,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "ISP Services"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 329,
+                "y": 130
+              },
+              "target": {
+                "x": 702,
+                "y": 129
+              },
+              "vertices": [],
+              "id": "dfb5524d-737e-4fcc-affb-9db25d96ec93",
+              "z": 35,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 337,
+                "y": 1
+              },
+              "angle": 0,
+              "id": "af4513dd-6453-4d97-add7-1df202b14f79",
+              "z": 36,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "Data Center\nServices"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 325,
+                "y": 7
+              },
+              "target": {
+                "x": 327,
+                "y": 129
+              },
+              "vertices": [],
+              "id": "43d6b18c-e013-450e-b852-dd3c52cd942b",
+              "z": 37,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "a2640908-08ca-47b2-a395-1e205da3c849"
+              },
+              "target": {
+                "id": "c9b0de8f-ea5a-41c9-99af-f948130d2016"
+              },
+              "vertices": [],
+              "id": "071085d8-dd69-4910-b25c-43462d0150ba",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 38,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "a2640908-08ca-47b2-a395-1e205da3c849"
+              },
+              "target": {
+                "id": "af4513dd-6453-4d97-add7-1df202b14f79"
+              },
+              "vertices": [],
+              "id": "74f778f4-1886-4561-b312-c01d5b212c22",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 39,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "af4513dd-6453-4d97-add7-1df202b14f79"
+              },
+              "target": {
+                "id": "e86db692-495e-4c15-9664-aba1416d95ed"
+              },
+              "vertices": [],
+              "id": "0b4a159c-e17d-4689-8fbe-c9696fcd2b22",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 40,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "e86db692-495e-4c15-9664-aba1416d95ed"
+              },
+              "target": {
+                "id": "d7866423-c28e-4aee-834a-e0bd3f5a5e01"
+              },
+              "vertices": [],
+              "id": "39ca3bd4-e0cd-40f6-bfcf-0df72b7fc1e7",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 41,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "c32d3247-80cd-4561-ab4c-6aaa0807a59c"
+              },
+              "target": {
+                "id": "60f8eae7-e1ce-42fe-84c5-4b5d1c3fe870"
+              },
+              "vertices": [],
+              "id": "f5c37c41-ae82-4f61-8ce0-9bfaeae21fe0",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Bluetooth",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 42,
+              "hasOpenThreats": false,
+              "bluetoothInterface": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "60f8eae7-e1ce-42fe-84c5-4b5d1c3fe870"
+              },
+              "target": {
+                "id": "b064aa07-6650-4252-a717-2a93466807c8"
+              },
+              "vertices": [],
+              "id": "34b63091-13ee-4c6f-97c4-599d1f5d03e2",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Wi-Fi",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 43,
+              "hasOpenThreats": false,
+              "wifiInterface": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "c5f10c62-1aaf-4816-ac46-fe8fbcf93dd7"
+              },
+              "target": {
+                "id": "b064aa07-6650-4252-a717-2a93466807c8"
+              },
+              "vertices": [],
+              "id": "a924507d-3a90-4db0-9334-25e616d2a641",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "L2 Access",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 44,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 868,
+                "y": 798
+              },
+              "angle": 0,
+              "id": "2078f8d4-5bf1-4185-9713-466f8175bb53",
+              "z": 45,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                },
+                "text": {
+                  "text": "Malicious User"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "2078f8d4-5bf1-4185-9713-466f8175bb53"
+              },
+              "target": {
+                "id": "b064aa07-6650-4252-a717-2a93466807c8"
+              },
+              "vertices": [],
+              "id": "271a0426-4bb8-4a62-9644-cee8ce96e2d3",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Wi-Fi",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 46,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1118,
+                "y": 355
+              },
+              "angle": 0,
+              "id": "af552699-b8b1-4e97-ac74-dbccd624fcc8",
+              "z": 47,
+              "hasOpenThreats": false,
+              "isASwitchingProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "CISCO CatL2\nAccess Switch"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1122,
+                "y": 546
+              },
+              "angle": 0,
+              "id": "bd918459-c3a8-42a6-b965-9ad10b698819",
+              "z": 48,
+              "hasOpenThreats": false,
+              "isAWebApplication": true,
+              "isAConfigurationProcess": true,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Network\nMgmt. Console"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "af552699-b8b1-4e97-ac74-dbccd624fcc8"
+              },
+              "target": {
+                "id": "bd918459-c3a8-42a6-b965-9ad10b698819"
+              },
+              "vertices": [],
+              "id": "867664dc-c9b2-427f-a6d7-727c5fd96af7",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 49,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "b649fe3f-d254-4e78-acb1-26ed0a72e0ed"
+              },
+              "target": {
+                "id": "af552699-b8b1-4e97-ac74-dbccd624fcc8"
+              },
+              "vertices": [],
+              "id": "e642f96b-cce8-42a4-b465-e65068e0cee2",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 50,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            }
+          ]
+        },
+        "size": {
+          "height": 590,
+          "width": 928.6400756835938
+        }
+      }
+    ]
+  }
+}
