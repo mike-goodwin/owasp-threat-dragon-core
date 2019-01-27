@@ -25,12 +25,14 @@ angular.module('templates', [])
     '                    <uib-accordion-heading>\n' +
     '                        Edit diagram <i class="pull-right glyphicon" ng-class="{\'glyphicon-chevron-down\': vm.viewStencil, \'glyphicon-chevron-right\': !vm.viewStencil}"></i>\n' +
     '                    </uib-accordion-heading>\n' +
-    '                    <div ng-repeat="stencil in vm.stencils">\n' +
-    '                        <div height="120">\n' +
-    '                            <tmt-stencil class="stencil" shape="stencil.shape" padding="5" scale="0.9" action="stencil.action()" />\n' +
+    '                    <div style="overflow-y:scroll; height: 550px">\n' +
+    '                        <div ng-repeat="stencil in vm.stencils">\n' +
+    '                            <div style="height: 120px">\n' +
+    '                                <tmt-stencil class="stencil" shape="stencil.shape" padding="15" scale="0.9" action="stencil.action()" />\n' +
+    '                            </div>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
-    '                </div\n' +
+    '                </div>\n' +
     '                <!--Threat pane-->\n' +
     '                <div uib-accordion-group is-open="vm.viewThreats">\n' +
     '                    <uib-accordion-heading>\n' +

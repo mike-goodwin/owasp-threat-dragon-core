@@ -7,12 +7,14 @@
                     <uib-accordion-heading>
                         Edit diagram <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.viewStencil, 'glyphicon-chevron-right': !vm.viewStencil}"></i>
                     </uib-accordion-heading>
-                    <div ng-repeat="stencil in vm.stencils">
-                        <div height="120">
-                            <tmt-stencil class="stencil" shape="stencil.shape" padding="5" scale="0.9" action="stencil.action()" />
+                    <div style="overflow-y:scroll; height: 550px">
+                        <div ng-repeat="stencil in vm.stencils">
+                            <div style="height: 120px">
+                                <tmt-stencil class="stencil" shape="stencil.shape" padding="15" scale="0.9" action="stencil.action()" />
+                            </div>
                         </div>
                     </div>
-                </div
+                </div>
                 <!--Threat pane-->
                 <div uib-accordion-group is-open="vm.viewThreats">
                     <uib-accordion-heading>

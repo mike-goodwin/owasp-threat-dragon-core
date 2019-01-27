@@ -21,6 +21,48 @@ function diagramming() {
         return cell;
     };
 
+    joint.dia.Graph.prototype.addSmartWatch = function () {
+        var cell = newElementWithLabelBelow(joint.shapes.tm.SmartWatch, 50, 50, 'Smart Watch ' + this.attributes.cells.length, 90);
+        this.addCell(cell);
+
+        return cell;
+    };
+
+    joint.dia.Graph.prototype.addLaptop = function () {
+        var cell = newElementWithLabelBelow(joint.shapes.tm.Laptop, 50, 50, 'Laptop ' + this.attributes.cells.length, 90);
+        this.addCell(cell);
+
+        return cell;
+    };
+
+    joint.dia.Graph.prototype.addPacemaker = function () {
+        var cell = newElementWithLabelBelow(joint.shapes.tm.Pacemaker, 50, 50, 'Pacemaker ' + this.attributes.cells.length, 90);
+        this.addCell(cell);
+
+        return cell;
+    };
+
+    joint.dia.Graph.prototype.addMobilePhone = function () {
+        var cell = newElementWithLabelBelow(joint.shapes.tm.MobilePhone, 50, 50, 'Mobile Phone ' + this.attributes.cells.length, 90);
+        this.addCell(cell);
+
+        return cell;
+    };
+
+    joint.dia.Graph.prototype.addTablet = function () {
+        var cell = newElementWithLabelBelow(joint.shapes.tm.Tablet, 50, 50, 'Tablet ' + this.attributes.cells.length, 90);
+        this.addCell(cell);
+
+        return cell;
+    };
+
+    joint.dia.Graph.prototype.addElectrocardiogram = function () {
+        var cell = newElementWithLabelBelow(joint.shapes.tm.Electrocardiogram, 50, 50, 'Electrocardiogram ' + this.attributes.cells.length, 90);
+        this.addCell(cell);
+
+        return cell;
+    };
+
     joint.dia.Graph.prototype.addStore = function () {
         var cell = newElement(joint.shapes.tm.Store, 50, 50, 'store ' + this.attributes.cells.length);
         this.addCell(cell);
@@ -81,6 +123,12 @@ function diagramming() {
         newGraph: newGraph,
         newDiagram: newDiagram,
         Process: joint.shapes.tm.Process,
+        SmartWatch: joint.shapes.tm.SmartWatch,
+        Laptop: joint.shapes.tm.Laptop,
+        Pacemaker: joint.shapes.tm.Pacemaker,
+        MobilePhone: joint.shapes.tm.MobilePhone,
+        Tablet: joint.shapes.tm.Tablet,
+        Electrocardiogram: joint.shapes.tm.Electrocardiogram,
         Store: joint.shapes.tm.Store,
         Actor: joint.shapes.tm.Actor,
         Flow: joint.shapes.tm.Flow,
@@ -111,12 +159,19 @@ function diagramming() {
     //private
 
     function newElement(ShapeClass, x, y, label) {
-        var cell = new ShapeClass({
+        return new ShapeClass({
             position: { x: x, y: y },
             attrs: { text: { text: label } }
         });
+    }
 
-        return cell;
+    function newElementWithLabelBelow(ShapeClass, x, y, label, labelPosition) {
+        return new ShapeClass({
+            position: { x: x, y: y },
+            attrs: {
+                text: { text: label, 'ref-y': labelPosition}
+            }
+        });
     }
 
     function flow(source, target, label) {
