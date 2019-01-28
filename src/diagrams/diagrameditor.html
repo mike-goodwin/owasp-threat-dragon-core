@@ -84,7 +84,7 @@
                 <div class="panel-heading panel-title">Properties</div>
                 <div class="panel-body">
                     <div ng-if="vm.selected && vm.selected.attributes.type != 'tm.Boundary' ">
-                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}">
+                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}"></tmt-element-properties>
                     </div>
                     <div ng-if="!vm.selected || vm.selected.attributes.type === 'tm.Boundary'">
                         <em>Select an element in the diagram to see or edit its properties</em>
