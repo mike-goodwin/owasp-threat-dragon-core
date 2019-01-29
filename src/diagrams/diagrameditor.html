@@ -1,4 +1,4 @@
-﻿<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">
+<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">
     <div ng-show="!vm.errored">
         <div class="col-lg-2">
             <!--Diagram stencil-->
@@ -32,6 +32,7 @@
                         <em>Select an element in the diagram to see or edit its threats</em>
                     </div>
                 </div>
+                <a class="btn btn-primary center-block" ng-click="vm.generateThreatsForEmptyNodesAndViewReport()" role="button">View Threat Report</a>
             </uib-accordion>
         </div>
         <!--Diagram area-->
@@ -73,7 +74,7 @@
                         </div>
                     </form>
                     <div class="tmt-diagram-container">
-                        <tmt-diagram graph="vm.graph" select="vm.select(element)" new-flow="vm.newFlow(source, target)" initialise-graph="vm.initialise(diagram)" height="600" width="800" grid-size="1" interactive="true"/>
+                        <tmt-diagram graph="vm.graph" select="vm.select(element)" new-flow="vm.newFlow(source, target)" initialise-graph="vm.initialise(diagram)" height="600" width="800" grid-size="1" interactive="true"></tmt-diagram>
                     </div>
                 </div>
             </div>
