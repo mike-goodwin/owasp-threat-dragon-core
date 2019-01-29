@@ -102,7 +102,7 @@ angular.module('templates', [])
     '                <div class="panel-heading panel-title">Properties</div>\n' +
     '                <div class="panel-body">\n' +
     '                    <div ng-if="vm.selected && vm.selected.attributes.type != \'tm.Boundary\' ">\n' +
-    '                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}">\n' +
+    '                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}"></tmt-element-properties>\n' +
     '                    </div>\n' +
     '                    <div ng-if="!vm.selected || vm.selected.attributes.type === \'tm.Boundary\'">\n' +
     '                        <em>Select an element in the diagram to see or edit its properties</em>\n' +
@@ -181,11 +181,20 @@ angular.module('templates', [])
     '        </div>\n' +
     '    </div>\n' +
     '    <div ng-show="elementType === \'tm.Actor\'">\n' +
+    '\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
-    '                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" /> Provides Authentication\n' +
+    '                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Provides Authentication\n' +
     '            </label>\n' +
+    '            <select ng-if="selected.providesAuthentication">\n' +
+    '                <option value="ldap">LDAP</option>\n' +
+    '                <option value="kerberos">Kerberos</option>\n' +
+    '                <option value="oauth2">Oauth 2</option>\n' +
+    '                <option value="saml">Saml</option>\n' +
+    '                <option value="radius">Radius</option>\n' +
+    '            </select>\n' +
     '        </div>\n' +
+    '\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxIsClientEHealthDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.clientEHealthDevice" ng-change="edit()" /> Client eHealth Device\n' +
@@ -268,6 +277,46 @@ angular.module('templates', [])
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxCellularInterface" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.cellularInterface" ng-change="edit()" /> Cellular Interface Link\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '    <div ng-show="elementType === \'tm.MobilePhone\'">\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '                <input name="checkboxIsEncryptedMobilePhone" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncrypted" ng-change="edit()" ng-init="selected.isEncrypted = false" /> Is Encrypted\n' +
+    '            </label>\n' +
+    '            <select ng-if="selected.isEncrypted">\n' +
+    '                <option value="" selected = "selected" ngValue="undefined">Select</option>\n' +
+    '                <option value="des">DES</option>\n' +
+    '                <option value="tripleDes">Triple DES</option>\n' +
+    '                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>\n' +
+    '                <option value="rc2">RC2</option>\n' +
+    '                <option value="rc4">RC4</option>\n' +
+    '                <option value="128rc4">128-bit RC4</option>\n' +
+    '                <option value="desx">DESX</option>\n' +
+    '                <option value="128aes">128-bit AES</option>\n' +
+    '                <option value="192aes">192-bit AES</option>\n' +
+    '                <option value="256aes">256-bit AES</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '                <input name="checkboxHasPasswordPolicy" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.hasPasswordPolicy" ng-change="edit()" /> Has a password Policy?\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '                <input name="checkboxSanitizesInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.inputSanitization" ng-change="edit()" /> Is input sanitized?\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '                <input name="checkboxStoresMedicalRecords" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesMedicalRecords" ng-change="edit()" /> Stores personal health information (PHI).\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '                <input name="checkboxStoresPI" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesPI" ng-change="edit()" /> Stores personal information (PI).\n' +
     '            </label>\n' +
     '        </div>\n' +
     '    </div>\n' +

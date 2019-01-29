@@ -316,7 +316,7 @@ joint.shapes.tm.MobilePhone = joint.shapes.tm.toolElement.extend({
 
 //define MobilePhone element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.MobilePhone.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned','remoteMedicalRecordStorage']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.MobilePhone.prototype, ['outOfScope', 'reasonOutOfScope', 'isEncrypted', 'encryptionValue', 'hasPasswordPolicy', 'inputSanitization', 'storesMedicalRecords', 'storesPI']);
 
 //process Tablet shape
 
