@@ -56,7 +56,7 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
 
     function getScopedNonFlowOrBoundaryElements() {
         return vm.graph.getCells().filter(function(element) {
-            return !isFlowOrBoundaryElement(element) && !element.outOfScope;
+            return !isBoundaryElement(element) && !element.outOfScope;
         });
     }
 
@@ -105,8 +105,8 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
         log('Cancelled');
     }
 
-    function isFlowOrBoundaryElement(element) {
-        return element.attributes.type === 'tm.Boundary' || element.attributes.type === 'tm.Flow';
+    function isBoundaryElement(element) {
+        return element.attributes.type === 'tm.Boundary';
     }
 }
 module.exports = ThreatReport;

@@ -187,7 +187,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
 
     function generateThreatsForEmptyNodesAndViewReport() {
         var elementsWithoutThreats = vm.graph.getCells().filter(function(element) {
-            if (isFlowOrBoundaryElement(element) || element.outOfScope) {
+            if (isBoundaryElement(element) || element.outOfScope) {
                 return false;
             }
             return element.threats == null || element.threats.length === 0;
@@ -399,8 +399,8 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
         }
     }
 
-    function isFlowOrBoundaryElement(element) {
-        return element.attributes.type === 'tm.Boundary' || element.attributes.type === 'tm.Flow';
+    function isBoundaryElement(element) {
+        return element.attributes.type === 'tm.Boundary';
     }
 }
 
