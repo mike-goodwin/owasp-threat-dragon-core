@@ -22,6 +22,12 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
         vm.dirty = false;
     vm.graph = diagramming.newGraph();
     vm.newProcess = newProcess;
+    vm.newSmartWatch = newSmartWatch;
+    vm.newLaptop = newLaptop;
+    vm.newPacemaker = newPacemaker;
+    vm.newMobilePhone = newMobilePhone;
+    vm.newTablet = newTablet;
+    vm.newElectrocardiogram = newElectrocardiogram;
     vm.newStore = newStore;
     vm.newFlow = newFlow;
     vm.newActor = newActor;
@@ -71,6 +77,12 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
     function getStencils() {
 
         var shapes = [
+            { shape: { getElement: function () { return new diagramming.SmartWatch(); }, label: 'Smart Watch' }, action: newSmartWatch },
+            { shape: { getElement: function () { return new diagramming.Laptop(); }, label: 'Laptop' }, action: newLaptop },
+            { shape: { getElement: function () { return new diagramming.Pacemaker(); }, label: 'Pacemaker' }, action: newPacemaker },
+            { shape: { getElement: function () { return new diagramming.MobilePhone(); }, label: 'Mobile Phone' }, action: newMobilePhone },
+            { shape: { getElement: function () { return new diagramming.Tablet(); }, label: 'Tablet' }, action: newTablet },
+            { shape: { getElement: function () { return new diagramming.Electrocardiogram(); }, label: 'Electrocardiogram' }, action: newElectrocardiogram },
             { shape: { getElement: function () { return new diagramming.Process(); }, label: 'Process' }, action: newProcess },
             { shape: { getElement: function () { return new diagramming.Store(); }, label: 'Store' }, action: newStore },
             { shape: { getElement: function () { return new diagramming.Actor(); }, label: 'Actor' }, action: newActor },
@@ -338,6 +350,30 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
 
     function newProcess() {
         return watchThreats(vm.graph.addProcess());
+    }
+
+    function newSmartWatch() {
+        return watchThreats(vm.graph.addSmartWatch());
+    }
+
+    function newLaptop() {
+        return watchThreats(vm.graph.addLaptop());
+    }
+
+    function newPacemaker() {
+        return watchThreats(vm.graph.addPacemaker());
+    }
+
+    function newMobilePhone() {
+        return watchThreats(vm.graph.addMobilePhone());
+    }
+
+    function newTablet() {
+        return watchThreats(vm.graph.addTablet());
+    }
+
+    function newElectrocardiogram() {
+        return watchThreats(vm.graph.addElectrocardiogram());
     }
 
     function newStore() {

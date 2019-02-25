@@ -230,7 +230,137 @@ joint.shapes.tm.Process = joint.shapes.tm.toolElement.extend({
 
 joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Process.prototype, ['privilegeLevel','isAWebApplication', 'isASwitchingProcess', 'isARoutingProcess', 'isAWirelessAccessProcess', 'isAConfigurationProcess','isAIPSecHostProcess']);
 
+//process Smart Watch shape
 
+joint.shapes.tm.SmartWatch = joint.shapes.tm.toolElement.extend({
+
+    markup: '<g class="rotatable"><g class="scalable"><image class="hasNoOpenThreats isInScope"/><title class="tooltip"/></g><text class="element-text hasNoOpenThreats isInScope"/></g>',
+
+    defaults: joint.util.deepSupplement({
+
+        type: 'tm.SmartWatch',
+        size: { width: 80, height: 80 },
+        attrs: {
+            'image': {'xlink:href': 'public/content/images/SmartWatch_White.png', width: 80, height: 80 },
+            'text': { 'ref-x': 0.5, 'ref-y': 80, ref: 'image' },
+        }
+
+    }, joint.shapes.tm.toolElement.prototype.defaults)
+});
+
+//define SmartWatch element properties
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.SmartWatch.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned','remoteMedicalRecordStorage']);
+
+//process Laptop shape
+
+joint.shapes.tm.Laptop = joint.shapes.tm.toolElement.extend({
+
+    markup: '<g class="rotatable"><g class="scalable"><image class="hasNoOpenThreats isInScope"/><title class="tooltip"/></g><text class="element-text hasNoOpenThreats isInScope"/></g>',
+
+    defaults: joint.util.deepSupplement({
+
+        type: 'tm.Laptop',
+        size: { width: 80, height: 80 },
+        attrs: {
+            'image': {'xlink:href': 'public/content/images/Laptop.png', width: 80, height: 80 },
+            'text': { 'ref-x': 0.5, 'ref-y': 80, ref: 'image' },
+        }
+
+    }, joint.shapes.tm.toolElement.prototype.defaults)
+});
+
+//define Laptop element properties
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Laptop.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned','remoteMedicalRecordStorage']);
+
+//process Pacemaker shape
+
+joint.shapes.tm.Pacemaker = joint.shapes.tm.toolElement.extend({
+
+    markup: '<g class="rotatable"><g class="scalable"><image class="hasNoOpenThreats isInScope"/><title class="tooltip"/></g><text class="element-text hasNoOpenThreats isInScope"/></g>',
+
+    defaults: joint.util.deepSupplement({
+
+        type: 'tm.Pacemaker',
+        size: { width: 80, height: 80 },
+        attrs: {
+            'image': {'xlink:href': 'public/content/images/Pacemaker.png', width: 80, height: 80 },
+            'text': { 'ref-x': 0.5, 'ref-y': 80, ref: 'image' },
+        }
+
+    }, joint.shapes.tm.toolElement.prototype.defaults)
+});
+
+//define Pacemaker element properties
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Pacemaker.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned','remoteMedicalRecordStorage']);
+
+//process Mobile Phone shape
+
+joint.shapes.tm.MobilePhone = joint.shapes.tm.toolElement.extend({
+
+    markup: '<g class="rotatable"><g class="scalable"><image class="hasNoOpenThreats isInScope"/><title class="tooltip"/></g><text class="element-text hasNoOpenThreats isInScope"/></g>',
+
+    defaults: joint.util.deepSupplement({
+
+        type: 'tm.MobilePhone',
+        size: { width: 80, height: 80 },
+        attrs: {
+            'image': {'xlink:href': 'public/content/images/MobilePhone.png', width: 80, height: 80 },
+            'text': { 'ref-x': 0.5, 'ref-y': 80, ref: 'image' },
+        }
+
+    }, joint.shapes.tm.toolElement.prototype.defaults)
+});
+
+//define MobilePhone element properties
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.MobilePhone.prototype, ['outOfScope', 'reasonOutOfScope', 'isEncrypted', 'encryptionValue', 'hasPasswordPolicy', 'inputSanitization', 'storesMedicalRecords', 'storesPI']);
+
+//process Tablet shape
+
+joint.shapes.tm.Tablet = joint.shapes.tm.toolElement.extend({
+
+    markup: '<g class="rotatable"><g class="scalable"><image class="hasNoOpenThreats isInScope"/><title class="tooltip"/></g><text class="element-text hasNoOpenThreats isInScope"/></g>',
+
+    defaults: joint.util.deepSupplement({
+
+        type: 'tm.Tablet',
+        size: { width: 80, height: 80 },
+        attrs: {
+            'image': {'xlink:href': 'public/content/images/Tablet.png', width: 80, height: 80 },
+            'text': { 'ref-x': 0.5, 'ref-y': 80, ref: 'image' },
+        }
+
+    }, joint.shapes.tm.toolElement.prototype.defaults)
+});
+
+//define Tablet element properties
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Tablet.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned','remoteMedicalRecordStorage']);
+
+//process Electrocardiogram shape
+
+joint.shapes.tm.Electrocardiogram = joint.shapes.tm.toolElement.extend({
+
+    markup: '<g class="rotatable"><g class="scalable"><image class="hasNoOpenThreats isInScope"/><title class="tooltip"/></g><text class="element-text hasNoOpenThreats isInScope"/></g>',
+
+    defaults: joint.util.deepSupplement({
+
+        type: 'tm.Electrocardiogram',
+        size: { width: 80, height: 80 },
+        attrs: {
+            'image': {'xlink:href': 'public/content/images/Electrocardiogram.png', width: 80, height: 80 },
+            'text': { 'ref-x': 0.5, 'ref-y': 80, ref: 'image' },
+        }
+
+    }, joint.shapes.tm.toolElement.prototype.defaults)
+});
+
+//define Electrocardiogram element properties
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Electrocardiogram.prototype, ['isALog', 'storesCredentials', 'isEncrypted', 'isSigned','remoteMedicalRecordStorage']);
 
 //data store element shape
 
@@ -357,6 +487,18 @@ joint.shapes.tm.StoreView = joint.shapes.tm.ToolElementView;
 joint.shapes.tm.ActorView = joint.shapes.tm.ToolElementView;
 
 joint.shapes.tm.ProcessView = joint.shapes.tm.ToolElementView;
+
+joint.shapes.tm.SmartWatchView = joint.shapes.tm.ToolElementView;
+
+joint.shapes.tm.LaptopView = joint.shapes.tm.ToolElementView;
+
+joint.shapes.tm.PacemakerView = joint.shapes.tm.ToolElementView;
+
+joint.shapes.tm.MobilePhoneView = joint.shapes.tm.ToolElementView;
+
+joint.shapes.tm.TabletView = joint.shapes.tm.ToolElementView;
+
+joint.shapes.tm.ElectrocardiogramView = joint.shapes.tm.ToolElementView;
 
 joint.shapes.tm.LinkView = joint.dia.LinkView.extend({
 

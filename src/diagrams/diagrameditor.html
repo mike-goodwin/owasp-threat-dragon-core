@@ -1,4 +1,4 @@
-﻿<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">
+<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">
     <div ng-show="!vm.errored">
         <div class="col-lg-2">
             <!--Diagram stencil-->
@@ -7,9 +7,11 @@
                     <uib-accordion-heading>
                         Edit diagram <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.viewStencil, 'glyphicon-chevron-right': !vm.viewStencil}"></i>
                     </uib-accordion-heading>
-                    <div ng-repeat="stencil in vm.stencils">
-                        <div height="120">
-                            <tmt-stencil class="stencil" shape="stencil.shape" padding="5" scale="0.9" action="stencil.action()" />
+                    <div style="overflow-y:scroll; height: 550px">
+                        <div ng-repeat="stencil in vm.stencils">
+                            <div style="height: 120px">
+                                <tmt-stencil class="stencil" shape="stencil.shape" padding="15" scale="0.9" action="stencil.action()" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,7 +85,7 @@
                 <div class="panel-heading panel-title">Properties</div>
                 <div class="panel-body">
                     <div ng-if="vm.selected && vm.selected.attributes.type != 'tm.Boundary' ">
-                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}"> </tmt-element-properties>
+                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}"></tmt-element-properties>
                     </div>
                     <div ng-if="!vm.selected || vm.selected.attributes.type === 'tm.Boundary'">
                         <em>Select an element in the diagram to see or edit its properties</em>
