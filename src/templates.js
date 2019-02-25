@@ -30,7 +30,7 @@ angular.module('templates', [])
     '                            <tmt-stencil class="stencil" shape="stencil.shape" padding="5" scale="0.9" action="stencil.action()" />\n' +
     '                        </div>\n' +
     '                    </div>\n' +
-    '                </div\n' +
+    '                </div>\n' +
     '                <!--Threat pane-->\n' +
     '                <div uib-accordion-group is-open="vm.viewThreats">\n' +
     '                    <uib-accordion-heading>\n' +
@@ -48,6 +48,7 @@ angular.module('templates', [])
     '                        <em>Select an element in the diagram to see or edit its threats</em>\n' +
     '                    </div>\n' +
     '                </div>\n' +
+    '                <a class="btn btn-primary center-block" ng-click="vm.generateThreatsForEmptyNodesAndViewReport()" role="button">View Threat Report</a>\n' +
     '            </uib-accordion>\n' +
     '        </div>\n' +
     '        <!--Diagram area-->\n' +
@@ -89,7 +90,7 @@ angular.module('templates', [])
     '                        </div>\n' +
     '                    </form>\n' +
     '                    <div class="tmt-diagram-container">\n' +
-    '                        <tmt-diagram graph="vm.graph" select="vm.select(element)" new-flow="vm.newFlow(source, target)" initialise-graph="vm.initialise(diagram)" height="600" width="800" grid-size="1" interactive="true"/>\n' +
+    '                        <tmt-diagram graph="vm.graph" select="vm.select(element)" new-flow="vm.newFlow(source, target)" initialise-graph="vm.initialise(diagram)" height="600" width="800" grid-size="1" interactive="true"></tmt-diagram>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '            </div>\n' +
@@ -100,7 +101,7 @@ angular.module('templates', [])
     '                <div class="panel-heading panel-title">Properties</div>\n' +
     '                <div class="panel-body">\n' +
     '                    <div ng-if="vm.selected && vm.selected.attributes.type != \'tm.Boundary\' ">\n' +
-    '                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}">\n' +
+    '                        <tmt-element-properties edit=" vm.edit()" selected="vm.selected" element-type="{{vm.selected.attributes.type}}"> </tmt-element-properties>\n' +
     '                    </div>\n' +
     '                    <div ng-if="!vm.selected || vm.selected.attributes.type === \'tm.Boundary\'">\n' +
     '                        <em>Select an element in the diagram to see or edit its properties</em>\n' +
@@ -381,7 +382,8 @@ angular.module('templates', [])
     '</ul> \n' +
     '<button id="buttonNewThreat" class="btn btn-link" ng-click="onNewThreat()">\n' +
     '    <span class="glyphicon glyphicon-plus"></span> Add a new threat...\n' +
-    '</button>')
+    '</button>\n' +
+    '')
   $templateCache.put('layout/pager.html',
     '<div class="clearfix" ng-if="canPrevious || canNext">\n' +
     '    <button ng-disabled="!canPrevious" class="pull-left btn btn-link" ng-click="previous()">Previous page</button>\n' +
@@ -408,6 +410,155 @@ angular.module('templates', [])
     '    <div class="modal-footer">\n' +
     '        <button id="buttonOK" class="btn btn-default" ng-click="onOK()">OK</button>\n' +
     '        <button id="buttonCancel" class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
+    '    </div>\n' +
+    '</div>\n' +
+    '')
+  $templateCache.put('report/confirmThreatAutoGeneration.html',
+    '<div>\n' +
+    '    <div class="modal-header">\n' +
+    '        <h3>Are you sure?</h3>\n' +
+    '    </div>\n' +
+    '    <div class="modal-body">\n' +
+    '        Some nodes in your diagram do not have threats defined. Would you like to automatically generate for these nodes?\n' +
+    '    </div>\n' +
+    '    <div class="modal-body">\n' +
+    '        Press Cancel to view the threat report without generating additional threats, or press OK to automatically generate threats for empty nodes.\n' +
+    '    </div>\n' +
+    '    <div class="modal-footer">\n' +
+    '        <button class="btn btn-default" ng-click="onOK()">OK</button>\n' +
+    '        <button class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
+    '    </div>\n' +
+    '</div>\n' +
+    '')
+  $templateCache.put('report/ThreatReport.html',
+    '<div data-ng-controller="ThreatReport as vm" class="container-fluid diagram-container">\n' +
+    '    <div class="tab">\n' +
+    '        <button class="tablinks" id="defaultTab" ng-click="vm.activateTab($event, \'Threats\')">Threats</button>\n' +
+    '        <button class="tablinks" ng-click="vm.activateTab($event, \'Countermeasures\')">Countermeasures</button>\n' +
+    '    </div>\n' +
+    '    <div id="Threats" class="tabcontent">\n' +
+    '        <table class="tg" style="width:100%">\n' +
+    '            <thead>\n' +
+    '                <tr>\n' +
+    '                    <th>No.</th>\n' +
+    '                    <th>COMPONENT</th>\n' +
+    '                    <th>THREAT TYPE</th>\n' +
+    '                    <th>DESCRIPTION</th>\n' +
+    '                    <th>STATUS</th>\n' +
+    '                    <th>SEVERITY</th>\n' +
+    '                </tr>\n' +
+    '            </thead>\n' +
+    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
+    '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
+    '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
+    '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
+    '                        <div style="margin-right: 36px;">\n' +
+    '                            <span>{{ element.name }}</span>\n' +
+    '                        </div>\n' +
+    '                        <div class="bottom-right">\n' +
+    '                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">\n' +
+    '                                <span class="glyphicon glyphicon-plus"></span>\n' +
+    '                            </button>\n' +
+    '                        </div>\n' +
+    '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
+    '                    <td><span>{{element.threats[0].description}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '                <tr ng-if="$even" class="even" ng-click="vm.editThreat(element.threats[0])">\n' +
+    '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
+    '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
+    '                        <div style="margin-right: 36px;">\n' +
+    '                            <span>{{ element.name }}</span>\n' +
+    '                        </div>\n' +
+    '                        <div class="bottom-right">\n' +
+    '                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">\n' +
+    '                                <span class="glyphicon glyphicon-plus"></span>\n' +
+    '                            </button>\n' +
+    '                        </div>\n' +
+    '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
+    '                    <td><span>{{element.threats[0].description}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.type}}</span></td>\n' +
+    '                    <td><span>{{threat.description}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[threat.severity]">{{threat.severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.type}}</span></td>\n' +
+    '                    <td><span>{{threat.description}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[threat.severity]">{{threat.severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '            </tbody>\n' +
+    '        </table>\n' +
+    '    </div>\n' +
+    '    <div id="Countermeasures" class="tabcontent">\n' +
+    '        <table class="tg" style="width:100%">\n' +
+    '            <thead>\n' +
+    '            <tr>\n' +
+    '                <th>No.</th>\n' +
+    '                <th>COMPONENT</th>\n' +
+    '                <th>THREAT TYPE</th>\n' +
+    '                <th>COUNTERMEASURE</th>\n' +
+    '                <th>STATUS</th>\n' +
+    '                <th>SEVERITY</th>\n' +
+    '            </tr>\n' +
+    '            </thead>\n' +
+    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
+    '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
+    '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
+    '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
+    '                        <div style="margin-right: 36px;">\n' +
+    '                            <span>{{ element.name }}</span>\n' +
+    '                        </div>\n' +
+    '                        <div class="bottom-right">\n' +
+    '                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">\n' +
+    '                                <span class="glyphicon glyphicon-plus"></span>\n' +
+    '                            </button>\n' +
+    '                        </div>\n' +
+    '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
+    '                    <td><span>{{element.threats[0].mitigation}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '                <tr ng-if="$even" class="even" ng-click="vm.editThreat(element.threats[0])">\n' +
+    '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
+    '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
+    '                        <div style="margin-right: 36px;">\n' +
+    '                            <span>{{ element.name }}</span>\n' +
+    '                        </div>\n' +
+    '                        <div class="bottom-right">\n' +
+    '                            <button class="btn btn-link" ng-click="vm.onAddNewThreat(element)" data-toggle="tooltip" data-placement="top" title="Add a new threat to this node">\n' +
+    '                                <span class="glyphicon glyphicon-plus"></span>\n' +
+    '                            </button>\n' +
+    '                        </div>\n' +
+    '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
+    '                    <td><span>{{element.threats[0].mitigation}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.type}}</span></td>\n' +
+    '                    <td><span>{{threat.mitigation}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[threat.severity]">{{threat.severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.type}}</span></td>\n' +
+    '                    <td><span>{{threat.mitigation}}</span></td>\n' +
+    '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +
+    '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[threat.severity]">{{threat.severity}}</span></td>\n' +
+    '                </tr>\n' +
+    '            </tbody>\n' +
+    '        </table>\n' +
     '    </div>\n' +
     '</div>\n' +
     '')

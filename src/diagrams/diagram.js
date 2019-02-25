@@ -30,6 +30,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
     vm.select = select;
     vm.edit = edit;
     vm.generateThreats = generateThreats;
+    vm.generateThreatsForEmptyNodesAndViewReport = generateThreatsForEmptyNodesAndViewReport;
     vm.selected = null;
     vm.viewStencil = true;
     vm.viewThreats = false;
@@ -79,7 +80,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
         return shapes;
     }
 
-    function save() {
+    function save(callback) {
         var diagramData = { diagramJson: { cells: vm.graph.getCells() } };
 
         if (!_.isUndefined(vm.currentDiagram.options) && !_.isUndefined(vm.currentDiagram.options.height) && !_.isUndefined(vm.currentDiagram.options.width)) {
@@ -87,8 +88,10 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
             diagramData.size = size;
         }
 
-        datacontext.saveThreatModelDiagram(vm.diagramId, diagramData)
-            .then(onSaveDiagram);
+        datacontext.saveThreatModelDiagram(vm.diagramId, diagramData).then(function () {
+            onSaveDiagram();
+            callback();
+        });
     }
 
     function onSaveDiagram() {
@@ -182,10 +185,56 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
         return threatmodellocator.getModelPathFromRouteParams($routeParams);
     }
 
+    function generateThreatsForEmptyNodesAndViewReport() {
+        var elementsWithoutThreats = vm.graph.getCells().filter(function(element) {
+            if (isBoundaryElement(element) || element.outOfScope) {
+                return false;
+            }
+            return element.threats == null || element.threats.length === 0;
+        });
+        if (elementsWithoutThreats.length === 0) {
+            viewThreatReport();
+        }
+        else {
+            dialogs.confirm('report/confirmThreatAutoGeneration.html',
+                function () {
+                    silentlyGenerateThreatsForElements(elementsWithoutThreats, function () {
+                        save(viewThreatReport);
+                    });
+                },
+                function () {
+                    return null;
+                },
+                function () {
+                    viewThreatReport();
+                });
+        }
+    }
+
+    function silentlyGenerateThreatsForElements(elementList, callback) {
+        var remainingElements = elementList;
+        if (remainingElements.length > 0) {
+            var currentElement = remainingElements.shift();
+            generateThreatsForElement(currentElement).then(function (newThreats) {
+                newThreats.forEach(function (newThreat) {
+                    addThreatToElement(newThreat, currentElement);
+                });
+                silentlyGenerateThreatsForElements(remainingElements, callback);
+            });
+        }
+        else {
+            callback();
+        }
+    }
+
     function generateThreats() {
         if (vm.selected) {
-            threatengine.generateForElement(vm.selected).then(onGenerateThreats);
+            generateThreatsForElement(vm.selected).then(onGenerateThreats);
         }
+    }
+
+    function generateThreatsForElement(element) {
+        return threatengine.generateForElement(element);
     }
 
     function onGenerateThreats(threats) {
@@ -198,7 +247,17 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
             if (threatList.length > 0) {
                 currentThreat = threatList.shift();
                 dialogs.confirm('diagrams/ThreatEditPane.html',
-                    addThreat,
+                    function (applyToAll) {
+                        if (applyToAll) {
+                            threatList.forEach(function (threat) {
+                                addThreatToElement(threat, vm.selected);
+                            });
+                        }
+                        else {
+                            addThreatToElement(currentThreat, vm.selected);
+                            $timeout(suggestThreat, 500);
+                        }
+                    },
                     function () {
                         return {
                             heading: 'Add this threat?',
@@ -214,31 +273,25 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
             }
         }
 
-        function addThreat(applyToAll) {
-            vm.dirty = true;
-
-            if (_.isUndefined(vm.selected.threats)) {
-                vm.selected.threats = [];
-            }
-
-            vm.selected.threats.push(currentThreat);
-
-            if (applyToAll) {
-                threatList.forEach(function (threat) {
-
-                    vm.selected.threats.push(threat);
-                });
-            }
-            else {
-                $timeout(suggestThreat, 500);
-            }
-        }
-
         function ignoreThreat(applyToAll) {
             if (!applyToAll) {
                 $timeout(suggestThreat, 500);
             }
         }
+    }
+
+    function addThreatToElement(threat, element) {
+        vm.dirty = true;
+
+        if (_.isUndefined(element.threats)) {
+            vm.selected.threats = [];
+        }
+
+        element.threats.push(threat);
+    }
+
+    function viewThreatReport() {
+        $location.path('/threatmodel/' + getThreatModelPath() + '/diagram/' + vm.diagramId + '/threatReport');
     }
 
     function onSelectElement() {
@@ -344,6 +397,10 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
             threatWatchers[element.id]();
             threatWatchers.splice(element.id, 1);
         }
+    }
+
+    function isBoundaryElement(element) {
+        return element.attributes.type === 'tm.Boundary';
     }
 }
 
