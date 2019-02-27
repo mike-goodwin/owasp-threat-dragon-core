@@ -21,12 +21,34 @@
         </div>
         <div class="checkbox">
             <label>
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedProcess" ng-change="edit()" ng-init="selected.isEncryptedProcess = false"/> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForProcess" ng-if="selected.isEncryptedProcess">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxIsWebApplication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAWebApplication" ng-change="edit()" /> Web Application
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsSwitchingProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isASwitchingProcess" ng-change="edit()" /> Network Switch
+                <input name="checkboxIsANetworkSwitch" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isANetworkSwitch" ng-change="edit()" /> Network Switch
             </label>
         </div>
         <div class="checkbox">
@@ -54,9 +76,9 @@
 
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Provides Authentication
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
             </label>
-            <select ng-if="selected.providesAuthentication">
+            <select id = "authType" ng-if="selected.providesAuthentication">
                 <option value="ldap">LDAP</option>
                 <option value="kerberos">Kerberos</option>
                 <option value="oauth2">Oauth 2</option>
@@ -64,7 +86,23 @@
                 <option value="radius">Radius</option>
             </select>
         </div>
-
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedActor" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedActor" ng-change="edit()" ng-init="selected.isEncryptedActor = false"/> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForActor" ng-if="selected.isEncryptedActor">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxIsClientEHealthDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.clientEHealthDevice" ng-change="edit()" /> Client eHealth Device
@@ -94,6 +132,11 @@
     <div ng-show="elementType === 'tm.Store'">
         <div class="checkbox">
             <label>
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorage" ng-change="edit()" /> Remote Storage of Medical Records
             </label>
         </div>
@@ -109,16 +152,28 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsEncryptedStore" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncrypted" ng-change="edit()" /> Is Encrypted
+                <input name="checkboxIsEncryptedStore" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedStore" ng-change="edit()" ng-init="selected.isEncryptedStore = false"/> Is Encrypted
             </label>
+            <select id ="encryptionTypeForStore" ng-if="selected.isEncryptedStore">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
         </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSigned" ng-change="edit()" /> Is Signed
             </label>
         </div>
-        
     </div>
+
     <div ng-show="elementType === 'tm.Flow'">
         <div class="form-group">
             <label>Protocol</label>
@@ -126,8 +181,20 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsEncryptedFlow" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncrypted" ng-change="edit()" /> Is Encrypted
+                <input name="checkboxIsEncryptedFlow" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedFlow" ng-change="edit()" ng-init="selected.isEncryptedFlow = false"/> Is Encrypted
             </label>
+            <select id ="encryptionTypeForFlow" ng-if="selected.isEncryptedFlow">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
         </div>
         <div class="checkbox">
             <label>
@@ -153,11 +220,15 @@
     <div ng-show="elementType === 'tm.MobilePhone'">
         <div class="checkbox">
             <label>
-                <input name="checkboxIsEncryptedMobilePhone" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncrypted" ng-change="edit()" ng-init="selected.isEncrypted = false" /> Is Encrypted
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
             </label>
-            <select ng-if="selected.isEncrypted">
-                <option value="" selected = "selected" ngValue="undefined">Select</option>
-                <option value="des">DES</option>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedMobilePhone" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedMobilePhone" ng-change="edit()" ng-init="selected.isEncryptedMobilePhone = false" /> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForMobilePhone" ng-if="selected.isEncryptedMobilePhone">
+                <option value="des" selected>DES</option>
                 <option value="tripleDes">Triple DES</option>
                 <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
                 <option value="rc2">RC2</option>
@@ -187,6 +258,231 @@
         <div class="checkbox">
             <label>
                 <input name="checkboxStoresPI" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesPI" ng-change="edit()" /> Stores personal information (PI).
+            </label>
+        </div>
+    </div>
+
+    <div ng-show="elementType === 'tm.SmartWatch'">
+        <div class="checkbox">
+            <label>
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALog" ng-change="edit()" />Stores Event Logs
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentials" ng-change="edit()" /> Stores Credentials
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedSmartWatch" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedSmartWatch" ng-change="edit()"  ng-init="selected.isEncryptedSmartWatch = false" /> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForSmartWatch" ng-if="selected.isEncryptedSmartWatch">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSigned" ng-change="edit()" /> Is Signed
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorage" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+    </div>
+
+    <div ng-show="elementType === 'tm.Laptop'">
+        <div class="checkbox">
+            <label>
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALog" ng-change="edit()" />Stores Event Logs
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentials" ng-change="edit()" /> Stores Credentials
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedLaptop" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedLaptop" ng-change="edit()" ng-init="selected.isEncryptedLaptop = false" /> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForLaptop" ng-if="selected.isEncryptedLaptop">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSigned" ng-change="edit()" /> Is Signed
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorage" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+    </div>
+
+    <div ng-show="elementType === 'tm.Tablet'">
+        <div class="checkbox">
+            <label>
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALog" ng-change="edit()" />Stores Event Logs
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentials" ng-change="edit()" /> Stores Credentials
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedTablet" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedTablet" ng-change="edit()" ng-init="selected.isEncryptedTablet = false" /> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForTablet" ng-if="selected.isEncryptedTablet">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSigned" ng-change="edit()" /> Is Signed
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorage" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+    </div>
+
+    <div ng-show="elementType === 'tm.Electrocardiogram'">
+        <div class="checkbox">
+            <label>
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALog" ng-change="edit()" />Stores Event Logs
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentials" ng-change="edit()" /> Stores Credentials
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedElectrocardiogram" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedElectrocardiogram" ng-change="edit()" ng-init="selected.isEncryptedElectrocardiogram = false" /> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForElectrocardiogram" ng-if="selected.isEncryptedElectrocardiogram">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSigned" ng-change="edit()" /> Is Signed
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorage" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+    </div>
+
+    <div ng-show="elementType === 'tm.Pacemaker'">
+        <div class="checkbox">
+            <label>
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthentication" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALog" ng-change="edit()" />Stores Event Logs
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentials" ng-change="edit()" /> Stores Credentials
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsEncryptedPacemaker" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedPacemaker" ng-change="edit()" ng-init="selected.isEncryptedPacemaker = false" /> Is Encrypted
+            </label>
+            <select id ="encryptionTypeForPacemaker" ng-if="selected.isEncryptedPacemaker">
+                <option value="des" selected>DES</option>
+                <option value="tripleDes">Triple DES</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="rc2">RC2</option>
+                <option value="rc4">RC4</option>
+                <option value="128rc4">128-bit RC4</option>
+                <option value="desx">DESX</option>
+                <option value="128aes">128-bit AES</option>
+                <option value="192aes">192-bit AES</option>
+                <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSigned" ng-change="edit()" /> Is Signed
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorage" ng-change="edit()" /> Remote Storage of Medical Records
             </label>
         </div>
     </div>

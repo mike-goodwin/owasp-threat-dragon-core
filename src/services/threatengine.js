@@ -20,6 +20,15 @@ function threatengine() {
         this.element = element;
     };
 
+    //Checks whether the values (within a string) of a dropdown element = the selected value)
+    //E.g. Returns boolean for  stringOfOptions:"car, van, truck", selectedValue in the dropdown = car, hence will return true
+    //E.g. Returns boolean for  stringOfOptions:"car, van", selectedValue in the dropdown = suv, hence will return false
+    function dropDownOptionsCheck(elementId, stringOfOptions){
+        var selectedElement = document.getElementById(elementId);
+        var selectedValue = selectedElement.options[selectedElement.selectedIndex].value;
+        return stringOfOptions.includes(selectedValue);
+    }
+
     return service;
 
     function generateForElement(element) {
@@ -278,7 +287,7 @@ function threatengine() {
                     description:'The use of a hard-coded cryptographic key tremendously increases the possibility that encrypted data may be recovered.Authentication: If hard-coded cryptographic keys are used, it is almost certain that malicious users will gain access through the account in question.',
                     mitigation:'To mitigate against this threat, this practice of hard coding the cryptographic key should be avoided to avoid exposing the cryptographic key to a potential adversary for exploitation [32]'});});
 
-            flow.rule('Faulty Cryptographic Algorithm', [[Element, 'el','el.element.attributes.type == "tm.MobilePhone" && isTrue(el.element.isEncrypted)' /*&& el.element.encryptionValue.options.value == "des"*/],
+            flow.rule('Faulty Cryptographic Algorithm', {scope: {dropDownOptionsCheck: dropDownOptionsCheck}}, [[Element, 'el','el.element.attributes.type == "tm.MobilePhone" && isTrue(el.element.isEncrypted) && isTrue(dropDownOptionsCheck("encryptionTypeForMobilePhone", "des, rsa, tripleDes, tripleDes3Key, rc2, rc4, 128rc4, desx"))'],
                 [Threats, 'threats']
             ], function (facts) {
                 facts.threats.collection.push({ ruleId: '3.7',
