@@ -228,7 +228,9 @@ joint.shapes.tm.Process = joint.shapes.tm.toolElement.extend({
 
 //define process element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Process.prototype, ['privilegeLevel', 'providesAuthentication', 'isEncryptedProcess', 'isAWebApplication', 'isANetworkSwitch', 'isARoutingProcess', 'isAWirelessAccessProcess', 'isAConfigurationProcess','isAIPSecHostProcess']);
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Process.prototype, ['privilegeLevel', 'providesAuthentication', 'isEncryptedProcess', 'isAWebApplication', 'isANetworkSwitch', 'isARoutingProcess', 'isAWirelessAccessProcess', 'isAConfigurationProcess','isAIPSecHostProcess', 'isALog', 'usesExternalResources', 'usesResourcesDirectly','validatesCert', 'localAccess', 'validatesInput']);;
+
 
 //process Smart Watch shape
 
@@ -382,7 +384,10 @@ joint.shapes.tm.Store = joint.shapes.tm.toolElement.extend({
 
 //data store properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['providesAuthentication', 'isEncryptedStore', 'isALog', 'storesCredentials', 'isSigned','remoteMedicalRecordStorage']);
+
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['providesAuthentication', 'isEncryptedStore', 'isALog', 'storesCredentials', 'isSigned','remoteMedicalRecordStorage', 'usesExternalResources','usesResourcesDirectly','validatesCert', 'localAccess', 'validatesInput']);
+
+
 
 //actor element shape
 
