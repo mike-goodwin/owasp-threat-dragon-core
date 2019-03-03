@@ -142,7 +142,7 @@ Object.defineProperty(joint.shapes.tm.Flow.prototype, 'name', {
 
 joint.shapes.tm.utils.defineOutOfScope(joint.shapes.tm.Flow.prototype, 'connection');
 joint.shapes.tm.utils.defineHasOpenThreats(joint.shapes.tm.Flow.prototype, ['connection', 'marker-target']);
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Flow.prototype, ['reasonOutOfScope', 'protocol', 'isEncryptedFlow', 'isPublicNetwork', 'threats','bluetoothInterface','wifiInterface','cellularInterface']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Flow.prototype, ['reasonOutOfScope', 'protocol', 'isEncryptedFlow', 'isPublicNetwork','bluetoothInterface','wifiInterface','cellularInterface', 'usesTLS', ]);
 
 //trust boundary shape
 
@@ -229,7 +229,7 @@ joint.shapes.tm.Process = joint.shapes.tm.toolElement.extend({
 //define process element properties
 
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Process.prototype, ['privilegeLevel', 'providesAuthentication', 'isEncryptedProcess', 'isAWebApplication', 'isANetworkSwitch', 'isARoutingProcess', 'isAWirelessAccessProcess', 'isAConfigurationProcess','isAIPSecHostProcess', 'isALog', 'usesExternalResources', 'usesResourcesDirectly','validatesCert', 'localAccess', 'validatesInput']);;
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Process.prototype, ['privilegeLevelForProcess', 'providesAuthenticationProcess', 'isEncryptedProcess', 'isAWebApplication', 'isANetworkSwitch', 'isARoutingProcess', 'isAWirelessAccessProcess', 'isAConfigurationProcess','isAIPSecHostProcess', 'isALogProcess', 'usesExternalResourcesProcess', 'usesResourcesDirectlyProcess','validatesCertProcess', 'localAccessProcess', 'validatesInputProcess', 'validateXMLProcess', 'userInputProcess', 'thirdPartyProcess']);
 
 
 //process Smart Watch shape
@@ -252,7 +252,7 @@ joint.shapes.tm.SmartWatch = joint.shapes.tm.toolElement.extend({
 
 //define SmartWatch element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.SmartWatch.prototype, ['providesAuthentication', 'isALog', 'storesCredentials', 'isEncryptedSmartWatch', 'isSigned','remoteMedicalRecordStorage']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.SmartWatch.prototype, ['providesAuthenticationSmartWatch', 'isALogSmartWatch', 'storesCredentialsSmartWatch', 'isEncryptedSmartWatch', 'isSignedSmartWatch','remoteMedicalRecordStorageSmartWatch']);
 
 //process Laptop shape
 
@@ -274,7 +274,7 @@ joint.shapes.tm.Laptop = joint.shapes.tm.toolElement.extend({
 
 //define Laptop element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Laptop.prototype, ['providesAuthentication', 'isALog', 'storesCredentials', 'isEncryptedLaptop', 'isSigned','remoteMedicalRecordStorage']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Laptop.prototype, ['providesAuthenticationLaptop', 'isALogLaptop', 'storesCredentialsLaptop', 'isEncryptedLaptop', 'isSignedLaptop','remoteMedicalRecordStorageLaptop']);
 
 //process Pacemaker shape
 
@@ -296,7 +296,7 @@ joint.shapes.tm.Pacemaker = joint.shapes.tm.toolElement.extend({
 
 //define Pacemaker element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Pacemaker.prototype, ['providesAuthentication', 'isALog', 'storesCredentials', 'isEncryptedPacemaker', 'isSigned','remoteMedicalRecordStorage']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Pacemaker.prototype, ['providesAuthenticationPacemaker', 'isALogPacemaker', 'storesCredentialsPacemaker', 'isEncryptedPacemaker', 'isSignedPacemaker','remoteMedicalRecordStoragePacemaker']);
 
 //process Mobile Phone shape
 
@@ -318,7 +318,7 @@ joint.shapes.tm.MobilePhone = joint.shapes.tm.toolElement.extend({
 
 //define MobilePhone element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.MobilePhone.prototype, ['providesAuthentication', 'isEncryptedMobilePhone', 'encryptionValue', 'hasPasswordPolicy', 'inputSanitization', 'storesMedicalRecords', 'storesPI']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.MobilePhone.prototype, ['providesAuthenticationMobilePhone', 'isEncryptedMobilePhone', 'hasPasswordPolicyMobilePhone', 'inputSanitizationMobilePhone', 'storesMedicalRecordsMobilePhone', 'storesPIMobilePhone', 'userInputMobilePhone', 'validatesInputMobilePhone', 'encryptionTypeForMobilePhone']);
 
 //process Tablet shape
 
@@ -340,7 +340,7 @@ joint.shapes.tm.Tablet = joint.shapes.tm.toolElement.extend({
 
 //define Tablet element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Tablet.prototype, ['providesAuthentication', 'isALog', 'storesCredentials', 'isEncryptedTablet', 'isSigned','remoteMedicalRecordStorage']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Tablet.prototype, ['providesAuthenticationTablet', 'isALogTablet', 'storesCredentialsTablet', 'isEncryptedTablet', 'isSignedTablet','remoteMedicalRecordStorageTablet']);
 
 //process Electrocardiogram shape
 
@@ -362,7 +362,7 @@ joint.shapes.tm.Electrocardiogram = joint.shapes.tm.toolElement.extend({
 
 //define Electrocardiogram element properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Electrocardiogram.prototype, ['providesAuthentication', 'isALog', 'storesCredentials', 'isEncryptedElectrocardiogram', 'isSigned','remoteMedicalRecordStorage']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Electrocardiogram.prototype, ['providesAuthenticationElectrocardiogram', 'isALogElectrocardiogram', 'storesCredentialsElectrocardiogram', 'isEncryptedElectrocardiogram', 'isSignedElectrocardiogram','remoteMedicalRecordStorageElectrocardiogram']);
 
 //data store element shape
 
@@ -385,7 +385,7 @@ joint.shapes.tm.Store = joint.shapes.tm.toolElement.extend({
 //data store properties
 
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['providesAuthentication', 'isEncryptedStore', 'isALog', 'storesCredentials', 'isSigned','remoteMedicalRecordStorage', 'usesExternalResources','usesResourcesDirectly','validatesCert', 'localAccess', 'validatesInput']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Store.prototype, ['providesAuthenticationStore', 'remoteMedicalRecordStorageStore', 'isALogStore', 'storesCredentialsStore', 'isEncryptedStore', 'isSignedStore','remoteMedicalRecordStorage', 'usesExternalResourcesStore','usesResourcesDirectlyStore','validatesCertStore', 'localAccessStore', 'validatesInputStore', 'userInputStore', 'thirdPartyStore']);
 
 
 
@@ -408,7 +408,7 @@ joint.shapes.tm.Actor = joint.shapes.tm.toolElement.extend({
 
 //actor properties
 
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Actor.prototype, ['providesAuthentication', 'isEncryptedActor', 'clientEHealthDevice','mobileDevice','desktopDevice','storesHealthDataLocally','forwardsHealthDataCloud']);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Actor.prototype, ['providesAuthenticationActor', 'isEncryptedActor', 'clientEHealthDevice','mobileDevice','desktopDevice','storesHealthDataLocally','forwardsHealthDataCloud']);
 
 //custom views
 
