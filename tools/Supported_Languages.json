@@ -1,0 +1,642 @@
+[
+ {
+   "name": "Markup",
+   "highlightAlias": "markup"
+ },
+ {
+   "name": "CSS",
+   "highlightAlias": "css"
+ },
+ {
+   "name": "C-like",
+   "highlightAlias": "clike"
+ },
+ {
+   "name": "JavaScript",
+   "highlightAlias": "javascript"
+ },
+ {
+   "name": "ABAP",
+   "highlightAlias": "abap"
+ },
+ {
+   "name": "ActionScript",
+   "highlightAlias": "actionscript"
+ },
+ {
+   "name": "Ada",
+   "highlightAlias": "ada"
+ },
+ {
+   "name": "Apache Configuration",
+   "highlightAlias": "apacheconf"
+ },
+ {
+   "name": "APL",
+   "highlightAlias": "apl"
+ },
+ {
+   "name": "AppleScript",
+   "highlightAlias": "applescript"
+ },
+ {
+   "name": "Arduino",
+   "highlightAlias": "arduino"
+ },
+ {
+   "name": "ARFF",
+   "highlightAlias": "arff"
+ },
+ {
+   "name": "AsciiDoc",
+   "highlightAlias": "asciidoc"
+ },
+ {
+   "name": "6502 Assembly",
+   "highlightAlias": "asm6502"
+ },
+ {
+   "name": "ASP.NET (C#)",
+   "highlightAlias": "aspnet"
+ },
+ {
+   "name": "AutoHotkey",
+   "highlightAlias": "autohotkey"
+ },
+ {
+   "name": "AutoIt",
+   "highlightAlias": "autoit"
+ },
+ {
+   "name": "Bash",
+   "highlightAlias": "bash"
+ },
+ {
+   "name": "BASIC",
+   "highlightAlias": "basic"
+ },
+ {
+   "name": "Batch",
+   "highlightAlias": "batch"
+ },
+ {
+   "name": "Bison",
+   "highlightAlias": "bison"
+ },
+ {
+   "name": "Brainfuck",
+   "highlightAlias": "brainfuck"
+ },
+ {
+   "name": "Bro",
+   "highlightAlias": "bro"
+ },
+ {
+   "name": "C",
+   "highlightAlias": "c"
+ },
+ {
+   "name": "C#",
+   "highlightAlias": "csharp"
+ },
+ {
+   "name": "C++",
+   "highlightAlias": "cpp"
+ },
+ {
+   "name": "CIL",
+   "highlightAlias": "cil"
+ },
+ {
+   "name": "CoffeeScript",
+   "highlightAlias": "coffeescript"
+ },
+ {
+   "name": "Clojure",
+   "highlightAlias": "clojure"
+ },
+ {
+   "name": "Crystal",
+   "highlightAlias": "crystal"
+ },
+ {
+   "name": "Content-Security-Policy",
+   "highlightAlias": "csp"
+ },
+ {
+   "name": "CSS Extras",
+   "highlightAlias": "css-extras"
+ },
+ {
+   "name": "D",
+   "highlightAlias": "d"
+ },
+ {
+   "name": "Dart",
+   "highlightAlias": "dart"
+ },
+ {
+   "name": "Diff",
+   "highlightAlias": "diff"
+ },
+ {
+   "name": "Django/Jinja2",
+   "highlightAlias": "django"
+ },
+ {
+   "name": "Docker",
+   "highlightAlias": "docker"
+ },
+ {
+   "name": "Eiffel",
+   "highlightAlias": "eiffel"
+ },
+ {
+   "name": "Elixir",
+   "highlightAlias": "elixir"
+ },
+ {
+   "name": "Elm",
+   "highlightAlias": "elm"
+ },
+ {
+   "name": "ERB",
+   "highlightAlias": "erb"
+ },
+ {
+   "name": "Erlang",
+   "highlightAlias": "erlang"
+ },
+ {
+   "name": "F#",
+   "highlightAlias": "fsharp"
+ },
+ {
+   "name": "Flow",
+   "highlightAlias": "flow"
+ },
+ {
+   "name": "Fortran",
+   "highlightAlias": "fortran"
+ },
+ {
+   "name": "G-code",
+   "highlightAlias": "gcode"
+ },
+ {
+   "name": "GEDCOM",
+   "highlightAlias": "gedcom"
+ },
+ {
+   "name": "Gherkin",
+   "highlightAlias": "gherkin"
+ },
+ {
+   "name": "Git",
+   "highlightAlias": "git"
+ },
+ {
+   "name": "GLSL",
+   "highlightAlias": "glsl"
+ },
+ {
+   "name": "GameMaker Language",
+   "highlightAlias": "gml"
+ },
+ {
+   "name": "Go",
+   "highlightAlias": "go"
+ },
+ {
+   "name": "GraphQL",
+   "highlightAlias": "graphql"
+ },
+ {
+   "name": "Groovy",
+   "highlightAlias": "groovy"
+ },
+ {
+   "name": "Haml",
+   "highlightAlias": "haml"
+ },
+ {
+   "name": "Handlebars",
+   "highlightAlias": "handlebars"
+ },
+ {
+   "name": "Haskell",
+   "highlightAlias": "haskell"
+ },
+ {
+   "name": "Haxe",
+   "highlightAlias": "haxe"
+ },
+ {
+   "name": "HCL",
+   "highlightAlias": "hcl"
+ },
+ {
+   "name": "HTTP",
+   "highlightAlias": "http"
+ },
+ {
+   "name": "HTTP Public-Key-Pins",
+   "highlightAlias": "hpkp"
+ },
+ {
+   "name": "HTTP Strict-Transport-Security",
+   "highlightAlias": "hsts"
+ },
+ {
+   "name": "IchigoJam",
+   "highlightAlias": "ichigojam"
+ },
+ {
+   "name": "Icon",
+   "highlightAlias": "icon"
+ },
+ {
+   "name": "Inform 7",
+   "highlightAlias": "inform7"
+ },
+ {
+   "name": "Ini",
+   "highlightAlias": "ini"
+ },
+ {
+   "name": "Io",
+   "highlightAlias": "io"
+ },
+ {
+   "name": "J",
+   "highlightAlias": "j"
+ },
+ {
+   "name": "Java",
+   "highlightAlias": "java"
+ },
+ {
+   "name": "Java stack trace",
+   "highlightAlias": "javastacktrace"
+ },
+ {
+   "name": "Jolie",
+   "highlightAlias": "jolie"
+ },
+ {
+   "name": "JSON",
+   "highlightAlias": "json"
+ },
+ {
+   "name": "Julia",
+   "highlightAlias": "julia"
+ },
+ {
+   "name": "Keyman",
+   "highlightAlias": "keyman"
+ },
+ {
+   "name": "Kotlin",
+   "highlightAlias": "kotlin"
+ },
+ {
+   "name": "LaTeX",
+   "highlightAlias": "latex"
+ },
+ {
+   "name": "Less",
+   "highlightAlias": "less"
+ },
+ {
+   "name": "Liquid",
+   "highlightAlias": "liquid"
+ },
+ {
+   "name": "Lisp",
+   "highlightAlias": "lisp"
+ },
+ {
+   "name": "LiveScript",
+   "highlightAlias": "livescript"
+ },
+ {
+   "name": "LOLCODE",
+   "highlightAlias": "lolcode"
+ },
+ {
+   "name": "Lua",
+   "highlightAlias": "lua"
+ },
+ {
+   "name": "Makefile",
+   "highlightAlias": "makefile"
+ },
+ {
+   "name": "Markdown",
+   "highlightAlias": "markdown"
+ },
+ {
+   "name": "Markup templating",
+   "highlightAlias": "markup-templating"
+ },
+ {
+   "name": "MATLAB",
+   "highlightAlias": "matlab"
+ },
+ {
+   "name": "MEL",
+   "highlightAlias": "mel"
+ },
+ {
+   "name": "Mizar",
+   "highlightAlias": "mizar"
+ },
+ {
+   "name": "Monkey",
+   "highlightAlias": "monkey"
+ },
+ {
+   "name": "N1QL",
+   "highlightAlias": "n1ql"
+ },
+ {
+   "name": "N4JS",
+   "highlightAlias": "n4js"
+ },
+ {
+   "name": "Nand To Tetris HDL",
+   "highlightAlias": "nand2tetris-hdl"
+ },
+ {
+   "name": "NASM",
+   "highlightAlias": "nasm"
+ },
+ {
+   "name": "nginx",
+   "highlightAlias": "nginx"
+ },
+ {
+   "name": "Nim",
+   "highlightAlias": "nim"
+ },
+ {
+   "name": "Nix",
+   "highlightAlias": "nix"
+ },
+ {
+   "name": "NSIS",
+   "highlightAlias": "nsis"
+ },
+ {
+   "name": "Objective-C",
+   "highlightAlias": "objectivec"
+ },
+ {
+   "name": "OCaml",
+   "highlightAlias": "ocaml"
+ },
+ {
+   "name": "OpenCL",
+   "highlightAlias": "opencl"
+ },
+ {
+   "name": "Oz",
+   "highlightAlias": "oz"
+ },
+ {
+   "name": "PARI/GP",
+   "highlightAlias": "parigp"
+ },
+ {
+   "name": "Parser",
+   "highlightAlias": "parser"
+ },
+ {
+   "name": "Pascal",
+   "highlightAlias": "pascal"
+ },
+ {
+   "name": "Perl",
+   "highlightAlias": "perl"
+ },
+ {
+   "name": "PHP",
+   "highlightAlias": "php"
+ },
+ {
+   "name": "PHP Extras",
+   "highlightAlias": "php-extras"
+ },
+ {
+   "name": "PL/SQL",
+   "highlightAlias": "plsql"
+ },
+ {
+   "name": "PowerShell",
+   "highlightAlias": "powershell"
+ },
+ {
+   "name": "Processing",
+   "highlightAlias": "processing"
+ },
+ {
+   "name": "Prolog",
+   "highlightAlias": "prolog"
+ },
+ {
+   "name": ".properties",
+   "highlightAlias": "properties"
+ },
+ {
+   "name": "Protocol Buffers",
+   "highlightAlias": "protobuf"
+ },
+ {
+   "name": "Pug",
+   "highlightAlias": "pug"
+ },
+ {
+   "name": "Puppet",
+   "highlightAlias": "puppet"
+ },
+ {
+   "name": "Pure",
+   "highlightAlias": "pure"
+ },
+ {
+   "name": "Python",
+   "highlightAlias": "python"
+ },
+ {
+   "name": "Q (kdb+ database)",
+   "highlightAlias": "q"
+ },
+ {
+   "name": "Qore",
+   "highlightAlias": "qore"
+ },
+ {
+   "name": "R",
+   "highlightAlias": "r"
+ },
+ {
+   "name": "React JSX",
+   "highlightAlias": "jsx"
+ },
+ {
+   "name": "React TSX",
+   "highlightAlias": "tsx"
+ },
+ {
+   "name": "Ren'py",
+   "highlightAlias": "renpy"
+ },
+ {
+   "name": "Reason",
+   "highlightAlias": "reason"
+ },
+ {
+   "name": "reST (reStructuredText)",
+   "highlightAlias": "rest"
+ },
+ {
+   "name": "Rip",
+   "highlightAlias": "rip"
+ },
+ {
+   "name": "Roboconf",
+   "highlightAlias": "roboconf"
+ },
+ {
+   "name": "Ruby",
+   "highlightAlias": "ruby"
+ },
+ {
+   "name": "Rust",
+   "highlightAlias": "rust"
+ },
+ {
+   "name": "SAS",
+   "highlightAlias": "sas"
+ },
+ {
+   "name": "Sass (Sass)",
+   "highlightAlias": "sass"
+ },
+ {
+   "name": "Sass (Scss)",
+   "highlightAlias": "scss"
+ },
+ {
+   "name": "Scala",
+   "highlightAlias": "scala"
+ },
+ {
+   "name": "Scheme",
+   "highlightAlias": "scheme"
+ },
+ {
+   "name": "Smalltalk",
+   "highlightAlias": "smalltalk"
+ },
+ {
+   "name": "Smarty",
+   "highlightAlias": "smarty"
+ },
+ {
+   "name": "SQL",
+   "highlightAlias": "sql"
+ },
+ {
+   "name": "Soy (Closure Template)",
+   "highlightAlias": "soy"
+ },
+ {
+   "name": "Stylus",
+   "highlightAlias": "stylus"
+ },
+ {
+   "name": "Swift",
+   "highlightAlias": "swift"
+ },
+ {
+   "name": "TAP",
+   "highlightAlias": "tap"
+ },
+ {
+   "name": "Tcl",
+   "highlightAlias": "tcl"
+ },
+ {
+   "name": "Textile",
+   "highlightAlias": "textile"
+ },
+ {
+   "name": "TOML",
+   "highlightAlias": "toml"
+ },
+ {
+   "name": "Template Toolkit 2",
+   "highlightAlias": "tt2"
+ },
+ {
+   "name": "Twig",
+   "highlightAlias": "twig"
+ },
+ {
+   "name": "TypeScript",
+   "highlightAlias": "typescript"
+ },
+ {
+   "name": "Vala",
+   "highlightAlias": "vala"
+ },
+ {
+   "name": "VB.Net",
+   "highlightAlias": "vbnet"
+ },
+ {
+   "name": "Velocity",
+   "highlightAlias": "velocity"
+ },
+ {
+   "name": "Verilog",
+   "highlightAlias": "verilog"
+ },
+ {
+   "name": "VHDL",
+   "highlightAlias": "vhdl"
+ },
+ {
+   "name": "vim",
+   "highlightAlias": "vim"
+ },
+ {
+   "name": "Visual Basic",
+   "highlightAlias": "visual-basic"
+ },
+ {
+   "name": "WebAssembly",
+   "highlightAlias": "wasm"
+ },
+ {
+   "name": "Wiki markup",
+   "highlightAlias": "wiki"
+ },
+ {
+   "name": "Xeora",
+   "highlightAlias": "xeora"
+ },
+ {
+   "name": "Xojo (REALbasic)",
+   "highlightAlias": "xojo"
+ },
+ {
+   "name": "XQuery",
+   "highlightAlias": "xquery"
+ },
+ {
+   "name": "YAML",
+   "highlightAlias": "yaml"
+ }
+]

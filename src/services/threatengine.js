@@ -100,7 +100,28 @@ function threatengine() {
                     status:'Open',
                     severity:'Medium',
                     description:'The elevated privilege level required to perform operations such as chroot() should be dropped immediately after the operation is performed.When a program calls a privileged function, such as chroot(), it must first acquire root privilege. As soon as the privileged operation has completed, the program should drop root privilege and return to the privilege level of the invoking user.',
-                    mitigation:'There are several ways to mitigate the least privilege violation:Split an individual components into several components, and assign lower privilege levels to those components [8]. Identify areas in the system which have that elevated privilege and use those  components instead to accomplish the task [8]. Create a separate environment within the system/program where only within that area or environment has an elevated privilege [8]. '});});
+                    mitigation:'There are several ways to mitigate the least privilege violation:Split an individual components into several components, and assign lower privilege levels to those components [8]. Identify areas in the system which have that elevated privilege and use those  components instead to accomplish the task [8]. Create a separate environment within the system/program where only within that area or environment has an elevated privilege [8]. ',
+                    references:[{name: 'CWE-272: Least Privilege Violation', link: 'https://cwe.mitre.org/data/definitions/272.html'}],
+                    examples:[{
+                        language: {name: 'C', highlightAlias: 'c'},
+                        preText: 'The following code calls chroot() to restrict the application to a subset of the filesystem below APP_HOME in order to prevent an attacker from using the program to gain unauthorized access to files located elsewhere. The code then opens a file specified by the user and processes the contents of the file.',
+                        postText:'Constraining the process inside the application\'s home directory before opening any files is a valuable security measure. However, the absence of a call to setuid() with some non-zero value means the application is continuing to operate with unnecessary root privileges. Any successful exploit carried out by an attacker against the application can now result in a privilege escalation attack because any malicious operations will be performed with the privileges of the superuser. If the application drops to the privilege level of a non-root user, the potential for damage is substantially reduced.',
+                        code: 'chroot(APP_HOME);\n' +
+                            'chdir("/");\n' +
+                            'FILE* data = fopen(argv[1], "r+");\n' +
+                            '...'
+                    },
+                    {
+                        language: {name: 'Markup', highlightAlias: 'markup'},
+                        preText:'This is a test HTML example',
+                        code: '<html lang="en">\n' +
+                            '\t<head>\n' +
+                            '\t\t<meta charset="utf-8" />\n' +
+                            '\t</head>\n' +
+                            '\t<body>\n' +
+                            '\t</body>\n' +
+                            '</html>'
+                    }]});});
 
             flow.rule('Code Permission', [[Element, 'el','el.element.attributes.type == "tm.Actor"'],
                 [Threats, 'threats']
@@ -111,7 +132,21 @@ function threatengine() {
                     status:'Open',
                     severity:'High',
                     description:'An active developer with access to unrelated module code may tamper or disclose sensitive project information (Interproject Code Access).',
-                    mitigation:'Throughout the development lifecycle, there are several mitigations that can be used:Within the Implementation phase, if a critical resource is being used, there should be a check to see if a resource has permissions/behavior which are not secure (such as a regular user being able to modify that resource).  If there are such behaviors or permissions that exist, the program should create an error or exit the program [10]. Within the Architecture and Design phase, one should split up the software components based on privilege level and if possible, control what data, functions and resources each component uses based the privilege level [10].  Another option in this phase is to create a separate environment within the system/program where only within that area or environment has an elevated privilege [8]. In the installation phase, default or most restrictive permissions should be set to avoid any code which doesn\\t have the permissions to be run.  Also, the assumption that a system administrator will change the settings based on a manual is incorrect [10]. In the System Configuration phase, The configurable, executable files and libraries should be only have read and write access by the system administrator [10]. In the Documentation phase, within any documentation, any configurations that are suggested must be secure, and do not affect the operation of the computer or program [10]. Code Quality'});});
+                    mitigation:'Throughout the development lifecycle, there are several mitigations that can be used:Within the Implementation phase, if a critical resource is being used, there should be a check to see if a resource has permissions/behavior which are not secure (such as a regular user being able to modify that resource).  If there are such behaviors or permissions that exist, the program should create an error or exit the program [10]. Within the Architecture and Design phase, one should split up the software components based on privilege level and if possible, control what data, functions and resources each component uses based the privilege level [10].  Another option in this phase is to create a separate environment within the system/program where only within that area or environment has an elevated privilege [8]. In the installation phase, default or most restrictive permissions should be set to avoid any code which doesn\\t have the permissions to be run.  Also, the assumption that a system administrator will change the settings based on a manual is incorrect [10]. In the System Configuration phase, The configurable, executable files and libraries should be only have read and write access by the system administrator [10]. In the Documentation phase, within any documentation, any configurations that are suggested must be secure, and do not affect the operation of the computer or program [10]. Code Quality',
+                    references:[{name: 'CWE-732: Incorrect Permission Assignment for Critical Resource', link: 'https://cwe.mitre.org/data/definitions/732.html'}],
+                    examples:[{
+                        language: {name: 'C', highlightAlias: 'c'},
+                        code: '#define OUTFILE "hello.out"\n' +
+                            '\n' +
+                            'umask(0);\n' +
+                            'FILE *out;\n' +
+                            '/* Ignore CWE-59 (link following) for brevity */ \n' +
+                            '\n' +
+                            'out = fopen(OUTFILE, "w");\n' +
+                            'if (out) {\n' +
+                            'fprintf(out, "hello world!\\n");\n' +
+                            'fclose(out);\n' +
+                            '}'}]});});
 
             flow.rule('Double Free Error', [[Element, 'el','el.element.attributes.type == "tm.Process"'],
                 [Threats, 'threats']

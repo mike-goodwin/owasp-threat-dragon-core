@@ -8,6 +8,9 @@ core.directive('tmtStencil', ['diagramming', diagramdirectives.stencil]);
 core.directive('tmtDiagram', ['common', 'diagramming', diagramdirectives.diagram]);
 core.directive('tmtModalClose', [elementPropertyDirectives.modalClose]);
 core.directive('tmtElementProperties', [elementPropertyDirectives.elementProperties]);
+core.directive('tmtExampleEditor', ['dialogs', elementPropertyDirectives.exampleEditor]);
+core.directive('tmtReferenceEditor', ['dialogs', elementPropertyDirectives.referenceEditor]);
+core.directive('tmtPrismHighlight', [elementPropertyDirectives.prismHighlight]);
 core.directive('tmtElementThreats', ['$routeParams', '$location', 'common', 'dialogs', elementPropertyDirectives.elementThreats]);
 core.controller('diagram', ['$scope', '$location', '$routeParams', '$timeout', 'dialogs', 'common', 'datacontext', 'threatengine', 'diagramming', 'threatmodellocator', diagram]);
 
