@@ -65,6 +65,47 @@
                 <label>Mitigations</label>
                 <textarea name="mitigationInput" ng-model="parameter.threat.mitigation" class="form-control" rows="5" placeholder="Mitigations for the threat"></textarea>
             </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <div class="pull-left padFive">
+                        <label>References</label>
+                    </div>
+                    <div class="pull-right">
+                        <tmt-reference-editor references="parameter.threat.references"></tmt-reference-editor>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-control overflowY" style="height: 100px;">
+                    <div name="referenceInput" ng-repeat="reference in parameter.threat.references">
+                        <div class="form-group form-control" style="border: 1px solid gray;">
+                            <a href="{{reference.link}}" target="_blank">{{reference.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <div class="pull-left padFive">
+                        <label>Code Snippets</label>
+                    </div>
+                    <div class="pull-right">
+                        <tmt-example-editor examples="parameter.threat.examples"></tmt-example-editor>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-control overflowY" style="height: 400px;">
+                    <div ng-repeat="example in parameter.threat.examples">
+                        <div style="border-radius: 25px; padding: 10px; margin: 10px; border: 1px solid gray;">
+                            <label style="color: #507eed">Language: {{example.language.name}}</label>
+                            <p ng-if="example.preText">{{example.preText}}</p>
+                            <pre class=" language-{{example.language.highlightAlias}} line-numbers">
+                                <code tmt-prism-highlight class=" language-{{example.language.highlightAlias}}">{{example.code}}</code>
+                            </pre>
+                            <p ng-if="example.postText">{{example.postText}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <div ng-if="parameter.editing" class="modal-footer">

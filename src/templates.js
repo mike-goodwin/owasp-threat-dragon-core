@@ -729,6 +729,89 @@ angular.module('templates', [])
     '﻿<button class="btn btn-default" ng-click="onAction()">\n' +
     '    Ignore\n' +
     '</button>')
+  $templateCache.put('diagrams/NewExamplePane.html',
+    '<div>\n' +
+    '    <div class="modal-header">\n' +
+    '        <h3>{{parameter.heading}}</h3>\n' +
+    '    </div>\n' +
+    '    <div class="modal-body">\n' +
+    '        <form name="newExampleForm">\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Programming language</label>\n' +
+    '                <select name="languageInput" class="form-control" ng-required="true" ng-model="parameter.example.language.highlightAlias">\n' +
+    '                    <option ng-repeat="supportedLanguage in parameter.supportedLanguages" value="{{supportedLanguage.highlightAlias}}">{{supportedLanguage.name}}</option>\n' +
+    '                </select>\n' +
+    '                <div ng-show="!newExampleForm.languageInput.$valid && newExampleForm.languageInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                    <div class="alert alert-danger" role="alert">\n' +
+    '                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                        <span class="sr-only">Error:</span>\n' +
+    '                        The programming language cannot be empty.\n' +
+    '                    </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Pre-text</label>\n' +
+    '                <textarea name="preTextInput" ng-model="parameter.example.preText" class="form-control" rows="5" placeholder="Text(description/explanation) to place before the code"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Code snippet</label>\n' +
+    '                <textarea name="codeInput" ng-model="parameter.example.code" ng-required="true" class="form-control" rows="5" placeholder="The code snippet in the specified language"></textarea>\n' +
+    '                <div ng-show="!newExampleForm.codeInput.$valid && newExampleForm.codeInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                    <div class="alert alert-danger" role="alert">\n' +
+    '                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                        <span class="sr-only">Error:</span>\n' +
+    '                        The code snippet cannot be empty.\n' +
+    '                    </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Post-text</label>\n' +
+    '                <textarea name="postTextInput" ng-model="parameter.example.postText" class="form-control" rows="5" placeholder="Text(description/explanation) to place after the code"></textarea>\n' +
+    '            </div>\n' +
+    '        </form>\n' +
+    '    </div>\n' +
+    '    <div class="modal-footer">\n' +
+    '        <button class="btn btn-primary" ng-disabled="!newExampleForm.$dirty || !newExampleForm.$valid" ng-click="onOK()">Save</button>\n' +
+    '        <button class="btn btn-default" ng-click="onCancel()">Cancel</button>\n' +
+    '    </div>\n' +
+    '</div>\n' +
+    '')
+  $templateCache.put('diagrams/NewReferencePane.html',
+    '<div>\n' +
+    '    <div class="modal-header">\n' +
+    '        <h3>{{parameter.heading}}</h3>\n' +
+    '    </div>\n' +
+    '    <div class="modal-body">\n' +
+    '        <form name="newExampleForm">\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Reference title</label>\n' +
+    '                <textarea name="preTextInput" ng-model="parameter.reference.name" class="form-control" rows="5" placeholder="Reference title"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Reference link</label>\n' +
+    '                <input type="text" name="codeInput" ng-pattern="parameter.regex" ng-model="parameter.reference.link" ng-required="true" class="form-control" rows="5" placeholder="Link to the reference">\n' +
+    '                <div ng-show="!newExampleForm.codeInput.$valid && newExampleForm.codeInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                        <div class="alert alert-danger" role="alert">\n' +
+    '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                            <span class="sr-only">Error:</span>\n' +
+    '                            Please provide a valid link.\n' +
+    '                        </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '        </form>\n' +
+    '    </div>\n' +
+    '    <div class="modal-footer">\n' +
+    '        <button class="btn btn-primary" ng-disabled="!newExampleForm.$dirty || !newExampleForm.$valid" ng-click="onOK()">Save Example</button>\n' +
+    '        <button class="btn btn-default" ng-click="onCancel()">Cancel</button>\n' +
+    '    </div>\n' +
+    '</div>\n' +
+    '')
   $templateCache.put('diagrams/ThreatEditPane.html',
     '﻿<div>\n' +
     '    <div class="modal-header">\n' +
@@ -796,6 +879,47 @@ angular.module('templates', [])
     '            <div class="form-group">\n' +
     '                <label>Mitigations</label>\n' +
     '                <textarea name="mitigationInput" ng-model="parameter.threat.mitigation" class="form-control" rows="5" placeholder="Mitigations for the threat"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <div class="form-group">\n' +
+    '                    <div class="pull-left padFive">\n' +
+    '                        <label>References</label>\n' +
+    '                    </div>\n' +
+    '                    <div class="pull-right">\n' +
+    '                        <tmt-reference-editor references="parameter.threat.references"></tmt-reference-editor>\n' +
+    '                    </div>\n' +
+    '                    <div class="clearfix"></div>\n' +
+    '                </div>\n' +
+    '                <div class="form-control overflowY" style="height: 100px;">\n' +
+    '                    <div name="referenceInput" ng-repeat="reference in parameter.threat.references">\n' +
+    '                        <div class="form-group form-control" style="border: 1px solid gray;">\n' +
+    '                            <a href="{{reference.link}}" target="_blank">{{reference.name}}</a>\n' +
+    '                        </div>\n' +
+    '                    </div>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <div class="form-group">\n' +
+    '                    <div class="pull-left padFive">\n' +
+    '                        <label>Code Snippets</label>\n' +
+    '                    </div>\n' +
+    '                    <div class="pull-right">\n' +
+    '                        <tmt-example-editor examples="parameter.threat.examples"></tmt-example-editor>\n' +
+    '                    </div>\n' +
+    '                    <div class="clearfix"></div>\n' +
+    '                </div>\n' +
+    '                <div class="form-control overflowY" style="height: 400px;">\n' +
+    '                    <div ng-repeat="example in parameter.threat.examples">\n' +
+    '                        <div style="border-radius: 25px; padding: 10px; margin: 10px; border: 1px solid gray;">\n' +
+    '                            <label style="color: #507eed">Language: {{example.language.name}}</label>\n' +
+    '                            <p ng-if="example.preText">{{example.preText}}</p>\n' +
+    '                            <pre class=" language-{{example.language.highlightAlias}} line-numbers">\n' +
+    '                                <code tmt-prism-highlight class=" language-{{example.language.highlightAlias}}">{{example.code}}</code>\n' +
+    '                            </pre>\n' +
+    '                            <p ng-if="example.postText">{{example.postText}}</p>\n' +
+    '                        </div>\n' +
+    '                    </div>\n' +
+    '                </div>\n' +
     '            </div>\n' +
     '        </form>\n' +
     '    </div>\n' +

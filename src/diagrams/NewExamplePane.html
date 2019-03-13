@@ -1,0 +1,49 @@
+<div>
+    <div class="modal-header">
+        <h3>{{parameter.heading}}</h3>
+    </div>
+    <div class="modal-body">
+        <form name="newExampleForm">
+            <div class="form-group">
+                <label>Programming language</label>
+                <select name="languageInput" class="form-control" ng-required="true" ng-model="parameter.example.language.highlightAlias">
+                    <option ng-repeat="supportedLanguage in parameter.supportedLanguages" value="{{supportedLanguage.highlightAlias}}">{{supportedLanguage.name}}</option>
+                </select>
+                <div ng-show="!newExampleForm.languageInput.$valid && newExampleForm.languageInput.$dirty">
+                    <p>
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        The programming language cannot be empty.
+                    </div>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Pre-text</label>
+                <textarea name="preTextInput" ng-model="parameter.example.preText" class="form-control" rows="5" placeholder="Text(description/explanation) to place before the code"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Code snippet</label>
+                <textarea name="codeInput" ng-model="parameter.example.code" ng-required="true" class="form-control" rows="5" placeholder="The code snippet in the specified language"></textarea>
+                <div ng-show="!newExampleForm.codeInput.$valid && newExampleForm.codeInput.$dirty">
+                    <p>
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        The code snippet cannot be empty.
+                    </div>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Post-text</label>
+                <textarea name="postTextInput" ng-model="parameter.example.postText" class="form-control" rows="5" placeholder="Text(description/explanation) to place after the code"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="!newExampleForm.$dirty || !newExampleForm.$valid" ng-click="onOK()">Save</button>
+        <button class="btn btn-default" ng-click="onCancel()">Cancel</button>
+    </div>
+</div>
