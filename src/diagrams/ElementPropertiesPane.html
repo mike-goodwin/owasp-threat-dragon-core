@@ -15,9 +15,10 @@
         <textarea name="textareaReasonOutOfScope" ng-disabled="!selected.outOfScope" rows="4" class="form-control" type="text" ng-model="selected.reasonOutOfScope" ng-change="edit()" placeholder="Reason for out of scope"></textarea>
     </div>
     <div ng-show="elementType === 'tm.Process'">
-        <div class="form-group">
-            <label>Privilege level</label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" class="form-control" type="text" ng-model="selected.privilegeLevelForProcess" ng-change="edit()" placeholder="Privilege level" />
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForProcess" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            </label>
         </div>
         <div class="checkbox">
             <label>
@@ -26,7 +27,7 @@
             <select id ="encryptionTypeForProcess" ng-if="selected.isEncryptedProcess">
                 <option value="des" selected>DES</option>
                 <option value="tripleDes">Triple DES</option>
-                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
+                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option></option>
                 <option value="rc2">RC2</option>
                 <option value="rc4">RC4</option>
                 <option value="128rc4">128-bit RC4</option>
@@ -34,6 +35,27 @@
                 <option value="128aes">128-bit AES</option>
                 <option value="192aes">192-bit AES</option>
                 <option value="256aes">256-bit AES</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageProcess" ng-change="edit()" ng-init="selected.programmingLanguageProcess = false"/> Programming Language
+            </label>
+            <select id ="checkboxProgrammingLanguageProcess" ng-if="selected.programmingLanguageProcess">
+                <option value="c" selected>C</option>
+                <option value="c++">C++</option>
+                <option value="c#">c#</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="assembly">Assembly</option>
+                <option value="objectivec">Objective C</option>
+                <option value="swift">Swift</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="html">HTML</option>
+                <option value="jsp">JSP</option>
+                <option value="juel">Juel</option>
+                <option value="spring">Spring</option>
             </select>
         </div>
         <div class="checkbox">
@@ -180,6 +202,11 @@
                 <input name="checkboxForwardsHealthDataCloud" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.forwardsHealthDataCloud" ng-change="edit()" /> Forwards Health Data to Cloud
             </label>
         </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForActor" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            </label>
+        </div>
     </div>
     <div ng-show="elementType === 'tm.Store'">
         <div class="checkbox">
@@ -259,18 +286,23 @@
                 <input name="checkboxThirdParty" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.thirdPartyStore" ng-change="edit()" /> Uses Third Party Libraries
             </label>
         </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForStore" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            </label>
+        </div>
     </div>
 
     <div ng-show="elementType === 'tm.Flow'">
         <div class="form-group">
             <label>Protocol</label>
-            <input name="inputProtocol" ng-disabled="selected.outOfScope" class="form-control" type="text" ng-model="selected.protocol" ng-change="edit()" placeholder="Protocol" />
+            <input name="inputProtocol" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.protocol" ng-change="edit()" placeholder="Protocol" />
         </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxIsEncryptedFlow" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedFlow" ng-change="edit()" ng-init="selected.isEncryptedFlow = false"/> Is Encrypted
             </label>
-            <select id ="encryptionTypeForFlow" ng-if="selected.isEncryptedFlow">
+            <select id ="encryptionTypeForFlow" ng-if="selected.isEncryptedStore">
                 <option value="des" selected>DES</option>
                 <option value="tripleDes">Triple DES</option>
                 <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>
@@ -334,6 +366,27 @@
         </div>
         <div class="checkbox">
             <label>
+                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageMobilePhone" ng-change="edit()" ng-init="selected.programmingLanguageMobilePhone = false"/> Programming Language
+            </label>
+            <select id ="checkboxProgrammingLanguageforMobilePhone" ng-if="selected.programmingLanguageMobilePhone">
+                <option value="c" selected>C</option>
+                <option value="c++">C++</option>
+                <option value="c#">c#</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="assembly">Assembly</option>
+                <option value="objectivec">Objective C</option>
+                <option value="swift">Swift</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="html">HTML</option>
+                <option value="jsp">JSP</option>
+                <option value="juel">Juel</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxHasPasswordPolicy" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.hasPasswordPolicyMobilePhone" ng-change="edit()" /> Has a password Policy?
             </label>
         </div>
@@ -360,6 +413,11 @@
         <div class="checkbox">
             <label>
                 <input name="checkboxValidateInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputMobilePhone" ng-change="edit()" /> Validates Input
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForMobilePhone" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -399,12 +457,38 @@
         </div>
         <div class="checkbox">
             <label>
+                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageSmartWatch" ng-change="edit()" ng-init="selected.programmingLanguageSmartWatch = false"/> Programming Language
+            </label>
+            <select id ="checkboxProgrammingLanguageforSmartWatch" ng-if="selected.programmingLanguageSmartWatch">
+                <option value="c" selected>C</option>
+                <option value="c++">C++</option>
+                <option value="c#">c#</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="assembly">Assembly</option>
+                <option value="objectivec">Objective C</option>
+                <option value="swift">Swift</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="html">HTML</option>
+                <option value="jsp">JSP</option>
+                <option value="juel">Juel</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedSmartWatch" ng-change="edit()" /> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageSmartWatch" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForSmartWatch" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -444,12 +528,38 @@
         </div>
         <div class="checkbox">
             <label>
+                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageLaptop" ng-change="edit()" ng-init="selected.programmingLanguageLaptop = false"/> Programming Language
+            </label>
+            <select id ="" ng-if="selected.programmingLanguageLaptop">
+                <option value="c" selected>C</option>
+                <option value="c++">C++</option>
+                <option value="c#">c#</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="assembly">Assembly</option>
+                <option value="objectivec">Objective C</option>
+                <option value="swift">Swift</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="html">HTML</option>
+                <option value="jsp">JSP</option>
+                <option value="juel">Juel</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedLaptop" ng-change="edit()" /> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageLaptop" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForLaptop" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -489,12 +599,38 @@
         </div>
         <div class="checkbox">
             <label>
+                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageTablet" ng-change="edit()" ng-init="selected.programmingLanguageTablet = false"/> Programming Language
+            </label>
+            <select id ="checkboxProgrammingLanguageforTablet" ng-if="selected.programmingLanguageTablet">
+                <option value="c" selected>C</option>
+                <option value="c++">C++</option>
+                <option value="c#">c#</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="assembly">Assembly</option>
+                <option value="objectivec">Objective C</option>
+                <option value="swift">Swift</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="html">HTML</option>
+                <option value="jsp">JSP</option>
+                <option value="juel">Juel</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedTablet" ng-change="edit()" /> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageTablet" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForTablet" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -534,12 +670,38 @@
         </div>
         <div class="checkbox">
             <label>
+                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageElectrocardiogram" ng-change="edit()" ng-init="selected.programmingLanguageElectrocardiogram = false"/> Programming Language
+            </label>
+            <select id ="checkboxProgrammingLanguageforElectrocardiogram" ng-if="selected.programmingLanguageElectrocardiogram">
+                <option value="c" selected>C</option>
+                <option value="c++">C++</option>
+                <option value="c#">c#</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="assembly">Assembly</option>
+                <option value="objectivec">Objective C</option>
+                <option value="swift">Swift</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="html">HTML</option>
+                <option value="jsp">JSP</option>
+                <option value="juel">Juel</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedElectrocardiogram" ng-change="edit()" /> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageElectrocardiogram" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForElectrocardiogram" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -579,12 +741,38 @@
         </div>
         <div class="checkbox">
             <label>
+                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguagePacemaker" ng-change="edit()" ng-init="selected.programmingLanguagePacemaker = false"/> Programming Language
+            </label>
+            <select id ="checkboxProgrammingLanguageforPacemaker" ng-if="selected.programmingLanguagePacemaker">
+                <option value="c" selected>C</option>
+                <option value="c++">C++</option>
+                <option value="c#">c#</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="assembly">Assembly</option>
+                <option value="objectivec">Objective C</option>
+                <option value="swift">Swift</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="html">HTML</option>
+                <option value="jsp">JSP</option>
+                <option value="juel">Juel</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
                 <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedPacemaker" ng-change="edit()" /> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStoragePacemaker" ng-change="edit()" /> Remote Storage of Medical Records
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForPacemaker" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
             </label>
         </div>
     </div>
