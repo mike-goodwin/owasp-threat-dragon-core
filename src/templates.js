@@ -757,19 +757,19 @@ angular.module('templates', [])
       '            </div>\n' +
       '            <div ng-if="isTrelloActive" class="form-group">\n' +
       '                <label>Board</label>\n' +
-      '                <select name="boardInput" class="form-control" ng-required="true"  ng-model="threatEditForm.boardInput" ng-init="threatEditForm.boardInput = boards[0]">\n' +
-      '                    <option ng-repeat="board in boards" value="{{board}}">{{board.name}}</option>\n' +
+      '                <select name="boardInput" class="form-control" ng-required="true"  ng-model="threatEditForm.boardInput" ng-options="board.name for board in boards">\n' +
       '                </select>\n' +
       '                <button ng-click="goToBoard()">Go To Board</button>\n' +
       '            </div>\n' +
       '            <div ng-if="isTrelloActive" class="form-group">\n' +
       '                <label>List</label>\n' +
-      '                <select ng-if="threatEditForm.boardInput.name!=\'Choose Board\'" name="listInput" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
+      '                <select name="listInput" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
       '                    <option ng-repeat="list in ourLists" value="{{list.id}}">{{list.name}}</option>\n' +
       '                </select>\n' +
+      '            </div>\n' +
       '            <div class="form-group">\n' +
       '                <label>STRIDE threat type</label>\n' +
-      '                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type" multiple>\n' +
+      '                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type">\n' +
       '                    <option selected>Spoofing</option>\n' +
       '                    <option>Tampering</option>\n' +
       '                    <option>Repudiation</option>\n' +

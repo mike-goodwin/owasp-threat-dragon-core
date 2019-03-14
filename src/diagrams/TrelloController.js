@@ -11,6 +11,8 @@ function TrelloController($scope, $window, common) {
     var log = getLogFn('TrelloController');
     $scope.isTrelloActive = false;
     $scope.boards = [];
+    $scope.ourLists = [];
+    $scope.shortUrl = "";
     $scope.toggle = function () {
         $scope.isTrelloActive = !$scope.isTrelloActive;
     };
@@ -24,7 +26,8 @@ function TrelloController($scope, $window, common) {
                 $scope.getLists();
             }
         });
-    }
+    };
+
     $scope.getLists=function getLists(){
         for (var i=0; i<$scope.boards.length; i++){
             $scope.getListsWithBoardId($scope.boards[i].id, i);
@@ -37,7 +40,6 @@ function TrelloController($scope, $window, common) {
                 log("Could Not Get Boards: ", error);
             } else {
                 log("found " + lists.length + " lists on board:"+boardId);
-                console.log(lists);
                 $scope.boards[index].lists = lists;
             }
         });
@@ -47,9 +49,9 @@ function TrelloController($scope, $window, common) {
         if(newVal!=oldVal) {
             log(newVal);
             if (newVal.id) {
+                log("new value had id: " + newVal);
                 $scope.getListsFromDictionary(newVal.id);
                 $scope.shortUrl = newVal.shortUrl;
-                //$scope.getListsFromBoard(newVal);
             }
         }
     }, true);
@@ -58,6 +60,8 @@ function TrelloController($scope, $window, common) {
         for (var i=0; i<$scope.boards.length; i++) {
             if($scope.boards[i].id == boardId){
                 $scope.ourLists = $scope.boards[i].lists;
+                log("Found Lists: " + $scope.ourLists);
+                break;
             }
         }
     };
