@@ -146,9 +146,10 @@ angular.module('templates', [])
     '        <textarea name="textareaReasonOutOfScope" ng-disabled="!selected.outOfScope" rows="4" class="form-control" type="text" ng-model="selected.reasonOutOfScope" ng-change="edit()" placeholder="Reason for out of scope"></textarea>\n' +
     '    </div>\n' +
     '    <div ng-show="elementType === \'tm.Process\'">\n' +
-    '        <div class="form-group">\n' +
-    '            <label>Privilege level</label>\n' +
-    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" class="form-control" type="text" ng-model="selected.privilegeLevelForProcess" ng-change="edit()" placeholder="Privilege level" />\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForProcess" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
+    '            </label>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
@@ -157,7 +158,7 @@ angular.module('templates', [])
     '            <select id ="encryptionTypeForProcess" ng-if="selected.isEncryptedProcess">\n' +
     '                <option value="des" selected>DES</option>\n' +
     '                <option value="tripleDes">Triple DES</option>\n' +
-    '                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>\n' +
+    '                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option></option>\n' +
     '                <option value="rc2">RC2</option>\n' +
     '                <option value="rc4">RC4</option>\n' +
     '                <option value="128rc4">128-bit RC4</option>\n' +
@@ -165,6 +166,27 @@ angular.module('templates', [])
     '                <option value="128aes">128-bit AES</option>\n' +
     '                <option value="192aes">192-bit AES</option>\n' +
     '                <option value="256aes">256-bit AES</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageProcess" ng-change="edit()" ng-init="selected.programmingLanguageProcess = false"/> Programming Language\n' +
+    '            </label>\n' +
+    '            <select id ="checkboxProgrammingLanguageProcess" ng-if="selected.programmingLanguageProcess">\n' +
+    '                <option value="c" selected>C</option>\n' +
+    '                <option value="c++">C++</option>\n' +
+    '                <option value="c#">c#</option>\n' +
+    '                <option value="python">Python</option>\n' +
+    '                <option value="java">Java</option>\n' +
+    '                <option value="assembly">Assembly</option>\n' +
+    '                <option value="objectivec">Objective C</option>\n' +
+    '                <option value="swift">Swift</option>\n' +
+    '                <option value="ruby">Ruby</option>\n' +
+    '                <option value="php">PHP</option>\n' +
+    '                <option value="html">HTML</option>\n' +
+    '                <option value="jsp">JSP</option>\n' +
+    '                <option value="juel">Juel</option>\n' +
+    '                <option value="spring">Spring</option>\n' +
     '            </select>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
@@ -311,6 +333,11 @@ angular.module('templates', [])
     '                <input name="checkboxForwardsHealthDataCloud" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.forwardsHealthDataCloud" ng-change="edit()" /> Forwards Health Data to Cloud\n' +
     '            </label>\n' +
     '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForActor" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
+    '            </label>\n' +
+    '        </div>\n' +
     '    </div>\n' +
     '    <div ng-show="elementType === \'tm.Store\'">\n' +
     '        <div class="checkbox">\n' +
@@ -390,18 +417,23 @@ angular.module('templates', [])
     '                <input name="checkboxThirdParty" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.thirdPartyStore" ng-change="edit()" /> Uses Third Party Libraries\n' +
     '            </label>\n' +
     '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForStore" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
+    '            </label>\n' +
+    '        </div>\n' +
     '    </div>\n' +
     '\n' +
     '    <div ng-show="elementType === \'tm.Flow\'">\n' +
     '        <div class="form-group">\n' +
     '            <label>Protocol</label>\n' +
-    '            <input name="inputProtocol" ng-disabled="selected.outOfScope" class="form-control" type="text" ng-model="selected.protocol" ng-change="edit()" placeholder="Protocol" />\n' +
+    '            <input name="inputProtocol" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.protocol" ng-change="edit()" placeholder="Protocol" />\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxIsEncryptedFlow" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedFlow" ng-change="edit()" ng-init="selected.isEncryptedFlow = false"/> Is Encrypted\n' +
     '            </label>\n' +
-    '            <select id ="encryptionTypeForFlow" ng-if="selected.isEncryptedFlow">\n' +
+    '            <select id ="encryptionTypeForFlow" ng-if="selected.isEncryptedStore">\n' +
     '                <option value="des" selected>DES</option>\n' +
     '                <option value="tripleDes">Triple DES</option>\n' +
     '                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>\n' +
@@ -465,6 +497,27 @@ angular.module('templates', [])
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
+    '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageMobilePhone" ng-change="edit()" ng-init="selected.programmingLanguageMobilePhone = false"/> Programming Language\n' +
+    '            </label>\n' +
+    '            <select id ="checkboxProgrammingLanguageforMobilePhone" ng-if="selected.programmingLanguageMobilePhone">\n' +
+    '                <option value="c" selected>C</option>\n' +
+    '                <option value="c++">C++</option>\n' +
+    '                <option value="c#">c#</option>\n' +
+    '                <option value="python">Python</option>\n' +
+    '                <option value="java">Java</option>\n' +
+    '                <option value="assembly">Assembly</option>\n' +
+    '                <option value="objectivec">Objective C</option>\n' +
+    '                <option value="swift">Swift</option>\n' +
+    '                <option value="ruby">Ruby</option>\n' +
+    '                <option value="php">PHP</option>\n' +
+    '                <option value="html">HTML</option>\n' +
+    '                <option value="jsp">JSP</option>\n' +
+    '                <option value="juel">Juel</option>\n' +
+    '                <option value="spring">Spring</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
     '                <input name="checkboxHasPasswordPolicy" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.hasPasswordPolicyMobilePhone" ng-change="edit()" /> Has a password Policy?\n' +
     '            </label>\n' +
     '        </div>\n' +
@@ -491,6 +544,11 @@ angular.module('templates', [])
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxValidateInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputMobilePhone" ng-change="edit()" /> Validates Input\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForMobilePhone" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
     '            </label>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -530,12 +588,38 @@ angular.module('templates', [])
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
+    '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageSmartWatch" ng-change="edit()" ng-init="selected.programmingLanguageSmartWatch = false"/> Programming Language\n' +
+    '            </label>\n' +
+    '            <select id ="checkboxProgrammingLanguageforSmartWatch" ng-if="selected.programmingLanguageSmartWatch">\n' +
+    '                <option value="c" selected>C</option>\n' +
+    '                <option value="c++">C++</option>\n' +
+    '                <option value="c#">c#</option>\n' +
+    '                <option value="python">Python</option>\n' +
+    '                <option value="java">Java</option>\n' +
+    '                <option value="assembly">Assembly</option>\n' +
+    '                <option value="objectivec">Objective C</option>\n' +
+    '                <option value="swift">Swift</option>\n' +
+    '                <option value="ruby">Ruby</option>\n' +
+    '                <option value="php">PHP</option>\n' +
+    '                <option value="html">HTML</option>\n' +
+    '                <option value="jsp">JSP</option>\n' +
+    '                <option value="juel">Juel</option>\n' +
+    '                <option value="spring">Spring</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
     '                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedSmartWatch" ng-change="edit()" /> Is Signed\n' +
     '            </label>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageSmartWatch" ng-change="edit()" /> Remote Storage of Medical Records\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForSmartWatch" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
     '            </label>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -575,12 +659,38 @@ angular.module('templates', [])
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
+    '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageLaptop" ng-change="edit()" ng-init="selected.programmingLanguageLaptop = false"/> Programming Language\n' +
+    '            </label>\n' +
+    '            <select id ="" ng-if="selected.programmingLanguageLaptop">\n' +
+    '                <option value="c" selected>C</option>\n' +
+    '                <option value="c++">C++</option>\n' +
+    '                <option value="c#">c#</option>\n' +
+    '                <option value="python">Python</option>\n' +
+    '                <option value="java">Java</option>\n' +
+    '                <option value="assembly">Assembly</option>\n' +
+    '                <option value="objectivec">Objective C</option>\n' +
+    '                <option value="swift">Swift</option>\n' +
+    '                <option value="ruby">Ruby</option>\n' +
+    '                <option value="php">PHP</option>\n' +
+    '                <option value="html">HTML</option>\n' +
+    '                <option value="jsp">JSP</option>\n' +
+    '                <option value="juel">Juel</option>\n' +
+    '                <option value="spring">Spring</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
     '                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedLaptop" ng-change="edit()" /> Is Signed\n' +
     '            </label>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageLaptop" ng-change="edit()" /> Remote Storage of Medical Records\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForLaptop" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
     '            </label>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -620,12 +730,38 @@ angular.module('templates', [])
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
+    '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageTablet" ng-change="edit()" ng-init="selected.programmingLanguageTablet = false"/> Programming Language\n' +
+    '            </label>\n' +
+    '            <select id ="checkboxProgrammingLanguageforTablet" ng-if="selected.programmingLanguageTablet">\n' +
+    '                <option value="c" selected>C</option>\n' +
+    '                <option value="c++">C++</option>\n' +
+    '                <option value="c#">c#</option>\n' +
+    '                <option value="python">Python</option>\n' +
+    '                <option value="java">Java</option>\n' +
+    '                <option value="assembly">Assembly</option>\n' +
+    '                <option value="objectivec">Objective C</option>\n' +
+    '                <option value="swift">Swift</option>\n' +
+    '                <option value="ruby">Ruby</option>\n' +
+    '                <option value="php">PHP</option>\n' +
+    '                <option value="html">HTML</option>\n' +
+    '                <option value="jsp">JSP</option>\n' +
+    '                <option value="juel">Juel</option>\n' +
+    '                <option value="spring">Spring</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
     '                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedTablet" ng-change="edit()" /> Is Signed\n' +
     '            </label>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageTablet" ng-change="edit()" /> Remote Storage of Medical Records\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForTablet" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
     '            </label>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -665,12 +801,38 @@ angular.module('templates', [])
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
+    '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageElectrocardiogram" ng-change="edit()" ng-init="selected.programmingLanguageElectrocardiogram = false"/> Programming Language\n' +
+    '            </label>\n' +
+    '            <select id ="checkboxProgrammingLanguageforElectrocardiogram" ng-if="selected.programmingLanguageElectrocardiogram">\n' +
+    '                <option value="c" selected>C</option>\n' +
+    '                <option value="c++">C++</option>\n' +
+    '                <option value="c#">c#</option>\n' +
+    '                <option value="python">Python</option>\n' +
+    '                <option value="java">Java</option>\n' +
+    '                <option value="assembly">Assembly</option>\n' +
+    '                <option value="objectivec">Objective C</option>\n' +
+    '                <option value="swift">Swift</option>\n' +
+    '                <option value="ruby">Ruby</option>\n' +
+    '                <option value="php">PHP</option>\n' +
+    '                <option value="html">HTML</option>\n' +
+    '                <option value="jsp">JSP</option>\n' +
+    '                <option value="juel">Juel</option>\n' +
+    '                <option value="spring">Spring</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
     '                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedElectrocardiogram" ng-change="edit()" /> Is Signed\n' +
     '            </label>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageElectrocardiogram" ng-change="edit()" /> Remote Storage of Medical Records\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForElectrocardiogram" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
     '            </label>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -710,12 +872,38 @@ angular.module('templates', [])
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
+    '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguagePacemaker" ng-change="edit()" ng-init="selected.programmingLanguagePacemaker = false"/> Programming Language\n' +
+    '            </label>\n' +
+    '            <select id ="checkboxProgrammingLanguageforPacemaker" ng-if="selected.programmingLanguagePacemaker">\n' +
+    '                <option value="c" selected>C</option>\n' +
+    '                <option value="c++">C++</option>\n' +
+    '                <option value="c#">c#</option>\n' +
+    '                <option value="python">Python</option>\n' +
+    '                <option value="java">Java</option>\n' +
+    '                <option value="assembly">Assembly</option>\n' +
+    '                <option value="objectivec">Objective C</option>\n' +
+    '                <option value="swift">Swift</option>\n' +
+    '                <option value="ruby">Ruby</option>\n' +
+    '                <option value="php">PHP</option>\n' +
+    '                <option value="html">HTML</option>\n' +
+    '                <option value="jsp">JSP</option>\n' +
+    '                <option value="juel">Juel</option>\n' +
+    '                <option value="spring">Spring</option>\n' +
+    '            </select>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
     '                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedPacemaker" ng-change="edit()" /> Is Signed\n' +
     '            </label>\n' +
     '        </div>\n' +
     '        <div class="checkbox">\n' +
     '            <label>\n' +
     '                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStoragePacemaker" ng-change="edit()" /> Remote Storage of Medical Records\n' +
+    '            </label>\n' +
+    '        </div>\n' +
+    '        <div class="checkbox">\n' +
+    '            <label>\n' +
+    '            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForPacemaker" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels\n' +
     '            </label>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -729,6 +917,89 @@ angular.module('templates', [])
     '﻿<button class="btn btn-default" ng-click="onAction()">\n' +
     '    Ignore\n' +
     '</button>')
+  $templateCache.put('diagrams/NewExamplePane.html',
+    '<div>\n' +
+    '    <div class="modal-header">\n' +
+    '        <h3>{{parameter.heading}}</h3>\n' +
+    '    </div>\n' +
+    '    <div class="modal-body">\n' +
+    '        <form name="newExampleForm">\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Programming language</label>\n' +
+    '                <select name="languageInput" class="form-control" ng-required="true" ng-model="parameter.example.language.highlightAlias">\n' +
+    '                    <option ng-repeat="supportedLanguage in parameter.supportedLanguages" value="{{supportedLanguage.highlightAlias}}">{{supportedLanguage.name}}</option>\n' +
+    '                </select>\n' +
+    '                <div ng-show="!newExampleForm.languageInput.$valid && newExampleForm.languageInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                    <div class="alert alert-danger" role="alert">\n' +
+    '                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                        <span class="sr-only">Error:</span>\n' +
+    '                        The programming language cannot be empty.\n' +
+    '                    </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Pre-text</label>\n' +
+    '                <textarea name="preTextInput" ng-model="parameter.example.preText" class="form-control" rows="5" placeholder="Text(description/explanation) to place before the code"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Code snippet</label>\n' +
+    '                <textarea name="codeInput" ng-model="parameter.example.code" ng-required="true" class="form-control" rows="5" placeholder="The code snippet in the specified language"></textarea>\n' +
+    '                <div ng-show="!newExampleForm.codeInput.$valid && newExampleForm.codeInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                    <div class="alert alert-danger" role="alert">\n' +
+    '                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                        <span class="sr-only">Error:</span>\n' +
+    '                        The code snippet cannot be empty.\n' +
+    '                    </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Post-text</label>\n' +
+    '                <textarea name="postTextInput" ng-model="parameter.example.postText" class="form-control" rows="5" placeholder="Text(description/explanation) to place after the code"></textarea>\n' +
+    '            </div>\n' +
+    '        </form>\n' +
+    '    </div>\n' +
+    '    <div class="modal-footer">\n' +
+    '        <button class="btn btn-primary" ng-disabled="!newExampleForm.$dirty || !newExampleForm.$valid" ng-click="onOK()">Save</button>\n' +
+    '        <button class="btn btn-default" ng-click="onCancel()">Cancel</button>\n' +
+    '    </div>\n' +
+    '</div>\n' +
+    '')
+  $templateCache.put('diagrams/NewReferencePane.html',
+    '<div>\n' +
+    '    <div class="modal-header">\n' +
+    '        <h3>{{parameter.heading}}</h3>\n' +
+    '    </div>\n' +
+    '    <div class="modal-body">\n' +
+    '        <form name="newExampleForm">\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Reference title</label>\n' +
+    '                <textarea name="preTextInput" ng-model="parameter.reference.name" class="form-control" rows="5" placeholder="Reference title"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Reference link</label>\n' +
+    '                <input type="text" name="codeInput" ng-pattern="parameter.regex" ng-model="parameter.reference.link" ng-required="true" class="form-control" rows="5" placeholder="Link to the reference">\n' +
+    '                <div ng-show="!newExampleForm.codeInput.$valid && newExampleForm.codeInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                        <div class="alert alert-danger" role="alert">\n' +
+    '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                            <span class="sr-only">Error:</span>\n' +
+    '                            Please provide a valid link.\n' +
+    '                        </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '        </form>\n' +
+    '    </div>\n' +
+    '    <div class="modal-footer">\n' +
+    '        <button class="btn btn-primary" ng-disabled="!newExampleForm.$dirty || !newExampleForm.$valid" ng-click="onOK()">Save Example</button>\n' +
+    '        <button class="btn btn-default" ng-click="onCancel()">Cancel</button>\n' +
+    '    </div>\n' +
+    '</div>\n' +
+    '')
   $templateCache.put('diagrams/ThreatEditPane.html',
     '﻿<div data-ng-controller="TrelloController as tc" data-ng-init="getBoards()">\n' +
       '    <div class="modal-header">\n' +
@@ -759,7 +1030,7 @@ angular.module('templates', [])
       '                <label>Board</label>\n' +
       '                <select name="boardInput" class="form-control" ng-required="true"  ng-model="threatEditForm.boardInput" ng-options="board.name for board in boards">\n' +
       '                </select>\n' +
-      '                <button ng-click="goToBoard()">Go To Board</button>\n' +
+      '                <button class="btn btn-primary ng-pristine" ng-click="goToBoard()">Go To Board</button>\n' +
       '            </div>\n' +
       '            <div ng-if="isTrelloActive" class="form-group">\n' +
       '                <label>List</label>\n' +
@@ -815,6 +1086,46 @@ angular.module('templates', [])
       '                <label>Mitigations</label>\n' +
       '                <textarea name="mitigationInput" ng-model="parameter.threat.mitigation" class="form-control" rows="5" placeholder="Mitigations for the threat"></textarea>\n' +
       '            </div>\n' +
+      '            <div class="form-group">\n' +
+      '                <div class="form-group">\n' +
+      '                    <div class="pull-left padFive">\n' +
+      '                        <label>References</label>\n' +
+      '                    </div>\n' +
+      '                    <div class="pull-right">\n' +
+      '                        <tmt-reference-editor references="parameter.threat.references"></tmt-reference-editor>\n' +
+      '                    </div>\n' +
+      '                    <div class="clearfix"></div>\n' +
+      '                </div>\n' +
+      '                <div class="form-control overflowY" style="height: 100px;">\n' +
+      '                    <div name="referenceInput" ng-repeat="reference in parameter.threat.references">\n' +
+      '                        <div class="form-group form-control" style="border: 1px solid gray;">\n' +
+      '                            <a href="{{reference.link}}" target="_blank">{{reference.name}}</a>\n' +
+      '                        </div>\n' +
+      '                    </div>\n' +
+      '                </div>\n' +
+      '            </div>\n' +
+      '            <div class="form-group">\n' +
+      '                <div class="form-group">\n' +
+      '                    <div class="pull-left padFive">\n' +
+      '                        <label>Code Snippets</label>\n' +
+      '                    </div>\n' +
+      '                    <div class="pull-right">\n' +
+      '                        <tmt-example-editor examples="parameter.threat.examples"></tmt-example-editor>\n' +
+      '                    </div>\n' +
+      '                    <div class="clearfix"></div>\n' +
+      '                </div>\n' +
+      '                <div class="form-control overflowY" style="height: 400px;">\n' +
+      '                    <div ng-repeat="example in parameter.threat.examples">\n' +
+      '                        <div style="border-radius: 25px; padding: 10px; margin: 10px; border: 1px solid gray;">\n' +
+      '                            <label style="color: #507eed">Language: {{example.language.name}}</label>\n' +
+      '                            <p ng-if="example.preText">{{example.preText}}</p>\n' +
+      '                            <pre class=" language-{{example.language.highlightAlias}} line-numbers">\n' +
+      '                                <code tmt-prism-highlight class=" language-{{example.language.highlightAlias}}">{{example.code}}</code>\n' +
+      '                            </pre>\n' +
+      '                            <p ng-if="example.postText">{{example.postText}}</p>\n' +
+      '                        </div>\n' +
+      '                    </div>\n' +
+      '                </div>\n' +
       '        </form>\n' +
       '    </div>\n' +
       '    <div ng-if="isTrelloActive" class="modal-footer">\n' +
