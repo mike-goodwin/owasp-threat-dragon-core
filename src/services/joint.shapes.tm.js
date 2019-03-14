@@ -142,7 +142,7 @@ Object.defineProperty(joint.shapes.tm.Flow.prototype, 'name', {
 
 joint.shapes.tm.utils.defineOutOfScope(joint.shapes.tm.Flow.prototype, 'connection');
 joint.shapes.tm.utils.defineHasOpenThreats(joint.shapes.tm.Flow.prototype, ['connection', 'marker-target']);
-joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Flow.prototype, ['reasonOutOfScope', 'protocol', 'isEncryptedFlow', 'isPublicNetwork','bluetoothInterface','wifiInterface','cellularInterface', 'usesTLS', ]);
+joint.shapes.tm.utils.defineProperties(joint.shapes.tm.Flow.prototype, ['reasonOutOfScope', 'protocol', 'isEncryptedFlow', 'isPublicNetwork','bluetoothInterface','wifiInterface','cellularInterface', 'usesTLS']);
 
 //trust boundary shape
 
