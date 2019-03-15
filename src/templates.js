@@ -7,10 +7,10 @@ angular.module('templates', [])
     '    </div>\n' +
     '    <div class="modal-body">\n' +
     '        Your diagram has unsaved changes and if you reload they will be lost!\n' +
-    '        Press Cancel to keep the unsaved changes, or press OK to reload the diagram and lose the unsaved changes.\n' +
+    '        Press \'Cancel\' to keep the unsaved changes, or press \'Reload\' to reload the diagram and lose the unsaved changes.\n' +
     '    </div>\n' +
     '    <div class="modal-footer">\n' +
-    '        <button class="btn btn-default" ng-click="onOK()">OK</button>\n' +
+    '        <button class="btn btn-default" ng-click="onOK()">Reload</button>\n' +
     '        <button class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
     '    </div>\n' +
     '</div>\n' +
@@ -131,7 +131,6 @@ angular.module('templates', [])
   $templateCache.put('diagrams/ElementPropertiesPane.html',
     '﻿<form name="elementPropertiesEditForm">\n' +
     '    <div>\n' +
-    '        <table ng-table=""\n' +
     '        <div class="form-group">\n' +
     '            <label>Name</label>\n' +
     '            <input name="nameInput" class="form-control" type="text" ng-model="selected.name" ng-change="edit()" placeholder="Element name" />\n' +
@@ -1166,11 +1165,11 @@ angular.module('templates', [])
     '    </div>\n' +
     '    <div class="modal-body">\n' +
     '        You have unsaved changes and if you leave this page they will be lost!\n' +
-    '        Press Cancel to stay where you are and keep the unsaved changes,\n' +
-    '        or press OK to leave and lose the unsaved changes.\n' +
+    '        Press \'Cancel\' to stay where you are and keep the unsaved changes,\n' +
+    '        or press \'Leave\' to leave and lose the unsaved changes.\n' +
     '    </div>\n' +
     '    <div class="modal-footer">\n' +
-    '        <button id="buttonOK" class="btn btn-default" ng-click="onOK()">OK</button>\n' +
+    '        <button id="buttonOK" class="btn btn-default" ng-click="onOK()">Leave</button>\n' +
     '        <button id="buttonCancel" class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
     '    </div>\n' +
     '</div>\n' +
@@ -1184,11 +1183,11 @@ angular.module('templates', [])
     '        Some nodes in your diagram do not have threats defined. Would you like to automatically generate for these nodes?\n' +
     '    </div>\n' +
     '    <div class="modal-body">\n' +
-    '        Press Cancel to view the threat report without generating additional threats, or press OK to automatically generate threats for empty nodes.\n' +
+    '        Press \'View Threat Report Without Modification\' to view the threat report without generating additional threats, or press \'Generate Threats and View Report\' to automatically generate threats for empty nodes before viewing the report.\n' +
     '    </div>\n' +
     '    <div class="modal-footer">\n' +
-    '        <button class="btn btn-default" ng-click="onOK()">OK</button>\n' +
-    '        <button class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
+    '        <button class="btn btn-default" ng-click="onOK()">Generate Threats and View Report</button>\n' +
+    '        <button class="btn btn-primary" ng-click="onCancel()">View Threat Report Without Modification</button>\n' +
     '    </div>\n' +
     '</div>\n' +
     '')
