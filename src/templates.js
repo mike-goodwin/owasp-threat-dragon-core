@@ -131,6 +131,7 @@ angular.module('templates', [])
   $templateCache.put('diagrams/ElementPropertiesPane.html',
     '﻿<form name="elementPropertiesEditForm">\n' +
     '    <div>\n' +
+    '        <table ng-table=""\n' +
     '        <div class="form-group">\n' +
     '            <label>Name</label>\n' +
     '            <input name="nameInput" class="form-control" type="text" ng-model="selected.name" ng-change="edit()" placeholder="Element name" />\n' +
@@ -1202,14 +1203,24 @@ angular.module('templates', [])
     '            <thead>\n' +
     '                <tr>\n' +
     '                    <th>No.</th>\n' +
-    '                    <th>COMPONENT</th>\n' +
-    '                    <th>THREAT TYPE</th>\n' +
-    '                    <th>DESCRIPTION</th>\n' +
-    '                    <th>STATUS</th>\n' +
-    '                    <th>SEVERITY</th>\n' +
+    '                    <th ng-click="vm.sort(\'name\')">COMPONENT\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'name\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'type\')">THREAT TYPE\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'type\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'description\')">DESCRIPTION\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'description\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'status\')">STATUS\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'status\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'severity\')">SEVERITY\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'severity\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
     '                </tr>\n' +
     '            </thead>\n' +
-    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
+    '            <tbody ng-repeat="element in vm.reportElements">\n' +
     '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
     '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
     '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
@@ -1264,14 +1275,24 @@ angular.module('templates', [])
     '            <thead>\n' +
     '            <tr>\n' +
     '                <th>No.</th>\n' +
-    '                <th>COMPONENT</th>\n' +
-    '                <th>THREAT TYPE</th>\n' +
-    '                <th>COUNTERMEASURE</th>\n' +
-    '                <th>STATUS</th>\n' +
-    '                <th>SEVERITY</th>\n' +
+    '                <th ng-click="vm.sort(\'name\')">COMPONENT\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'name\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'type\')">THREAT TYPE\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'type\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'mitigation\')">MITIGATION\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'mitigation\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'status\')">STATUS\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'status\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'severity\')">SEVERITY\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'severity\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
     '            </tr>\n' +
     '            </thead>\n' +
-    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
+    '            <tbody ng-repeat="element in vm.reportElements">\n' +
     '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
     '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
     '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +

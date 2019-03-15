@@ -8,14 +8,24 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>COMPONENT</th>
-                    <th>THREAT TYPE</th>
-                    <th>DESCRIPTION</th>
-                    <th>STATUS</th>
-                    <th>SEVERITY</th>
+                    <th ng-click="vm.sort('name')">COMPONENT
+                        <span class="glyphicon sort-icon" ng-show="vm.sortKey=='name'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                    </th>
+                    <th ng-click="vm.sort('type')">THREAT TYPE
+                        <span class="glyphicon sort-icon" ng-show="vm.sortKey=='type'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                    </th>
+                    <th ng-click="vm.sort('description')">DESCRIPTION
+                        <span class="glyphicon sort-icon" ng-show="vm.sortKey=='description'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                    </th>
+                    <th ng-click="vm.sort('status')">STATUS
+                        <span class="glyphicon sort-icon" ng-show="vm.sortKey=='status'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                    </th>
+                    <th ng-click="vm.sort('severity')">SEVERITY
+                        <span class="glyphicon sort-icon" ng-show="vm.sortKey=='severity'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                    </th>
                 </tr>
             </thead>
-            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">
+            <tbody ng-repeat="element in vm.reportElements">
                 <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">
                     <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>
                     <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">
@@ -70,14 +80,24 @@
             <thead>
             <tr>
                 <th>No.</th>
-                <th>COMPONENT</th>
-                <th>THREAT TYPE</th>
-                <th>COUNTERMEASURE</th>
-                <th>STATUS</th>
-                <th>SEVERITY</th>
+                <th ng-click="vm.sort('name')">COMPONENT
+                    <span class="glyphicon sort-icon" ng-show="vm.sortKey=='name'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                </th>
+                <th ng-click="vm.sort('type')">THREAT TYPE
+                    <span class="glyphicon sort-icon" ng-show="vm.sortKey=='type'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                </th>
+                <th ng-click="vm.sort('mitigation')">MITIGATION
+                    <span class="glyphicon sort-icon" ng-show="vm.sortKey=='mitigation'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                </th>
+                <th ng-click="vm.sort('status')">STATUS
+                    <span class="glyphicon sort-icon" ng-show="vm.sortKey=='status'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                </th>
+                <th ng-click="vm.sort('severity')">SEVERITY
+                    <span class="glyphicon sort-icon" ng-show="vm.sortKey=='severity'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                </th>
             </tr>
             </thead>
-            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">
+            <tbody ng-repeat="element in vm.reportElements">
                 <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">
                     <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>
                     <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">
