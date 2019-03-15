@@ -433,7 +433,7 @@ angular.module('templates', [])
     '            <label>\n' +
     '                <input name="checkboxIsEncryptedFlow" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedFlow" ng-change="edit()" ng-init="selected.isEncryptedFlow = false"/> Is Encrypted\n' +
     '            </label>\n' +
-    '            <select id ="encryptionTypeForFlow" ng-if="selected.isEncryptedStore">\n' +
+    '            <select id ="encryptionTypeForFlow" ng-if="selected.isEncryptedFlow">\n' +
     '                <option value="des" selected>DES</option>\n' +
     '                <option value="tripleDes">Triple DES</option>\n' +
     '                <option value="tripleDes3Key">TRIPLE_DES_3KEY</option>\n' +
