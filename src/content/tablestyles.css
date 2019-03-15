@@ -47,7 +47,7 @@
     border-style: solid;
     border-width: 1px;
     overflow: hidden;
-    word-break: normal;
+    white-space: nowrap;
     border-color: #aabcfe;
     color: white;
     background-color: #094490;
@@ -80,6 +80,15 @@
     float: left;
     border: none;
     outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 14px;
+    color: white;
+}
+
+.tab form {
+    float: left;
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;

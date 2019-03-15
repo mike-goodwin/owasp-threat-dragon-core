@@ -296,7 +296,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
         vm.dirty = true;
 
         if (_.isUndefined(element.threats)) {
-            vm.selected.threats = [];
+            element.threats = [];
         }
 
         element.threats.push(threat);

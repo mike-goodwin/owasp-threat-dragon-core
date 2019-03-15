@@ -7,10 +7,10 @@ angular.module('templates', [])
     '    </div>\n' +
     '    <div class="modal-body">\n' +
     '        Your diagram has unsaved changes and if you reload they will be lost!\n' +
-    '        Press Cancel to keep the unsaved changes, or press OK to reload the diagram and lose the unsaved changes.\n' +
+    '        Press \'Cancel\' to keep the unsaved changes, or press \'Reload\' to reload the diagram and lose the unsaved changes.\n' +
     '    </div>\n' +
     '    <div class="modal-footer">\n' +
-    '        <button class="btn btn-default" ng-click="onOK()">OK</button>\n' +
+    '        <button class="btn btn-default" ng-click="onOK()">Reload</button>\n' +
     '        <button class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
     '    </div>\n' +
     '</div>\n' +
@@ -1165,11 +1165,11 @@ angular.module('templates', [])
     '    </div>\n' +
     '    <div class="modal-body">\n' +
     '        You have unsaved changes and if you leave this page they will be lost!\n' +
-    '        Press Cancel to stay where you are and keep the unsaved changes,\n' +
-    '        or press OK to leave and lose the unsaved changes.\n' +
+    '        Press \'Cancel\' to stay where you are and keep the unsaved changes,\n' +
+    '        or press \'Proceed\' to leave and lose the unsaved changes.\n' +
     '    </div>\n' +
     '    <div class="modal-footer">\n' +
-    '        <button id="buttonOK" class="btn btn-default" ng-click="onOK()">OK</button>\n' +
+    '        <button id="buttonOK" class="btn btn-default" ng-click="onOK()">Proceed</button>\n' +
     '        <button id="buttonCancel" class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
     '    </div>\n' +
     '</div>\n' +
@@ -1183,11 +1183,11 @@ angular.module('templates', [])
     '        Some nodes in your diagram do not have threats defined. Would you like to automatically generate for these nodes?\n' +
     '    </div>\n' +
     '    <div class="modal-body">\n' +
-    '        Press Cancel to view the threat report without generating additional threats, or press OK to automatically generate threats for empty nodes.\n' +
+    '        Press \'View Threat Report Without Modification\' to view the threat report without generating additional threats, or press \'Generate Threats and View Report\' to automatically generate threats for empty nodes before viewing the report.\n' +
     '    </div>\n' +
     '    <div class="modal-footer">\n' +
-    '        <button class="btn btn-default" ng-click="onOK()">OK</button>\n' +
-    '        <button class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
+    '        <button class="btn btn-default" ng-click="onOK()">Generate Threats and View Report</button>\n' +
+    '        <button class="btn btn-primary" ng-click="onCancel()">View Threat Report Without Modification</button>\n' +
     '    </div>\n' +
     '</div>\n' +
     '')
@@ -1202,14 +1202,24 @@ angular.module('templates', [])
     '            <thead>\n' +
     '                <tr>\n' +
     '                    <th>No.</th>\n' +
-    '                    <th>COMPONENT</th>\n' +
-    '                    <th>THREAT TYPE</th>\n' +
-    '                    <th>DESCRIPTION</th>\n' +
-    '                    <th>STATUS</th>\n' +
-    '                    <th>SEVERITY</th>\n' +
+    '                    <th ng-click="vm.sort(\'name\')">COMPONENT\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'name\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'type\')">THREAT TYPE\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'type\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'description\')">DESCRIPTION\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'description\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'status\')">STATUS\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'status\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'severity\')">SEVERITY\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'severity\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
     '                </tr>\n' +
     '            </thead>\n' +
-    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
+    '            <tbody ng-repeat="element in vm.reportElements">\n' +
     '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
     '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
     '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
@@ -1264,14 +1274,24 @@ angular.module('templates', [])
     '            <thead>\n' +
     '            <tr>\n' +
     '                <th>No.</th>\n' +
-    '                <th>COMPONENT</th>\n' +
-    '                <th>THREAT TYPE</th>\n' +
-    '                <th>COUNTERMEASURE</th>\n' +
-    '                <th>STATUS</th>\n' +
-    '                <th>SEVERITY</th>\n' +
+    '                <th ng-click="vm.sort(\'name\')">COMPONENT\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'name\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'type\')">THREAT TYPE\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'type\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'mitigation\')">MITIGATION\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'mitigation\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'status\')">STATUS\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'status\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'severity\')">SEVERITY\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'severity\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
     '            </tr>\n' +
     '            </thead>\n' +
-    '            <tbody ng-repeat="element in vm.getScopedNonFlowOrBoundaryElements()">\n' +
+    '            <tbody ng-repeat="element in vm.reportElements">\n' +
     '                <tr ng-if="$odd" class="odd" ng-click="vm.editThreat(element.threats[0])">\n' +
     '                    <td class="noHover" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()"><span>{{ $index }}</span></td>\n' +
     '                    <td class="noHover bottom-right-container" rowspan="{{element.threats.length > 0 ? element.threats.length : 1}}" ng-click="$event.stopPropagation()">\n' +
