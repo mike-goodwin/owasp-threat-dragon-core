@@ -1550,8 +1550,8 @@
                 "height": 80
               },
               "position": {
-                "x": 42,
-                "y": 893
+                "x": 40,
+                "y": 902
               },
               "angle": 0,
               "id": "1acd7f91-db75-432e-a3d3-13fde3d8086c",
@@ -1560,7 +1560,7 @@
               "attrs": {
                 "text": {
                   "ref-y": 90,
-                  "text": "Smart Watch 47"
+                  "text": "Apple\nWatch"
                 },
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -1577,8 +1577,8 @@
                 "height": 80
               },
               "position": {
-                "x": 306,
-                "y": 893
+                "x": 312,
+                "y": 903
               },
               "angle": 0,
               "id": "85af2678-fee5-4ba8-810f-9527cc9625fe",
@@ -1587,7 +1587,7 @@
               "attrs": {
                 "text": {
                   "ref-y": 90,
-                  "text": "Mobile Phone 49"
+                  "text": "iPhone"
                 },
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -1611,6 +1611,14 @@
               "id": "7a066e3f-89df-40bf-a6bb-37048338de7a",
               "z": 55,
               "hasOpenThreats": false,
+              "providesAuthenticationPacemaker": false,
+              "isALogPacemaker": false,
+              "storesCredentialsPacemaker": false,
+              "isEncryptedPacemaker": false,
+              "programmingLanguagePacemaker": false,
+              "isSignedPacemaker": false,
+              "remoteMedicalRecordStoragePacemaker": false,
+              "privilegeLevelForPacemaker": false,
               "attrs": {
                 "text": {
                   "ref-y": 90,
@@ -1660,14 +1668,22 @@
               "target": {
                 "id": "85af2678-fee5-4ba8-810f-9527cc9625fe"
               },
-              "vertices": [],
+              "vertices": [
+                {
+                  "x": 133,
+                  "y": 945
+                }
+              ],
               "id": "2c966d19-88a9-4c61-a7c1-0db1e7e5e1b6",
               "labels": [
                 {
-                  "position": 0.5,
+                  "position": {
+                    "distance": 0.4409294128417969,
+                    "offset": -16
+                  },
                   "attrs": {
                     "text": {
-                      "text": "flow 51",
+                      "text": "Bluetooth",
                       "font-weight": "400",
                       "font-size": "small"
                     }
