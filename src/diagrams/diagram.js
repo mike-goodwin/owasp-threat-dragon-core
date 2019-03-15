@@ -16,6 +16,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
 
     // Bindable properties and functions are placed on vm.
     vm.errored = false;
+    vm.generatingThreats = false;
     vm.title = 'ThreatModelDiagram';
     vm.initialise = initialise,
         /*jshint -W030 */
@@ -101,6 +102,9 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
         }
 
         datacontext.saveThreatModelDiagram(vm.diagramId, diagramData).then(function () {
+            onSaveDiagram();
+            callback();
+        }, function () {
             onSaveDiagram();
             callback();
         });
@@ -211,6 +215,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
             dialogs.confirm('report/confirmThreatAutoGeneration.html',
                 function () {
                     silentlyGenerateThreatsForElements(elementsWithoutThreats, function () {
+                        vm.generatingThreats = false;
                         save(viewThreatReport);
                     });
                 },
@@ -224,6 +229,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
     }
 
     function silentlyGenerateThreatsForElements(elementList, callback) {
+        vm.generatingThreats = true;
         var remainingElements = elementList;
         if (remainingElements.length > 0) {
             var currentElement = remainingElements.shift();

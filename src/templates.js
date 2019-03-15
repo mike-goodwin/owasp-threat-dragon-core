@@ -16,7 +16,7 @@ angular.module('templates', [])
     '</div>\n' +
     '')
   $templateCache.put('diagrams/diagrameditor.html',
-    '<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">\n' +
+    '﻿<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">\n' +
     '    <div ng-show="!vm.errored">\n' +
     '        <div class="col-lg-2">\n' +
     '            <!--Diagram stencil-->\n' +
@@ -125,6 +125,10 @@ angular.module('templates', [])
     '                <a href="#">Take me home</a>\n' +
     '            </p>\n' +
     '        </div>\n' +
+    '    </div>\n' +
+    '5\n' +
+    '    <div ng-if="vm.generatingThreats">\n' +
+    '        <div class="spinner"></div>\n' +
     '    </div>\n' +
     '</div>\n' +
     '')
