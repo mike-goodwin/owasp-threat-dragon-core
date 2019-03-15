@@ -1275,7 +1275,12 @@
               ],
               "z": 43,
               "hasOpenThreats": false,
-              "wifiInterface": true,
+              "wifiInterface": false,
+              "isEncryptedFlow": false,
+              "isPublicNetwork": false,
+              "bluetoothInterface": false,
+              "cellularInterface": false,
+              "usesTLS": false,
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
