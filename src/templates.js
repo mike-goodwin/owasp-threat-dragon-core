@@ -1030,11 +1030,11 @@ angular.module('templates', [])
       '                <label>Board</label>\n' +
       '                <select name="boardInput" class="form-control" ng-required="true"  ng-model="threatEditForm.boardInput" ng-options="board.name for board in boards">\n' +
       '                </select>\n' +
-      '                <button class="btn btn-primary ng-pristine" ng-click="goToBoard()">Go To Board</button>\n' +
+      '                <button class="btn btn-primary ng-pristine" ng-disabled="!threatEditForm.boardInput.id" ng-click="goToBoard()">Go To Board</button>\n' +
       '            </div>\n' +
       '            <div ng-if="isTrelloActive" class="form-group">\n' +
       '                <label>List</label>\n' +
-      '                <select name="listInput" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
+      '                <select name="listInput" ng-disabled="!threatEditForm.boardInput.id" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
       '                    <option ng-repeat="list in ourLists" value="{{list.id}}">{{list.name}}</option>\n' +
       '                </select>\n' +
       '            </div>\n' +
@@ -1129,7 +1129,7 @@ angular.module('templates', [])
       '        </form>\n' +
       '    </div>\n' +
       '    <div ng-if="isTrelloActive" class="modal-footer">\n' +
-      '        <button class="btn btn-primary" ng-disabled="!threatEditForm.$valid" ng-click="addCard(threatEditForm.titleInput.$modelValue, threatEditForm.descriptionInput.$modelValue, threatEditForm.listInput)">Add To Board</button>\n' +
+      '        <button class="btn btn-primary" ng-click="addCard(threatEditForm.titleInput.$modelValue, threatEditForm.descriptionInput.$modelValue, threatEditForm.listInput)">Add To Board</button>\n' +
       '        <button class="btn btn-default" ng-click="toggle()">Cancel</button>\n' +
       '    </div>\n' +
       '    <div ng-if="parameter.editing && !isTrelloActive" class="modal-footer">\n' +
