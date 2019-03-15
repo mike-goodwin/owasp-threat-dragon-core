@@ -1,25 +1,43 @@
-﻿<div>
+﻿<div data-ng-controller="TrelloController as tc" data-ng-init="getBoards()">
     <div class="modal-header">
+        <img class="trelloLogo" name="trelloLogo" src="public/content/images/trello-mark-blue.png" alt="Add To Trello" ng-click="toggle()">
         <h3>{{parameter.heading}}<span class="pull-right" ng-if="parameter.threatTotal"> ({{parameter.threatIndex}} of {{parameter.threatTotal}})</span></h3>
     </div>
     <div class="modal-body">
-        <form name="threatEditForm">
+        <form name="threatEditForm" >
             <div class="form-group">
-                <label>Title</label>
+                <label ng-if="!isTrelloActive">Title</label><label ng-if="isTrelloActive">Card Title</label>
                 <input name="titleInput" class="form-control" ng-required="true" type="text" ng-model="parameter.threat.title" placeholder="A short title for the threat" />
                 <div ng-show="!threatEditForm.titleInput.$valid && threatEditForm.titleInput.$dirty">
                     <p>
-                        <div class="alert alert-danger" role="alert">
+                        <div ng-if="!isTrelloActive" class="alert alert-danger" role="alert">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             <span class="sr-only">Error:</span>
                             The threat title cannot be empty.
                         </div>
+                        <div ng-if="isTrelloActive" class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            The card title cannot be empty.
+                        </div>
                     </p>
                 </div>
             </div>
+            <div ng-if="isTrelloActive" class="form-group">
+                <label>Board</label>
+                <select name="boardInput" class="form-control" ng-required="true"  ng-model="threatEditForm.boardInput" ng-options="board.name for board in boards">
+                </select>
+                <button class="btn btn-primary ng-pristine" ng-disabled="!threatEditForm.boardInput.id" ng-click="goToBoard()">Go To Board</button>
+            </div>
+            <div ng-if="isTrelloActive" class="form-group">
+                <label>List</label>
+                <select ng-disabled="threatEditForm.boardInput.name!='Choose Board'" name="listInput" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">
+                    <option ng-repeat="list in ourLists" value="{{list}}">{{list.name}}</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label>STRIDE threat type</label>
-                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type" multiple>
+                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type">
                     <option selected>Spoofing</option>
                     <option>Tampering</option>
                     <option>Repudiation</option>
@@ -58,7 +76,7 @@
             </div>
             <div class="clearfix"></div>
             <div class="form-group">
-                <label>Description</label>
+                <label ng-if="!isTrelloActive">Description</label><label ng-if="isTrelloActive">Card Description</label>
                 <textarea name="descriptionInput" ng-model="parameter.threat.description" class="form-control" rows="5" placeholder="Detailed description of the threat"></textarea>
             </div>
             <div class="form-group">
@@ -108,11 +126,15 @@
             </div>
         </form>
     </div>
-    <div ng-if="parameter.editing" class="modal-footer">
+    <div ng-if="isTrelloActive" class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="!threatEditForm.listInput.id || !threatEditForm.boardInput || !threatEditForm.titleInput.$modelValue" ng-click="addCard(threatEditForm.titleInput.$modelValue, threatEditForm.descriptionInput.$modelValue, threatEditForm.listInput.id)">Add To Board</button>
+        <button class="btn btn-default" ng-click="toggle()">Cancel</button>
+    </div>
+    <div ng-if="parameter.editing && !isTrelloActive" class="modal-footer">
         <button class="btn btn-primary" ng-disabled="!threatEditForm.$dirty || !threatEditForm.$valid" ng-click="onOK()">Save</button>
         <button class="btn btn-default" ng-click="onCancel()">Cancel</button>
     </div>
-    <div ng-if="!parameter.editing" class="modal-footer">
+    <div ng-if="!parameter.editing && !isTrelloActive" class="modal-footer">
         <span class="pull-left">
             <input type="checkbox" ng-model="applyToAll">
             Do this for all remaining threats 

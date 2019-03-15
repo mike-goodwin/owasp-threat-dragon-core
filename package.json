@@ -35,7 +35,7 @@
     "angular": "1.6.7",
     "angular-route": "1.6.7",
     "angular-ui-bootstrap": "2.5.6",
-    "bootstrap": "3.3.7",
+    "bootstrap": "^3.4.1",
     "jointjs": "^2.2.1",
     "jquery": "3.0.0",
     "lodash": "4.13.1",
@@ -43,7 +43,8 @@
     "prismjs": "^1.15.0",
     "rework-npm": "^1.0.0",
     "snyk": "^1.52.0",
-    "toastr": "2.1.2"
+    "toastr": "2.1.2",
+    "trello": "^0.9.1"
   },
   "devDependencies": {
     "angular-mocks": "1.6.7",
