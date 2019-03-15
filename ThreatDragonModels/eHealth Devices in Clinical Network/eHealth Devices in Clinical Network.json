@@ -467,6 +467,25 @@
               "hasOpenThreats": false,
               "outOfScope": true,
               "reasonOutOfScope": "Managed by 3rd Party",
+              "privilegeLevelForProcess": false,
+              "isEncryptedProcess": false,
+              "programmingLanguageProcess": false,
+              "isAWebApplication": false,
+              "isANetworkSwitch": false,
+              "isARoutingProcess": false,
+              "isAWirelessAccessProcess": false,
+              "isAConfigurationProcess": false,
+              "isAIPSecHostProcess": false,
+              "providesAuthenticationProcess": false,
+              "isALogProcess": false,
+              "usesExternalResourcesProcess": false,
+              "usesResourcesDirectlyProcess": false,
+              "validatesCertProcess": false,
+              "localAccessProcess": false,
+              "validatesInputProcess": false,
+              "validateXMLProcess": false,
+              "userInputProcess": false,
+              "thirdPartyProcess": false,
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isOutOfScope"
@@ -1042,6 +1061,25 @@
               "z": 36,
               "hasOpenThreats": false,
               "outOfScope": true,
+              "privilegeLevelForProcess": false,
+              "isEncryptedProcess": false,
+              "programmingLanguageProcess": false,
+              "isAWebApplication": false,
+              "isANetworkSwitch": false,
+              "isARoutingProcess": false,
+              "isAWirelessAccessProcess": false,
+              "isAConfigurationProcess": false,
+              "isAIPSecHostProcess": false,
+              "providesAuthenticationProcess": false,
+              "isALogProcess": false,
+              "usesExternalResourcesProcess": false,
+              "usesResourcesDirectlyProcess": false,
+              "validatesCertProcess": false,
+              "localAccessProcess": false,
+              "validatesInputProcess": false,
+              "validateXMLProcess": false,
+              "userInputProcess": false,
+              "thirdPartyProcess": false,
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isOutOfScope"
@@ -1163,6 +1201,12 @@
               ],
               "z": 40,
               "hasOpenThreats": false,
+              "isEncryptedFlow": false,
+              "isPublicNetwork": false,
+              "bluetoothInterface": false,
+              "wifiInterface": false,
+              "cellularInterface": false,
+              "usesTLS": false,
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -1291,6 +1335,14 @@
               "z": 45,
               "hasOpenThreats": false,
               "outOfScope": true,
+              "providesAuthenticationActor": false,
+              "isEncryptedActor": false,
+              "clientEHealthDevice": false,
+              "mobileDevice": false,
+              "desktopDevice": false,
+              "storesHealthDataLocally": false,
+              "forwardsHealthDataCloud": false,
+              "privilegeLevelForActor": false,
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isOutOfScope"
@@ -1694,7 +1746,7 @@
               "hasOpenThreats": false,
               "isEncryptedFlow": false,
               "isPublicNetwork": false,
-              "bluetoothInterface": false,
+              "bluetoothInterface": true,
               "wifiInterface": false,
               "cellularInterface": false,
               "usesTLS": false,
