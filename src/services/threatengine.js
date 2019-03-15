@@ -1455,17 +1455,29 @@ return nools.flow(flowName, function (flow) {
             mitigation:'Threat model your OS, platforms, andframeworks to determine how they handle thefollowing features:URL Caching (Both request and response)Keyboard Press CachingCopy/Paste buffer CachingApplication backgroundingLoggingHTML5 data storageBrowser cookie objectsAnalytics data sent to 3rd partiesAlso identify what a given OS or framework doesby default, by doing this and applying mitigatingcontrols, unintended data leakage can beavoided. [51]',
             references:[]});});
 
-    flow.rule('Broken/Insecure ',{scope: {dropDownOptionsCheck: dropDownOptionsCheck}},[[Element, 'el','(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.isEncryptedMobilePhone)&& isTrue(dropDownOptionsCheck("encryptionTypeForMobilePhone", "des, rsa, tripleDes,tripleDes3Key, rc2, rc4, 128rc4, desx")))'],
+    flow.rule('Broken/Insecure Cryptography',{scope: {dropDownOptionsCheck: dropDownOptionsCheck}},[[Element, 'el','(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.isEncryptedMobilePhone)&& isTrue(dropDownOptionsCheck("encryptionTypeForMobilePhone", "des, rsa, tripleDes,tripleDes3Key, rc2, rc4, 128rc4, desx")))'],
         [Threats, 'threats']
     ], function (facts) {
         facts.threats.collection.push({ ruleId: '7.7',
-            title:'Broken/Insecure ',
+            title:'Broken/Insecure Cryptography',
             type:'Information disclosure',
             status:'Open',
             severity:'High',
             description:'This threat is cause when an adversary has physicalaccess to data that has been encrypted improperly,or mobile malware acting on an adversary\'s behalf.This can be done in several ways such as decryptionaccess to the device or network traffic capture, ormalicious apps on the device with access to theencrypted data Hello.',
             mitigation:'To mitigate this threat, avoid using algorithms orprotocols that are unsecure such as \'RC2\',\'MD4\', \'MD5\' and \'SHA1\'. A strongercryptographic algorithm that is widely known to besecure should be used. Currently, AES is one of themost secure encryption algorithms and isrecommended to be used.  [33] [34] [52]',
-            references:[{name:'A Study of Encryption Algorithms (RSA', link:'DES'},{name:'Broken ', link:'https://www.owasp.org/index.php/Mobile_Top_10_2014-M6'},{name:'Using a broken or risky cryptographic algorithm', link:'https://www.owasp.org/index.php/Using_a_broken_or_risky_cryptographic_algorithm'}]});});
+            references:[{name:'A Study of Encryption Algorithms (RSA, DES, 3DES and AES) for Information Security', link:'https://pdfs.semanticscholar.org/187d/26258dc57d794ce4badb094e64cf8d3f7d88.pdf '},{name:'Using a broken or risky cryptographic algorithm', link:'https://www.owasp.org/index.php/Using_a_broken_or_risky_cryptographic_algorithm'}],
+            examples:[
+                {
+                    language: {name: 'C++', highlightAlias: 'cpp'},
+                    code: 'EVP_des_ecb();'
+                },
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    code: 'Cipher des=Cipher.getInstance("DES...);\n' +
+                        'des.initEncrypt(key2);'
+                }
+            ]
+        });});
 
     flow.rule('Client-Side Injection',[[Element, 'el','(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.userInputMobilePhone) && isTrue(el.element.validatesInputMobilePhone))'],
         [Threats, 'threats']
@@ -1479,17 +1491,34 @@ return nools.flow(flowName, function (flow) {
             mitigation:'IOS Specific Best Practices:SQLite Injection: When designing queries for SQLitebe sure that user supplied data is being passed to aparameterized query. This can be spotted bylooking for the format specifier used. In general,dangerous user supplied data will be inserted by a%@ instead of a proper parameterized queryspecifier.JavaScript Injection (XSS, etc): Ensure that allUIWebView calls do not execute without properinput validation. Apply filters for dangerousJavaScript characters if possible, using a whitelistover blacklist character policy before rendering. Ifpossible, call mobile Safari instead of rending insideof UIWebkit which has access to your application.Local File Inclusion: Use input validation forNSFileManager calls.XML Injection: use libXML2 over NSXMLParserFormat String Injection: Several Objective Cmethods are vulnerable to format string attacks:NSLog, [NSString stringWithFormat:], [NSStringinitWithFormat:], [NSMutableStringappendFormat:], [NSAlertinformativeTextWithFormat:], [NSPredicatepredicateWithFormat:], [NSException format:],NSRunAlertPanel.Do not let sources outside of your control, such asuser data and messages from other applications orweb services, control any part of your formatstrings.Classic C Attacks: Objective C is a superset of C,avoid using old C functions vulnerable to injectionsuch as: strcat, strcpy, strncat, strncpy, sprint,vsprintf, gets, etc.Android Specific Best Practices:SQL Injection: When dealing with dynamic queriesor Content-Providers ensure you are usingparameterized queries.JavaScript Injection (XSS): Verify that JavaScript andPlugin support is disabled for any WebViews(usually the default).Local File Inclusion: Verify that File System Access isdisabled for any WebViews(webview.getSettings().setAllowFileAccess(false);).Intent Injection\/Fuzzing: Verify actions and dataare validated via an Intent Filter for all Activities.Binary Injection\/Modification Prevention forAndroid and iOS:Follow security coding techniques for jailbreakdetection, checksum, certificate pinning, anddebugger detection controlsThe organization building the app must adequatelyprevent an adversary from analyzing and reverseengineering the app using static or dynamic analysistechniques.The mobile app must be able to detect at runtimethat code has been added or changed from whatit knows about its integrity at compile time. Theapp must be able to react appropriately atruntime to a code integrity violation.[53]',
             references:[{name:'Client Side Injection', link:'https://www.owasp.org/index.php/Mobile_Top_10_2014-M7'}]});});
 
-    flow.rule('Poor Client ',[[Element, 'el','(el.element.attributes.type == "tm.Process") ||(el.element.attributes.type == "tm.Store") ||(el.element.attributes.type =="tm.MobilePhone") ||(el.element.attributes.type == "tm.Pacemaker")|| (el.element.attributes.type =="tm.SmartWatch") || (el.element.attributes.type== "tm.Laptop") || (el.element.attributes.type =="tm.Tablet") || (el.element.attributes.type =="tm.Electrocardiogram")'],
+    flow.rule('Poor Client Code Quality',[[Element, 'el','(el.element.attributes.type == "tm.Process") ||(el.element.attributes.type == "tm.Store") ||(el.element.attributes.type =="tm.MobilePhone") ||(el.element.attributes.type == "tm.Pacemaker")|| (el.element.attributes.type =="tm.SmartWatch") || (el.element.attributes.type== "tm.Laptop") || (el.element.attributes.type =="tm.Tablet") || (el.element.attributes.type =="tm.Electrocardiogram")'],
         [Threats, 'threats']
     ], function (facts) {
         facts.threats.collection.push({ ruleId: '7.9',
-            title:'Poor Client ',
+            title:'Poor Client Code Quality',
             type:'Spoofing',
             status:'Open',
             severity:'Medium',
             description:'This threat involves entities that can pass untrustedinputs to method calls made within mobile code.These types of issues are not necessarily securityissues in and of themselves but lead to securityvulnerabilities. For example, buffer overflows withinolder versions of Safari (a poor code qualityvulnerability) led to high risk drive-by Jailbreakattacks. Poor code-quality issues are typicallyexploited via malware or phishing scams. Anattacker will typically exploit vulnerabilities in thiscategory by supplying carefully crafted inputs to thevictim. These inputs are passed onto code thatresides within the mobile device where exploitationtakes place. Typical types of attacks will exploitmemory leaks and buffer overflows.[54]',
             mitigation:'To mitigate this threat, the followingcountermeasures should be considered:Consistent coding patterns, standards in anorganizationWrite code that is legible and documentedAny code that requires a buffer, the length of theinput should be checked, and the length should berestricted.Use third party tools to find buffer overflows andmemory leaks.Prioritize to fix any buffer overflows and memoryleaks that are present in the code before moving onto other issues.',
-            references:[{name:'Poor ', link:'https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality'}]});});
+            references:[{name:'Poor Client Code Quality', link:'https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality'}],
+            examples:[
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'Buffer Overflow example:',
+                    postText: 'We should avoid the use of the gets function to avoid a buffer overflow. This is an example of what most static analysis tools will report as a code quality issue.',
+                    code: 'include <stdio.h>\n' +
+                        '\n' +
+                        ' int main(int argc, char **argv)\n' +
+                        '    {\n' +
+                        '    char buf[8]; // buffer for eight characters\n' +
+                        '    gets(buf); // read from stdio (sensitive function!)\n' +
+                        '    printf("%s\\n", buf); // print out data stored in buf\n' +
+                        '    return 0; // 0 as return value\n' +
+                        '    }'
+                }
+            ]
+        });});
 
     flow.rule('Security Decisions Via Untrusted Inputs',[[Element, 'el','(el.element.attributes.type == "tm.Process") ||(el.element.attributes.type == "tm.Store") ||(el.element.attributes.type =="tm.MobilePhone") ||(el.element.attributes.type == "tm.Pacemaker")|| (el.element.attributes.type =="tm.SmartWatch") || (el.element.attributes.type== "tm.Laptop") || (el.element.attributes.type =="tm.Tablet") || (el.element.attributes.type =="tm.Electrocardiogram")'],
         [Threats, 'threats']
@@ -1537,7 +1566,31 @@ return nools.flow(flowName, function (flow) {
             severity:'Medium',
             description:'The software does not neutralize or incorrectlyneutralizes output that is written to logs. [61]',
             mitigation:'To mitigate this threat, there are 2countermeasures that can be implemented. Firstly,any input should be assumed to be malicious. Allinput should be validated, where a whitelist shouldbe used to accept input based on specificrequirements. Properties that should be consideredinclude length, type, full range of accepted values,missing or extra input, syntax, consistency andconforming to business logic. Anothercountermeasure is to have the output encoded in aparticular format that a downstream consumer can',
-            references:[{name:'CWE-117: Improper Output Neutralization for Logs', link:'https://cwe.mitre.org/data/definitions/117.html'}]});});
+            references:[{name:'CWE-117: Improper Output Neutralization for Logs', link:'https://cwe.mitre.org/data/definitions/117.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'The following web application code attempts to read an integer value from a request object. If the parseInt call fails, then the input is logged with an error message indicating what happened.',
+                    postText: 'If a user submits the string "twenty-one" for val, the following entry is logged:\n' +
+                        '\n' +
+                        'INFO: Failed to parse val=twenty-one\n' +
+                        'However, if an attacker submits the string "twenty-one%0a%0aINFO:+User+logged+out%3dbadguy", the following entry is logged:\n' +
+                        '\n' +
+                        'INFO: Failed to parse val=twenty-one\n' +
+                        'INFO: User logged out=badguy\n' +
+                        'Clearly, attackers can use this same mechanism to insert arbitrary log entries.',
+                    code: 'String val = request.getParameter("val");\n' +
+                        'try {\n' +
+                        '\n' +
+                        'int value = Integer.parseInt(val);\n' +
+                        '}\n' +
+                        'catch (NumberFormatException) {\n' +
+                        'log.info("Failed to parse val = " + val);\n' +
+                        '}\n' +
+                        '...'
+                }
+            ]
+        });});
 
     flow.rule('Insufficient Logging ',[[Element, 'el','(el.element.attributes.type == "tm.Process") ||(el.element.attributes.type == "tm.Store") ||(el.element.attributes.type =="tm.MobilePhone") ||(el.element.attributes.type == "tm.Pacemaker")|| (el.element.attributes.type =="tm.SmartWatch") || (el.element.attributes.type== "tm.Laptop") || (el.element.attributes.type =="tm.Tablet") || (el.element.attributes.type =="tm.Electrocardiogram")'],
         [Threats, 'threats']
@@ -1549,7 +1602,41 @@ return nools.flow(flowName, function (flow) {
             severity:'Medium',
             description:'When a security-critical event occurs, the softwareeither does not record the event or omits importantdetails about the event when logging it. [62]',
             mitigation:'To mitigate this threat, there are 2countermeasures that can be implemented. Firstly,logging should be centralized with different levels ofdetails. However, in a production environmentthere should be sufficient logging to allow systemadministrators to see attacks, diagnose and recoverfrom errors. [62]',
-            references:[{name:'CWE-778: Insufficient Logging', link:'https://cwe.mitre.org/data/definitions/778.html'}]});});
+            references:[{name:'CWE-778: Insufficient Logging', link:'https://cwe.mitre.org/data/definitions/778.html'}],
+            examples:[
+                {
+                    language: {name: 'Markup', highlightAlias: 'markup'},
+                    preText: 'The example below shows a configuration for the service security audit feature in the Windows Communication Foundation (WCF).',
+                    postText: 'The previous configuration file has effectively disabled the recording of security-critical events, which would force the administrator to look to other sources during debug or recovery efforts.',
+                    code: '<system.serviceModel>\n' +
+                        '<behaviors>\n' +
+                        '<serviceBehaviors>\n' +
+                        '<behavior name="NewBehavior">\n' +
+                        '<serviceSecurityAudit auditLogLocation="Default"\n' +
+                        'suppressAuditFailure="false"\n' +
+                        'serviceAuthorizationAuditLevel="None"\n' +
+                        'messageAuthenticationAuditLevel="None" />\n' +
+                        '\n' +
+                        '...\n' +
+                        '</system.serviceModel>'
+                },
+                {
+                    language: {name: 'Markup', highlightAlias: 'markup'},
+                    preText: 'Logging failed authentication attempts can warn administrators of potential brute force attacks. Similarly, logging successful authentication events can provide a useful audit trail when a legitimate account is compromised. The following configuration shows appropriate settings, assuming that the site does not have excessive traffic, which could fill the logs if there are a large number of success or failure events.',
+                    code: '<system.serviceModel>\n' +
+                        '<behaviors>\n' +
+                        '<serviceBehaviors>\n' +
+                        '<behavior name="NewBehavior">\n' +
+                        '<serviceSecurityAudit auditLogLocation="Default"\n' +
+                        'suppressAuditFailure="false"\n' +
+                        'serviceAuthorizationAuditLevel="SuccessAndFailure"\n' +
+                        'messageAuthenticationAuditLevel="SuccessAndFailure" />\n' +
+                        '\n' +
+                        '...\n' +
+                        '</system.serviceModel>'
+                }
+            ]
+        });});
 
     flow.rule('Information Exposure Through Log Files',[[Element, 'el','(el.element.attributes.type == "tm.Store" && isTrue(el.element.isALogStore))  ||(el.element.attributes.type == "tm.Process"  && isTrue(el.element.isALog)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.isALogMobilePhone)) ||(el.element.attributes.type == "tm.SmartWatch"&& isTrue(el.element.isALogSmartPhone)) ||(el.element.attributes.type == "tm.Laptop" && isTrue(el.element.isALogLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.isALogTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.isALogElectrocardiogram)) ||(el.element.attributes.type == "tm.Pacemaker"&& isTrue(el.element.isALogPacemaker))'],
         [Threats, 'threats']
@@ -1561,7 +1648,32 @@ return nools.flow(flowName, function (flow) {
             severity:'Medium',
             description:'Information written to log files can be of a sensitivenature and give valuable guidance to an attacker orexpose sensitive user information. [64]',
             mitigation:'To mitigate this threat, there are a few mitigationsthat can be implemented. Firstly, anysensitive/secret information should not be writteninto any log files. Any debug log files should beremoved prior to code being deployed in aproduction environment. Log files should beprotected from unauthorized read/write access.Configurations should be changed when anapplication is transitioning to a productionenvironment. [63]',
-            references:[{name:'CWE-532: Information Exposure Through Log Files', link:'https://cwe.mitre.org/data/definitions/532.html'},{name:'CWE-779: Logging of Excessive Data', link:'https://cwe.mitre.org/data/definitions/779.html'}]});});
+            references:[{name:'CWE-532: Information Exposure Through Log Files', link:'https://cwe.mitre.org/data/definitions/532.html'},{name:'CWE-779: Logging of Excessive Data', link:'https://cwe.mitre.org/data/definitions/779.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'In the following code snippet, a user\'s full name and credit card number are written to a log file.',
+                    code: 'logger.info("Username: " + usernme + ", CCN: " + ccn);'
+                },
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'This code stores location information about the current user:',
+                    postText: 'When the application encounters an exception it will write the user object to the log. Because the user object contains location information, the user\'s location is also written to the log.',
+                    code: 'locationClient = new LocationClient(this, this, this);\n' +
+                        'locationClient.connect();\n' +
+                        'currentUser.setLocation(locationClient.getLastLocation());\n' +
+                        '... \n' +
+                        '\n' +
+                        'catch (Exception e) {\n' +
+                        'AlertDialog.Builder builder = new AlertDialog.Builder(this);\n' +
+                        'builder.setMessage("Sorry, this application has experienced an error.");\n' +
+                        'AlertDialog alert = builder.create();\n' +
+                        'alert.show();\n' +
+                        'Log.e("ExampleActivity", "Caught exception: " + e + " While on User:" + User.toString());\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Logging of Excessive Data',[[Element, 'el','(el.element.attributes.type == "tm.Store" && isTrue(el.element.isALogStore))  ||(el.element.attributes.type == "tm.Process"  && isTrue(el.element.isALog)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.isALogMobilePhone)) ||(el.element.attributes.type == "tm.SmartWatch"&& isTrue(el.element.isALogSmartPhone)) ||(el.element.attributes.type == "tm.Laptop" && isTrue(el.element.isALogLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.isALogTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.isALogElectrocardiogram)) ||(el.element.attributes.type == "tm.Pacemaker"&& isTrue(el.element.isALogPacemaker))'],
         [Threats, 'threats']
@@ -1585,7 +1697,16 @@ return nools.flow(flowName, function (flow) {
             severity:'Low',
             description:'If no mechanism is in place for managing passwordaging, users will have no incentive to updatepasswords in a timely manner [65]',
             mitigation:'To mitigate this threat, an algorithm that wouldcheck how old a particular password is, should beimplemented and used regularly. This algorithmmust notify the user when their password is old andto change the password while not allowing the userto reuse old passwords as their new password [65].',
-            references:[{name:'CWE-262: Not Using Password Aging', link:'https://cwe.mitre.org/data/definitions/262.html'}]});});
+            references:[{name:'CWE-262: Not Using Password Aging', link:'https://cwe.mitre.org/data/definitions/262.html'}],
+            examples:[
+                {
+                    preText: 'A common example is not having a system to terminate old employee accounts.'
+                },
+                {
+                    preText: 'Not having a system for enforcing the changing of passwords every certain period.'
+                }
+            ]
+        });});
 
     flow.rule('Password Aging with Long Expiration',[[Element, 'el','(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncryptedFlow)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncryptedStore))'],
         [Threats, 'threats']
@@ -1597,7 +1718,16 @@ return nools.flow(flowName, function (flow) {
             severity:'Low',
             description:'Allowing password aging to occur unchecked canresult in the possibility of diminished passwordintegrity [66].',
             mitigation:'To mitigate this threat, there should be a maximumage that a password can be valid for (ex: 4 months)before the user has to change it. An algorithmshould be implemented to check the password\’sage and notify users prior to expiration of thatpassword [66].',
-            references:[{name:'CWE-263: Password Aging with Long Expiration', link:'https://cwe.mitre.org/data/definitions/263.html'}]});});
+            references:[{name:'CWE-263: Password Aging with Long Expiration', link:'https://cwe.mitre.org/data/definitions/263.html'}],
+            examples:[
+                {
+                    preText: 'A common example is not having a system to terminate old employee accounts.'
+                },
+                {
+                    preText: 'Not having a system for enforcing the changing of passwords every certain period.'
+                }
+            ]
+        });});
 
     flow.rule('Authentication Bypass Using an Alternate Path orChannel',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.providesAuthenticationProcess))|| (el.element.attributes.type == "tm.Actor" && isTrue(el.element.providesAuthenticationActor)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.providesAuthenticationStore)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.providesAuthenticationMobilePhone)) || (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.providesAuthenticationSmartWatch)) || (el.element.attributes.type == "tm.Laptop"&& isTrue(el.element.providesAuthenticationLaptop))|| (el.element.attributes.type == "tm.Tablet" && isTrue(el.element.providesAuthenticationTablet))|| (el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.providesAuthenticationElectrocardiogram)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.providesAuthenticationPacemaker))'],
         [Threats, 'threats']
@@ -1645,8 +1775,31 @@ return nools.flow(flowName, function (flow) {
             severity:'Medium',
             description:'Simple authentication protocols are subject toreflection attacks if a malicious user can use thetarget machine to impersonate a trusted user [72].',
             mitigation:'To mitigate this threat, there a few mitigations thatcan be used. Firstly, it is recommended to havedifferent keys for the requestor and responder of achallenge. Another suggestion is to providedifferent challenges for the requestor andresponder. Prior to the challenge, it isrecommended to have the requestor prove it\’sidentity. [72]',
-            references:[{name:'CWE-301: Reflection Attack in an Authentication Protocol', link:'https://cwe.mitre.org/data/definitions/301.html'}]});});
-
+            references:[{name:'CWE-301: Reflection Attack in an Authentication Protocol', link:'https://cwe.mitre.org/data/definitions/301.html'}],
+            examples:[
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'The following example demonstrates the weakness.',
+                    code: 'unsigned char *simple_digest(char *alg,char *buf,unsigned int len, int *olen) {\n' +
+                        'const EVP_MD *m;\n' +
+                        'EVP_MD_CTX ctx;\n' +
+                        'unsigned char *ret;\n' +
+                        'OpenSSL_add_all_digests();\n' +
+                        'if (!(m = EVP_get_digestbyname(alg))) return NULL;\n' +
+                        'if (!(ret = (unsigned char*)malloc(EVP_MAX_MD_SIZE))) return NULL;\n' +
+                        'EVP_DigestInit(&ctx, m);\n' +
+                        'EVP_DigestUpdate(&ctx,buf,len);\n' +
+                        'EVP_DigestFinal(&ctx,ret,olen);\n' +
+                        'return ret;\n' +
+                        '}\n' +
+                        'unsigned char *generate_password_and_cmd(char *password_and_cmd) {\n' +
+                        'simple_digest("sha1",password,strlen(password_and_cmd)\n' +
+                        '...\n' +
+                        ');\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Authentication Bypass by Assumed-ImmutableData',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.providesAuthenticationProcess))|| (el.element.attributes.type == "tm.Actor" && isTrue(el.element.providesAuthenticationActor)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.providesAuthenticationStore)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.providesAuthenticationMobilePhone)) || (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.providesAuthenticationSmartWatch)) || (el.element.attributes.type == "tm.Laptop"&& isTrue(el.element.providesAuthenticationLaptop))|| (el.element.attributes.type == "tm.Tablet" && isTrue(el.element.providesAuthenticationTablet))|| (el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.providesAuthenticationElectrocardiogram)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.providesAuthenticationPacemaker))'],
         [Threats, 'threats']
@@ -1658,7 +1811,19 @@ return nools.flow(flowName, function (flow) {
             severity:'Medium',
             description:'The authentication scheme or implementation useskey data elements that are assumed to beimmutable, but can be controlled or modified bythe attacker [73].',
             mitigation:'To mitigate this threat, any immutable data fieldsshould be properly protected such as environmentvariables, and form fields to ensure that those fieldsare not tempered with [73].',
-            references:[{name:'CWE-302: Authentication Bypass by Assumed-Immutable Data', link:'https://cwe.mitre.org/data/definitions/302.html'}]});});
+            references:[{name:'CWE-302: Authentication Bypass by Assumed-Immutable Data', link:'https://cwe.mitre.org/data/definitions/302.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'In the following example, an "authenticated" cookie is used to determine whether or not a user should be granted access to a system.',
+                    postText: 'Of course, modifying the value of a cookie on the client-side is trivial, but many developers assume that cookies are essentially immutable.',
+                    code: 'boolean authenticated = new Boolean(getCookieValue("authenticated")).booleanValue();\n' +
+                        'if (authenticated) {\n' +
+                        '...\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Incorrect Implementation of AuthenticationAlgorithm',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.providesAuthenticationProcess))|| (el.element.attributes.type == "tm.Actor" && isTrue(el.element.providesAuthenticationActor)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.providesAuthenticationStore)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.providesAuthenticationMobilePhone)) || (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.providesAuthenticationSmartWatch)) || (el.element.attributes.type == "tm.Laptop"&& isTrue(el.element.providesAuthenticationLaptop))|| (el.element.attributes.type == "tm.Tablet" && isTrue(el.element.providesAuthenticationTablet))|| (el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.providesAuthenticationElectrocardiogram)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.providesAuthenticationPacemaker))'],
         [Threats, 'threats']
@@ -1682,19 +1847,104 @@ return nools.flow(flowName, function (flow) {
             severity:'High',
             description:'The software does not perform any authenticationfor functionality that requires a provable useridentity or consumes a significant amount ofresources [75].',
             mitigation:'To mitigate this threat there are several countermeasures that can be implemented. Firstly, theapplication should be split up based on privilegelevels where it\’s maintained by a centralizedauthentication mechanism. Secondly, any securitycheck that was implemented on the client side of anapplication should also be on the server side.Another migration technique is to avoid designingand implementing authentication function that arecustom-tailed to the application. Lastly, any libraryor framework which is known to have countermeasures that will have the authentication function[75].',
-            references:[{name:'CWE-306: Missing Authentication for Critical Function', link:'https://cwe.mitre.org/data/definitions/306.html'}]});});
+            references:[{name:'CWE-306: Missing Authentication for Critical Function', link:'https://cwe.mitre.org/data/definitions/306.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'In the following Java example the method createBankAccount is used to create a BankAccount object for a bank management application.',
+                    postText: 'However, there is no authentication mechanism to ensure that the user creating this bank account object has the authority to create new bank accounts. Some authentication mechanisms should be used to verify that the user has the authority to create bank account objects.',
+                    code: 'public BankAccount createBankAccount(String accountNumber, String accountType,\n' +
+                        'String accountName, String accountSSN, double balance) {\n' +
+                        'BankAccount account = new BankAccount();\n' +
+                        'account.setAccountNumber(accountNumber);\n' +
+                        'account.setAccountType(accountType);\n' +
+                        'account.setAccountOwnerName(accountName);\n' +
+                        'account.setAccountOwnerSSN(accountSSN);\n' +
+                        'account.setBalance(balance);\n' +
+                        '\n' +
+                        'return account;\n' +
+                        '}'
+                },
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'The following Java code includes a boolean variable and method for authenticating a user. If the user has not been authenticated then the createBankAccount will not create the bank account object.',
+                    code: 'private boolean isUserAuthentic = false;\n' +
+                        '\n' +
+                        '// authenticate user, \n' +
+                        '\n' +
+                        '// if user is authenticated then set variable to true \n' +
+                        '\n' +
+                        '// otherwise set variable to false \n' +
+                        'public boolean authenticateUser(String username, String password) {\n' +
+                        '...\n' +
+                        '}\n' +
+                        '\n' +
+                        'public BankAccount createNewBankAccount(String accountNumber, String accountType,\n' +
+                        'String accountName, String accountSSN, double balance) {\n' +
+                        'BankAccount account = null;\n' +
+                        '\n' +
+                        'if (isUserAuthentic) {\n' +
+                        'account = new BankAccount();\n' +
+                        'account.setAccountNumber(accountNumber);\n' +
+                        'account.setAccountType(accountType);\n' +
+                        'account.setAccountOwnerName(accountName);\n' +
+                        'account.setAccountOwnerSSN(accountSSN);\n' +
+                        'account.setBalance(balance);\n' +
+                        '}\n' +
+                        'return account;\n' +
+                        '}'
+                }
+            ]
+        });});
 
-    flow.rule('Improper Restriction of Excessive AuthenticationAttempts',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.providesAuthenticationProcess))|| (el.element.attributes.type == "tm.Actor" && isTrue(el.element.providesAuthenticationActor)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.providesAuthenticationStore)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.providesAuthenticationMobilePhone)) || (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.providesAuthenticationSmartWatch)) || (el.element.attributes.type == "tm.Laptop"&& isTrue(el.element.providesAuthenticationLaptop))|| (el.element.attributes.type == "tm.Tablet" && isTrue(el.element.providesAuthenticationTablet))|| (el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.providesAuthenticationElectrocardiogram)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.providesAuthenticationPacemaker))'],
+    flow.rule('Improper Restriction of Excessive Authentication Attempts',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.providesAuthenticationProcess))|| (el.element.attributes.type == "tm.Actor" && isTrue(el.element.providesAuthenticationActor)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.providesAuthenticationStore)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.providesAuthenticationMobilePhone)) || (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.providesAuthenticationSmartWatch)) || (el.element.attributes.type == "tm.Laptop"&& isTrue(el.element.providesAuthenticationLaptop))|| (el.element.attributes.type == "tm.Tablet" && isTrue(el.element.providesAuthenticationTablet))|| (el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.providesAuthenticationElectrocardiogram)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.providesAuthenticationPacemaker))'],
         [Threats, 'threats']
     ], function (facts) {
         facts.threats.collection.push({ ruleId: '9.10',
-            title:'Improper Restriction of Excessive AuthenticationAttempts',
+            title:'Improper Restriction of Excessive Authentication Attempts',
             type:'Spoofing',
             status:'Open',
             severity:'Medium',
             description:'The software does not implement sufficientmeasures to prevent multiple failed authenticationattempts within in a short time frame, making itmore susceptible to brute force attacks [76].',
             mitigation:'To mitigate this threat, there are multipletechniques can be used such as disconnecting theuser after a certain number of failed attempts,having a timeout after a certain number of attemptsor locking out a targeted account [76].',
-            references:[{name:'CWE-307: Improper Restriction of Excessive Authentication Attempts', link:'https://cwe.mitre.org/data/definitions/307.html'}]});});
+            references:[{name:'CWE-307: Improper Restriction of Excessive Authentication Attempts', link:'https://cwe.mitre.org/data/definitions/307.html'}],
+            examples:[
+                {
+                    language: {name: 'PHP', highlightAlias: 'php'},
+                    preText: 'This code attempts to limit the number of login attempts by causing the process to sleep before completing the authentication.',
+                    postText: 'However, there is no limit on parallel connections, so this does not increase the amount of time an attacker needs to complete an attack.',
+                    code: '$username = $_POST[\'username\'];\n' +
+                        '$password = $_POST[\'password\'];\n' +
+                        'sleep(2000);\n' +
+                        '$isAuthenticated = authenticateUser($username, $password);'
+                },
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'In the following C/C++ example the validateUser method opens a socket connection, reads a username and password from the socket and attempts to authenticate the username and password.',
+                    postText: 'The validateUser method will continuously check for a valid username and password without any restriction on the number of authentication attempts made. The method should limit the number of authentication attempts made to prevent brute force attacks.',
+                    code: 'int validateUser(char *host, int port)\n' +
+                        '{\n' +
+                        'int socket = openSocketConnection(host, port);\n' +
+                        'if (socket < 0) {\n' +
+                        'printf("Unable to open socket connection");\n' +
+                        'return(FAIL);\n' +
+                        '}\n' +
+                        '\n' +
+                        'int isValidUser = 0;\n' +
+                        'char username[USERNAME_SIZE];\n' +
+                        'char password[PASSWORD_SIZE];\n' +
+                        '\n' +
+                        'while (isValidUser == 0) {\n' +
+                        'if (getNextMessage(socket, username, USERNAME_SIZE) > 0) {\n' +
+                        'if (getNextMessage(socket, password, PASSWORD_SIZE) > 0) {\n' +
+                        'isValidUser = AuthenticateUser(username, password);\n' +
+                        '}\n' +
+                        '}\n' +
+                        '}\n' +
+                        'return(SUCCESS);'
+                }
+            ]
+        });});
 
     flow.rule('Use of Single-Factor Authentication',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.providesAuthenticationProcess))|| (el.element.attributes.type == "tm.Actor" && isTrue(el.element.providesAuthenticationActor)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.providesAuthenticationStore)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.providesAuthenticationMobilePhone)) || (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.providesAuthenticationSmartWatch)) || (el.element.attributes.type == "tm.Laptop"&& isTrue(el.element.providesAuthenticationLaptop))|| (el.element.attributes.type == "tm.Tablet" && isTrue(el.element.providesAuthenticationTablet))|| (el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.providesAuthenticationElectrocardiogram)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.providesAuthenticationPacemaker))'],
         [Threats, 'threats']
@@ -1706,7 +1956,22 @@ return nools.flow(flowName, function (flow) {
             severity:'High',
             description:'The use of single-factor authentication can lead tounnecessary risk of compromise when comparedwith the benefits of a dual-factor authenticationscheme [77].',
             mitigation:'To mitigate this threat, the system or applicationshould use an extra method of authentication(multi-factor authentication). This ensures if onemethod is compromised, the system or applicationis still safe [77].',
-            references:[{name:'CWE-308: Use of Single-factor Authentication', link:'https://cwe.mitre.org/data/definitions/308.html'}]});});
+            references:[{name:'CWE-308: Use of Single-factor Authentication', link:'https://cwe.mitre.org/data/definitions/308.html'}],
+            examples:[
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'In this example a user is logged in if their given password matches a stored password:',
+                    postText: 'This code fails to incorporate more than one method of authentication. If an attacker can steal or guess a user\'s password, they are given full access to their account. Note this code also exhibits Reversible One-Way Hash and Use of a One-Way Hash without a Salt.',
+                    code: 'unsigned char *check_passwd(char *plaintext) {\n' +
+                        'ctext = simple_digest("sha1",plaintext,strlen(plaintext), ... );\n' +
+                        '//Login if hash matches stored hash \n' +
+                        'if (equal(ctext, secret_password())) {\n' +
+                        'login_user();\n' +
+                        '}\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Key Exchange with Entity Authentication',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.providesAuthenticationProcess))|| (el.element.attributes.type == "tm.Actor" && isTrue(el.element.providesAuthenticationActor)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.providesAuthenticationStore)) ||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.providesAuthenticationMobilePhone)) || (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.providesAuthenticationSmartWatch)) || (el.element.attributes.type == "tm.Laptop"&& isTrue(el.element.providesAuthenticationLaptop))|| (el.element.attributes.type == "tm.Tablet" && isTrue(el.element.providesAuthenticationTablet))|| (el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.providesAuthenticationElectrocardiogram)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.providesAuthenticationPacemaker))'],
         [Threats, 'threats']
@@ -1754,7 +2019,21 @@ return nools.flow(flowName, function (flow) {
             severity:'High',
             description:'When setting a new password for a user, theproduct does not require knowledge of the originalpassword, or using another form of authentication.[82]',
             mitigation:'To mitigate this threat, two techniques can beimplemented. Firstly, when there is a passwordchange, the user must provide the originalpassword. Lastly, a “Forget Password” option canbe used, but ensure that the user is requesting achange through a challenge (ex: enter email toreceive an email which contains a link to changetheir password) and not actually changing theuser\’s properties until they\’ve clicked that link[82].',
-            references:[{name:'CWE-620: Unverified Password Change', link:'https://cwe.mitre.org/data/definitions/620.html'}]});});
+            references:[{name:'CWE-620: Unverified Password Change', link:'https://cwe.mitre.org/data/definitions/620.html'}],
+            examples:[
+                {
+                    language: {name: 'PHP', highlightAlias: 'php'},
+                    preText: 'This code changes a user\'s password.',
+                    postText: 'While the code confirms that the requesting user typed the same new password twice, it does not confirm that the user requesting the password change is the same user whose password will be changed. An attacker can request a change of another user\'s password and gain control of the victim\'s account.',
+                    code: '$user = $_GET[\'user\'];\n' +
+                        '$pass = $_GET[\'pass\'];\n' +
+                        '$checkpass = $_GET[\'checkpass\'];\n' +
+                        'if ($pass == $checkpass) {\n' +
+                        'SetUserPassword($user, $pass);\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Weak Password Recovery Mechanism forForgetten Password',[[Element, 'el','(el.element.attributes.type == "tm.Flow" && isTrue(el.element.isEncryptedFlow)) ||(el.element.attributes.type == "tm.Store" && isTrue(el.element.isEncryptedStore))'],
         [Threats, 'threats']
@@ -1768,17 +2047,36 @@ return nools.flow(flowName, function (flow) {
             mitigation:'To mitigate this threat, there are several countermeasures that can be implemented. Ensure that allthe input that goes through the mechanism isvalidated. If security questions are used, ensurethat the questions are not simple and there aremultiple questions. There should be a limit as tohow many attempts one has to answer a question.The user must also answer the question before thepassword is reset. Do not allow the user to choosewhich email the password is sent to. As well, theoriginal password should not be given, instead anew temporary password should be provided [83].',
             references:[{name:'CWE-640: Weak Password Recovery Mechanism for Forgotten Password', link:'https://cwe.mitre.org/data/definitions/640.html'}]});});
 
-    flow.rule('External Control of System or ConfigurationSetting',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isFalse(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isFalse(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isFalse(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isFalse(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isFalse(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isFalse(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isFalse(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isFalse(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isFalse(el.element.privilegeLevelForElectrocardiogram))'],
+    flow.rule('External Control of System or Configuration Setting',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isFalse(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isFalse(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isFalse(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isFalse(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isFalse(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isFalse(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isFalse(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isFalse(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isFalse(el.element.privilegeLevelForElectrocardiogram))'],
         [Threats, 'threats']
     ], function (facts) {
         facts.threats.collection.push({ ruleId: '10.1',
-            title:'External Control of System or ConfigurationSetting',
+            title:'External Control of System or Configuration Setting',
             type:'Tampering',
             status:'Open',
             severity:'Medium',
-            description:'One or more system settings or configurationelements can be externally controlled by a user[84].',
-            mitigation:'To mitigate this threat, the system can be split upby privilege level, so the settings/control are onlychanged by authorized users. [84]',
-            references:[{name:'CWE-15: External Control of System or Configuration Setting', link:'https://cwe.mitre.org/data/definitions/15.html'}]});});
+            description:'One or more system settings or configuration elements can be externally controlled by a user[84].',
+            mitigation:'To mitigate this threat, the system can be split up by privilege level, so the settings/control are only changed by authorized users. [84]',
+            references:[{name:'CWE-15: External Control of System or Configuration Setting', link:'https://cwe.mitre.org/data/definitions/15.html'}],
+            examples:[
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'The following C code accepts a number as one of its command line parameters and sets it as the host ID of the current machine.',
+                    postText: 'Although a process must be privileged to successfully invoke sethostid(), unprivileged users may be able to invoke the program. The code in this example allows user input to directly control the value of a system setting. If an attacker provides a malicious value for host ID, the attacker can misidentify the affected machine on the network or cause other unintended behavior.',
+                    code: '...\n' +
+                        'sethostid(argv[1]);\n' +
+                        '...'
+                },
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'The following Java code snippet reads a string from an HttpServletRequest and sets it as the active catalog for a database Connection.',
+                    postText: '...\n' +
+                        'conn.setCatalog(request.getParameter("catalog"));\n' +
+                        '...',
+                    code: 'In this example, an attacker could cause an error by providing a nonexistent catalog name or connect to an unauthorized portion of the database.'
+                }
+            ]
+        });});
 
     flow.rule('Process Control',[[Element, 'el','(el.element.attributes.type == "tm.Process") ||(el.element.attributes.type == "tm.Store") ||(el.element.attributes.type =="tm.MobilePhone") ||(el.element.attributes.type == "tm.Pacemaker")|| (el.element.attributes.type =="tm.SmartWatch") || (el.element.attributes.type== "tm.Laptop") || (el.element.attributes.type =="tm.Tablet") || (el.element.attributes.type =="tm.Electrocardiogram")'],
         [Threats, 'threats']
@@ -1790,7 +2088,40 @@ return nools.flow(flowName, function (flow) {
             severity:'High',
             description:'Executing commands or loading libraries from anuntrusted source or in an untrusted environmentcan cause an application to execute maliciouscommands (and payloads) on behalf of an attacker[85].',
             mitigation:'To mitigate this threat, libraries and frameworksthat are used must be from a trusted source, wherethese libraries can be relied upon and not bemaliciously used by an adversary. [85]',
-            references:[{name:'CWE-114: Process Control', link:'https://cwe.mitre.org/data/definitions/114.html'}]});});
+            references:[{name:'CWE-114: Process Control', link:'https://cwe.mitre.org/data/definitions/114.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'The following code uses System.loadLibrary() to load code from a native library named library.dll, which is normally found in a standard system directory.',
+                    postText: 'The problem here is that System.loadLibrary() accepts a library name, not a path, for the library to be loaded. From the Java 1.4.2 API documentation this function behaves as follows [1]: A file containing native code is loaded from the local file system from a place where library files are conventionally obtained. The details of this process are implementation-dependent. The mapping from a library name to a specific filename is done in a system-specific manner. If an attacker is able to place a malicious copy of library.dll higher in the search order than file the application intends to load, then the application will load the malicious copy instead of the intended file. Because of the nature of the application, it runs with elevated privileges, which means the contents of the attacker\'s library.dll will now be run with elevated privileges, possibly giving them complete control of the system.',
+                    code: '...\n' +
+                        'System.loadLibrary("library.dll");\n' +
+                        '...'
+                },
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'The following code from a privileged application uses a registry entry to determine the directory in which it is installed and loads a library file based on a relative path from the specified directory.',
+                    postText: 'The code in this example allows an attacker to load an arbitrary library, from which code will be executed with the elevated privilege of the application, by modifying a registry key to specify a different path containing a malicious version of INITLIB. Because the program does not validate the value read from the environment, if an attacker can control the value of APPHOME, they can fool the application into running malicious code.',
+                    code: '...\n' +
+                        'RegQueryValueEx(hkey, "APPHOME",\n' +
+                        '0, 0, (BYTE*)home, &size);\n' +
+                        'char* lib=(char*)malloc(strlen(home)+strlen(INITLIB));\n' +
+                        'if (lib) {\n' +
+                        '\n' +
+                        'strcpy(lib,home);\n' +
+                        'strcat(lib,INITCMD);\n' +
+                        'LoadLibrary(lib);\n' +
+                        '}\n' +
+                        '...'
+                },
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'The following code is from a web-based administration utility that allows users access to an interface through which they can update their profile on the system. The utility makes use of a library named liberty.dll, which is normally found in a standard system directory.',
+                    postText: 'The problem is that the program does not specify an absolute path for liberty.dll. If an attacker is able to place a malicious library named liberty.dll higher in the search order than file the application intends to load, then the application will load the malicious copy instead of the intended file. Because of the nature of the application, it runs with elevated privileges, which means the contents of the attacker\'s liberty.dll will now be run with elevated privileges, possibly giving the attacker complete control of the system. The type of attack seen in this example is made possible because of the search order used by LoadLibrary() when an absolute path is not specified. If the current directory is searched before system directories, as was the case up until the most recent versions of Windows, then this type of attack becomes trivial if the attacker can execute the program locally. The search order is operating system version dependent, and is controlled on newer operating systems by the value of the registry key: HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\SafeDllSearchMode',
+                    code: 'LoadLibrary("liberty.dll");'
+                }
+            ]
+        });});
 
     flow.rule('Sensitive Data Under Web Root',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.isAWebApplication))'],
         [Threats, 'threats']
@@ -1812,9 +2143,34 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'High',
-            description:'A product incorrectly assigns a privilege to aparticular actor, creating an unintended sphere ofcontrol for that actor [87].',
-            mitigation:'To mitigate this threat, the settings, managementsand handling of privileges must be managedcarefully. There should be accounts with limitedprivileges if there is a task that needs to be done,with very specific privilege levels. [87]',
-            references:[{name:'CWE-266: Incorrect Privilege Assignment', link:'https://cwe.mitre.org/data/definitions/266.html'}]});});
+            description:'A product incorrectly assigns a privilege to a particular actor, creating an unintended sphere of control for that actor [87].',
+            mitigation:'To mitigate this threat, the settings, management sand handling of privileges must be managed carefully. There should be accounts with limitedprivileges if there is a task that needs to be done,with very specific privilege levels. [87]',
+            references:[{name:'CWE-266: Incorrect Privilege Assignment', link:'https://cwe.mitre.org/data/definitions/266.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'Evidence of privilege change:',
+                    code: 'AccessController.doPrivileged(new PrivilegedAction() {\n' +
+                        'public Object run() {\n' +
+                        '\n' +
+                        '// privileged code goes here, for example: \n' +
+                        'System.loadLibrary("awt");\n' +
+                        'return null;\n' +
+                        '// nothing to return \n' +
+                        '}'
+                },
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'This application sends a special intent with a flag that allows the receiving application to read a data file for backup purposes.',
+                    postText: 'Any malicious application can register to receive this intent. Because of the FLAG_GRANT_READ_URI_PERMISSION included with the intent, the malicious receiver code can read the user\'s data.',
+                    code: 'Intent intent = new Intent();\n' +
+                        'intent.setAction("com.example.BackupUserData");\n' +
+                        'intent.setData(file_uri);\n' +
+                        'intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION);\n' +
+                        'sendBroadcast(intent);'
+                }
+            ]
+        });});
 
     flow.rule('Privilege Defined With Unsafe Actions',[[Element, 'el','(el.element.attributes.type == "tm.Process") ||(el.element.attributes.type == "tm.Store") ||(el.element.attributes.type =="tm.MobilePhone") ||(el.element.attributes.type == "tm.Pacemaker")|| (el.element.attributes.type =="tm.SmartWatch") || (el.element.attributes.type== "tm.Laptop") || (el.element.attributes.type =="tm.Tablet") || (el.element.attributes.type =="tm.Electrocardiogram")'],
         [Threats, 'threats']
@@ -1824,9 +2180,37 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'High',
-            description:'A particular privilege, role, capability, or right canbe used to perform unsafe actions that were notintended, even when it is assigned to the correctentity [88].',
-            mitigation:'To mitigate this threat, the settings, managementsand handling of privileges must be managedcarefully. There should be accounts with limitedprivileges if there is a task that needs to be done,with very specific privilege levels [88].',
-            references:[{name:'CWE-267: Privilege Defined With Unsafe Actions', link:'https://cwe.mitre.org/data/definitions/267.html'}]});});
+            description:'A particular privilege, role, capability, or right can be used to perform unsafe actions that were notintended, even when it is assigned to the correctentity [88].',
+            mitigation:'To mitigate this threat, the settings, managements and handling of privileges must be managedcarefully. There should be accounts with limitedprivileges if there is a task that needs to be done,with very specific privilege levels [88].',
+            references:[{name:'CWE-267: Privilege Defined With Unsafe Actions', link:'https://cwe.mitre.org/data/definitions/267.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'This code intends to allow only Administrators to print debug information about a system.',
+                    postText: 'While the intention was to only allow Administrators to print the debug information, the code as written only excludes those the with the role of "GUEST". Someone with the role of "ADMIN" or "USER" will be allowed access, which goes against the original intent. An attacker may be able to use this debug information to craft an attack on the system.',
+                    code: 'public enum Roles {\n' +
+                        'ADMIN,USER,GUEST\n' +
+                        '}\n' +
+                        '\n' +
+                        'public void printDebugInfo(User requestingUser){\n' +
+                        'if(isAuthenticated(requestingUser)){\n' +
+                        'switch(requestingUser.role){\n' +
+                        'case GUEST:\n' +
+                        'System.out.println("You are not authorized to perform this command");\n' +
+                        'break;\n' +
+                        '\n' +
+                        'default:\n' +
+                        'System.out.println(currentDebugState());\n' +
+                        'break;\n' +
+                        '}\n' +
+                        '}\n' +
+                        'else{\n' +
+                        'System.out.println("You must be logged in to perform this command");\n' +
+                        '}\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Privilege Chaining',[[Element, 'el','(el.element.attributes.type == "tm.Process") ||(el.element.attributes.type == "tm.Store") ||(el.element.attributes.type =="tm.MobilePhone") ||(el.element.attributes.type == "tm.Pacemaker")|| (el.element.attributes.type =="tm.SmartWatch") || (el.element.attributes.type== "tm.Laptop") || (el.element.attributes.type =="tm.Tablet") || (el.element.attributes.type =="tm.Electrocardiogram")'],
         [Threats, 'threats']
@@ -1836,9 +2220,42 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'High',
-            description:'Two distinct privileges, roles, capabilities, or rightscan be combined in a way that allows an entity toperform unsafe actions that would not be allowedwithout that combination [89].',
-            mitigation:'To mitigate this threat, the settings, managementsand handling of privileges must be managedcarefully. There should be accounts with limitedprivileges if there is a task that needs to be done,with very specific privilege levels. In addition tothose techniques, privileges should be separatedwhere multiple conditions need to be met to access[89].',
-            references:[{name:'CWE-268: Privilege Chaining', link:'https://cwe.mitre.org/data/definitions/268.html'}]});});
+            description:'Two distinct privileges, roles, capabilities, or rights can be combined in a way that allows an entity to perform unsafe actions that would not be allowedwithout that combination [89].',
+            mitigation:'To mitigate this threat, the settings, managements and handling of privileges must be managed carefully. There should be accounts with limitedprivileges if there is a task that needs to be done,with very specific privilege levels. In addition tothose techniques, privileges should be separatedwhere multiple conditions need to be met to access[89].',
+            references:[{name:'CWE-268: Privilege Chaining', link:'https://cwe.mitre.org/data/definitions/268.html'}],
+            examples:[
+                {
+                    language: {name: 'Java', highlightAlias: 'java'},
+                    preText: 'This code allows someone with the role of "ADMIN" or "OPERATOR" to reset a user\'s password. The role of "OPERATOR" is intended to have less privileges than an "ADMIN", but still be able to help users with small issues such as forgotten passwords.',
+                    postText: 'This code does not check the role of the user whose password is being reset. It is possible for an Operator to gain Admin privileges by resetting the password of an Admin account and taking control of that account.',
+                    code: 'public enum Roles {\n' +
+                        'ADMIN,OPERATOR,USER,GUEST\n' +
+                        '}\n' +
+                        '\n' +
+                        'public void resetPassword(User requestingUser, User user, String password ){\n' +
+                        'if(isAuthenticated(requestingUser)){\n' +
+                        'switch(requestingUser.role){\n' +
+                        'case GUEST:\n' +
+                        'System.out.println("You are not authorized to perform this command");\n' +
+                        'break;\n' +
+                        '\n' +
+                        'case USER:\n' +
+                        'System.out.println("You are not authorized to perform this command");\n' +
+                        'break;\n' +
+                        '\n' +
+                        'default:\n' +
+                        'setPassword(user,password);\n' +
+                        'break;\n' +
+                        '}\n' +
+                        '}\n' +
+                        '\n' +
+                        'else{\n' +
+                        'System.out.println("You must be logged in to perform this command");\n' +
+                        '}\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Improper Privilege Management',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isFalse(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isFalse(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isFalse(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isFalse(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isFalse(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isFalse(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isFalse(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isFalse(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isFalse(el.element.privilegeLevelForElectrocardiogram))'],
         [Threats, 'threats']
@@ -1848,8 +2265,8 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'Medium',
-            description:'The software does not properly assign, modify,track, or check privileges for an actor, creating anunintended sphere of control for that actor [90].',
-            mitigation:'To mitigate this threat three techniques arepossible counter measures to properly manageprivileges. There should be specific trust zones inthe system, the least privilege principle should be ineffect where the access rights of each user aregiven the minimum privilege level to do their task aswell, privileges should be separated where multipleconditions need to be met to access [90].',
+            description:'The software does not properly assign, modify,track, or check privileges for an actor, creating an unintended sphere of control for that actor [90].',
+            mitigation:'To mitigate this threat three techniques are possible counter measures to properly manage privileges. There should be specific trust zones in the system, the least privilege principle should be in effect where the access rights of each user aregiven the minimum privilege level to do their task as well, privileges should be separated where multiple conditions need to be met to access [90].',
             references:[{name:'CWE-269: Improper Privilege Management', link:'https://cwe.mitre.org/data/definitions/269.html'}]});});
 
     flow.rule('Privilege Context Switching Error',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isTrue(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isTrue(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isTrue(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.privilegeLevelForElectrocardiogram))'],
@@ -1872,9 +2289,21 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'High',
-            description:'The software does not drop privileges beforepassing control of a resource to an actor that doesnot have those privileges [92].',
-            mitigation:'To mitigate this threat, three techniques arepossible counter measures to properly manageprivileges in different contexts. There should bespecific trust zones in the system, the least privilegeprinciple should be in effect where the access rightsof each user are given the minimum privilege levelto do their task as well, privileges should beseparated where multiple conditions need to bemet to access [92].',
-            references:[{name:'CWE-271: Privilege Dropping / Lowering Errors', link:'https://cwe.mitre.org/data/definitions/271.html'}]});});
+            description:'The software does not drop privileges before passing control of a resource to an actor that does not have those privileges [92].',
+            mitigation:'To mitigate this threat, three techniques a possible counter measures to properly manage privileges in different contexts. There should bespecific trust zones in the system, the least privilegeprinciple should be in effect where the access rightsof each user are given the minimum privilege levelto do their task as well, privileges should beseparated where multiple conditions need to bemet to access [92].',
+            references:[{name:'CWE-271: Privilege Dropping / Lowering Errors', link:'https://cwe.mitre.org/data/definitions/271.html'}],
+            examples:[
+                {
+                    language: {name: 'C', highlightAlias: 'c'},
+                    preText: 'The following code calls chroot() to restrict the application to a subset of the filesystem below APP_HOME in order to prevent an attacker from using the program to gain unauthorized access to files located elsewhere. The code then opens a file specified by the user and processes the contents of the file.',
+                    postText: 'Constraining the process inside the application\'s home directory before opening any files is a valuable security measure. However, the absence of a call to setuid() with some non-zero value means the application is continuing to operate with unnecessary root privileges. Any successful exploit carried out by an attacker against the application can now result in a privilege escalation attack because any malicious operations will be performed with the privileges of the superuser. If the application drops to the privilege level of a non-root user, the potential for damage is substantially reduced.',
+                    code: 'chroot(APP_HOME);\n' +
+                        'chdir("/");\n' +
+                        'FILE* data = fopen(argv[1], "r+");\n' +
+                        '...'
+                }
+            ]
+        });});
 
     flow.rule('Improper Check for Dropped Privileges',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isTrue(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isTrue(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isTrue(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.privilegeLevelForElectrocardiogram))'],
         [Threats, 'threats']
@@ -1884,9 +2313,25 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'Medium',
-            description:'The software attempts to drop privileges but doesnot check or incorrectly checks to see if the dropsucceeded [93].',
-            mitigation:'To mitigate this threat, there are two techniquesthat can counter against an improper check fordropped privileges. Firstly, the system should bedesigned from the point of view of privilege level,where there are entry points and trust boundariesto interface components of different privilegelevels. Ensure that all functions return a value, andverify that the result is expected [93].',
-            references:[{name:'CWE-273: Improper Check for Dropped Privileges', link:'https://cwe.mitre.org/data/definitions/273.html'}]});});
+            description:'The software attempts to drop privileges but does not check or incorrectly checks to see if the drop succeeded [93].',
+            mitigation:'To mitigate this threat, there are two techniques that can counter against an improper check for dropped privileges. Firstly, the system should be designed from the point of view of privilege level,where there are entry points and trust boundaries to interface components of different privilege levels. Ensure that all functions return a value, and verify that the result is expected [93].',
+            references:[{name:'CWE-273: Improper Check for Dropped Privileges', link:'https://cwe.mitre.org/data/definitions/273.html'}],
+            examples:[
+                {
+                    language: {name: 'C++', highlightAlias: 'cpp'},
+                    preText: 'This code attempts to take on the privileges of a user before creating a file, thus avoiding performing the action with unnecessarily high privileges:',
+                    postText: 'The call to ImpersonateNamedPipeClient may fail, but the return value is not checked. If the call fails, the code may execute with higher privileges than intended. In this case, an attacker could exploit this behavior to write a file to a location that the attacker does not have access to.',
+                    code: 'bool DoSecureStuff(HANDLE hPipe) {\n' +
+                        'bool fDataWritten = false;\n' +
+                        'ImpersonateNamedPipeClient(hPipe);\n' +
+                        'HANDLE hFile = CreateFile(...);\n' +
+                        '/../\n' +
+                        'RevertToSelf()\n' +
+                        '/../\n' +
+                        '}'
+                }
+            ]
+        });});
 
     flow.rule('Incorrect Default Permissions',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isTrue(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isTrue(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isTrue(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.privilegeLevelForElectrocardiogram))'],
         [Threats, 'threats']
@@ -1908,8 +2353,8 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'Low',
-            description:'A product defines a set of insecure permissions thatare inherited by objects that are created by theprogram [95].',
-            mitigation:'To mitigate this threat, the settings, managementand handling of privileges need to be managedproperly [95].',
+            description:'A product defines a set of insecure permissions that are inherited by objects that are created by theprogram [95].',
+            mitigation:'To mitigate this threat, the settings, management and handling of privileges need to be managedproperly [95].',
             references:[{name:'CWE-277: Insecure Inherited Permissions', link:'https://cwe.mitre.org/data/definitions/277.html'}]});});
 
     flow.rule('Incorrect Execution-Assigned Permissions',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isTrue(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isTrue(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isTrue(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.privilegeLevelForElectrocardiogram))'],
@@ -1920,20 +2365,20 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'Medium',
-            description:'While it is executing, the software sets thepermissions of an object in a way that violates theintended permissions that have been specified bythe user [96].',
-            mitigation:'To mitigate this threat, the settings, managementand handling of privileges need to be managedproperly [96].',
+            description:'While it is executing, the software sets the permissions of an object in a way that violates theintended permissions that have been specified bythe user [96].',
+            mitigation:'To mitigate this threat, the settings, management and handling of privileges need to be managedproperly [96].',
             references:[{name:'CWE-279: Incorrect Execution-Assigned Permissions', link:'https://cwe.mitre.org/data/definitions/279.html'}]});});
 
-    flow.rule('Improper Handling of Insufficient Permissions orPrivileges',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isTrue(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isTrue(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isTrue(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.privilegeLevelForElectrocardiogram))'],
+    flow.rule('Improper Handling of Insufficient Permissions or Privileges',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isTrue(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isTrue(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isTrue(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.privilegeLevelForElectrocardiogram))'],
         [Threats, 'threats']
     ], function (facts) {
         facts.threats.collection.push({ ruleId: '10.14',
-            title:'Improper Handling of Insufficient Permissions orPrivileges',
+            title:'Improper Handling of Insufficient Permissions or Privileges',
             type:'Elevation of privilege',
             status:'Open',
             severity:'Medium',
-            description:'The application does not handle or incorrectlyhandles when it has insufficient privileges to accessresources or functionality as specified by theirpermissions. This may cause it to follow unexpectedcode paths that may leave the application in aninvalid state [97].',
-            mitigation:'To mitigate this threat, there should be areas wherethere are specific permission levels. In addition,verify that if an access to a resource or systemfunctionality is successful or not in all privilegelevels. [97]',
+            description:'The application does not handle or incorrectly handles when it has insufficient privileges to accessresources or functionality as specified by theirpermissions. This may cause it to follow unexpectedcode paths that may leave the application in aninvalid state [97].',
+            mitigation:'To mitigate this threat, there should be areas where there are specific permission levels. In addition,verify that if an access to a resource or systemfunctionality is successful or not in all privilegelevels. [97]',
             references:[{name:'CWE-280: Improper Handling of Insufficient Permissions or Privileges', link:'https://cwe.mitre.org/data/definitions/280.html'}]});});
 
     flow.rule('Improper Ownership Management',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isTrue(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isTrue(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isTrue(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isTrue(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isTrue(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isTrue(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isTrue(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isTrue(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isTrue(el.element.privilegeLevelForElectrocardiogram))'],
@@ -1944,8 +2389,8 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'Medium',
-            description:'The software assigns the wrong ownership, or doesnot properly verify the ownership, of an object orresource [98].',
-            mitigation:'To mitigate this threat, the settings, managementand handling of privilege needs to managedcarefully [98].',
+            description:'The software assigns the wrong ownership, or does not properly verify the ownership, of an object orresource [98].',
+            mitigation:'To mitigate this threat, the settings, management and handling of privilege needs to managedcarefully [98].',
             references:[{name:'CWE-282: Improper Ownership Management ', link:'https://cwe.mitre.org/data/definitions/282.html'}]});});
 
     flow.rule('Unverified Ownership',[[Element, 'el','(el.element.attributes.type == "tm.Process" && isFalse(el.element.privilegeLevelForProcess)) ||(el.element.attributes.type ==  "tm.Actor" && isFalse(el.element.privilegeLevelForActor))||(el.element.attributes.type == "tm.Store" && isFalse(el.element.privilegeLevelForStore))||(el.element.attributes.type == "tm.MobilePhone"&& isFalse(el.element.privilegeLevelForMobilePhone)) || (el.element.attributes.type =="tm.Pacemaker" && isFalse(el.element.privilegeLevelForPacemaker))|| (el.element.attributes.type =="tm.SmartWatch" && isFalse(el.element.privilegeLevelForSmartWatch))|| (el.element.attributes.type == "tm.Laptop" && isFalse(el.element.privilegeLevelForLaptop)) ||(el.element.attributes.type == "tm.Tablet" && isFalse(el.element.privilegeLevelForTablet)) ||(el.element.attributes.type =="tm.Electrocardiogram" && isFalse(el.element.privilegeLevelForElectrocardiogram))'],
@@ -1956,14 +2401,34 @@ return nools.flow(flowName, function (flow) {
             type:'Elevation of privilege',
             status:'Open',
             severity:'Low',
-            description:'The software does not properly verify that a criticalresource is owned by the proper entity [99].',
-            mitigation:'To mitigate the threat of unverified ownership, thesettings, management and handling of privilegeneeds to be managed carefully and the applicationneeds to be designed from a separation of privilegepoint of view, which will require multiple conditionsto access a resource. [99]',
-            references:[{name:'CWE-283: Unverified Ownership', link:'https://cwe.mitre.org/data/definitions/283.html'}]});});
-
-
-
-
-
+            description:'The software does not properly verify that a critical resource is owned by the proper entity [99].',
+            mitigation:'To mitigate the threat of unverified ownership, the settings, management and handling of privilege needs to be managed carefully and the applicationneeds to be designed from a separation of privilegepoint of view, which will require multiple conditionsto access a resource. [99]',
+            references:[{name:'CWE-283: Unverified Ownership', link:'https://cwe.mitre.org/data/definitions/283.html'}],
+            examples:[
+                {
+                    language: {name: 'Python', highlightAlias: 'python'},
+                    preText: 'This function is part of a privileged program that takes input from users with potentially lower privileges.',
+                    postText: 'This code does not confirm that the process to be killed is owned by the requesting user, thus allowing an attacker to kill arbitrary processes.',
+                    code: 'def killProcess(processID):\n' +
+                        'os.kill(processID, signal.SIGKILL)'
+                },
+                {
+                    language: {name: 'Python', highlightAlias: 'python'},
+                    preText: 'This function remedies the problem by checking the owner of the process before killing it:',
+                    code: 'def killProcess(processID):\n' +
+                        'user = getCurrentUser()\n' +
+                        '\n' +
+                        '#Check process owner against requesting user \n' +
+                        'if getProcessOwner(processID) == user:\n' +
+                        'os.kill(processID, signal.SIGKILL)\n' +
+                        'return\n' +
+                        '\n' +
+                        'else:\n' +
+                        'print("You cannot kill a process you don\'t own")\n' +
+                        'return'
+                }
+            ]
+        });});
 });
 
 }

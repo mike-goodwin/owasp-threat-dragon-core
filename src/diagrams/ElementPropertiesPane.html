@@ -17,7 +17,7 @@
     <div ng-show="elementType === 'tm.Process'">
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForProcess" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForProcess" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForProcess = false"/> Uses Privilege Levels
             </label>
         </div>
         <div class="checkbox">
@@ -60,37 +60,37 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsWebApplication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAWebApplication" ng-change="edit()" /> Web Application
+                <input name="checkboxIsWebApplication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAWebApplication" ng-change="edit()" ng-init="selected.isAWebApplication = false"/> Web Application
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsANetworkSwitch" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isANetworkSwitch" ng-change="edit()" /> Network Switch
+                <input name="checkboxIsANetworkSwitch" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isANetworkSwitch" ng-change="edit()" ng-init="selected.isANetworkSwitch = false"/> Network Switch
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsRoutingProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isARoutingProcess" ng-change="edit()" /> Network Router or Gateway
+                <input name="checkboxIsRoutingProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isARoutingProcess" ng-change="edit()" ng-init="selected.isARoutingProcess = false"/> Network Router or Gateway
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsWirelessAccessProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAWirelessAccessProcess" ng-change="edit()" /> Wireless Access Point
+                <input name="checkboxIsWirelessAccessProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAWirelessAccessProcess" ng-change="edit()" ng-init="selected.isAWirelessAccessProcess = false"/> Wireless Access Point
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsConfigurationProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAConfigurationProcess" ng-change="edit()" /> Configuration Server (Free-Radius, DHCP, Cert Management, etc.)
+                <input name="checkboxIsConfigurationProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAConfigurationProcess" ng-change="edit()" ng-init="selected.isAConfigurationProcess = false"/> Configuration Server (Free-Radius, DHCP, Cert Management, etc.)
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsIPSecHostProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAIPSecHostProcess" ng-change="edit()" /> IPSec Host 
+                <input name="checkboxIsIPSecHostProcess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isAIPSecHostProcess" ng-change="edit()" ng-init="selected.isAIPSecHostProcess = false"/> IPSec Host
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationProcess" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Provides Authentication
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationProcess" ng-change="edit()" ng-init="selected.providesAuthenticationProcess = false" /> Provides Authentication
             </label>
             <select ng-if="selected.providesAuthenticationProcess">
                 <option value="ldap">LDAP</option>
@@ -102,47 +102,47 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogProcess" ng-change="edit()" />Stores Event Logs
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogProcess" ng-change="edit()" ng-init="selected.isALogProcess = false"/>Stores Event Logs
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxUsesExternalResources" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesExternalResourcesProcess" ng-change="edit()" /> Uses External Resources
+                <input name="checkboxUsesExternalResources" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesExternalResourcesProcess" ng-change="edit()" ng-init="selected.usesExternalResourcesProcess = false"/> Uses External Resources
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxUsesResourcesDirectly" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesResourcesDirectlyProcess" ng-change="edit()" /> Directly Uses Resources
+                <input name="checkboxUsesResourcesDirectly" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesResourcesDirectlyProcess" ng-change="edit()" ng-init="selected.usesResourcesDirectlyProcess = false"/> Directly Uses Resources
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxValidatesCert" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesCertProcess" ng-change="edit()" /> Validates Certificate
+                <input name="checkboxValidatesCert" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesCertProcess" ng-change="edit()" ng-init="selected.validatesCertProcess = false"/> Validates Certificate
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxLocalAccess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.localAccessProcess" ng-change="edit()" /> Has Local Access to File(s)
+                <input name="checkboxLocalAccess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.localAccessProcess" ng-change="edit()" ng-init="selected.localAccessProcess = false"/> Has Local Access to File(s)
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxValidateInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputProcess" ng-change="edit()" /> Validates Input
+                <input name="checkboxValidateInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputProcess" ng-change="edit()" ng-init="selected.validatesInputProcess = false"/> Validates Input
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxValidateXML" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validateXMLProcess" ng-change="edit()" /> Validates XML Schema
+                <input name="checkboxValidateXML" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validateXMLProcess" ng-change="edit()" ng-init="selected.validateXMLProcess = false"/> Validates XML Schema
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxUserInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.userInputProcess" ng-change="edit()" /> Accepts User Input
+                <input name="checkboxUserInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.userInputProcess" ng-change="edit()" ng-init="selected.userInputProcess = false"/> Accepts User Input
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxThirdParty" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.thirdPartyProcess" ng-change="edit()" /> Uses Third Party Libraries
+                <input name="checkboxThirdParty" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.thirdPartyProcess" ng-change="edit()" ng-init="selected.thirdPartyProcess = false"/> Uses Third Party Libraries
             </label>
         </div>
     </div>
@@ -150,7 +150,7 @@
 
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationActor" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationActor" ng-change="edit()" ng-init="selected.providesAuthenticationActor = false" /> Implements or Uses Authentication Mechanism
             </label>
             <select id = "authType" ng-if="selected.providesAuthenticationActor">
                 <option value="ldap">LDAP</option>
@@ -179,54 +179,54 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsClientEHealthDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.clientEHealthDevice" ng-change="edit()" /> Client eHealth Device
+                <input name="checkboxIsClientEHealthDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.clientEHealthDevice" ng-change="edit()" ng-init="selected.clientEHealthDevice = false" /> Client eHealth Device
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsMobileDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.mobileDevice" ng-change="edit()" /> Mobile Device
+                <input name="checkboxIsMobileDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.mobileDevice" ng-change="edit()" ng-init="selected.mobileDevice = false" /> Mobile Device
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsDesktopDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.desktopDevice" ng-change="edit()" /> Desktop Device
+                <input name="checkboxIsDesktopDevice" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.desktopDevice" ng-change="edit()" ng-init="selected.desktopDevice = false"/> Desktop Device
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresHealthDataLocally" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesHealthDataLocally" ng-change="edit()" /> Stores Health Data Locally
+                <input name="checkboxStoresHealthDataLocally" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesHealthDataLocally" ng-change="edit()" ng-init="selected.storesHealthDataLocally = false"/> Stores Health Data Locally
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxForwardsHealthDataCloud" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.forwardsHealthDataCloud" ng-change="edit()" /> Forwards Health Data to Cloud
+                <input name="checkboxForwardsHealthDataCloud" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.forwardsHealthDataCloud" ng-change="edit()" ng-init="selected.forwardsHealthDataCloud = false"/> Forwards Health Data to Cloud
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForActor" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForActor" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForActor = false"/> Uses Privilege Levels
             </label>
         </div>
     </div>
     <div ng-show="elementType === 'tm.Store'">
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationStore" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationStore" ng-change="edit()" ng-init="selected.providesAuthenticationStore = false" /> Implements or Uses Authentication Mechanism
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageStore" ng-change="edit()" /> Remote Storage of Medical Records
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageStore" ng-change="edit()" ng-init="selected.remoteMedicalRecordStorageStore = false"/> Remote Storage of Medical Records
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogStore" ng-change="edit()" />Stores Event Logs
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogStore" ng-change="edit()" ng-init="selected.isALogStore = false"/>Stores Event Logs
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsStore" ng-change="edit()" /> Stores Credentials
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsStore" ng-change="edit()" ng-init="selected.storesCredentialsStore = false"/> Stores Credentials
             </label>
         </div>
         <div class="checkbox">
@@ -248,56 +248,52 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedStore" ng-change="edit()" /> Is Signed
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedStore" ng-change="edit()" ng-init="selected.isSignedStore = false"/> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxUsesExternalResources" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesExternalResourcesStore" ng-change="edit()" /> Uses External Resources
+                <input name="checkboxUsesExternalResources" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesExternalResourcesStore" ng-change="edit()" ng-init="selected.usesExternalResourcesStore = false"/> Uses External Resources
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxUsesResourcesDirectly" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesResourcesDirectlyStore" ng-change="edit()" /> Directly Uses Resources
+                <input name="checkboxUsesResourcesDirectly" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesResourcesDirectlyStore" ng-change="edit()" ng-init="selected.usesResourcesDirectlyStore = false"/> Directly Uses Resources
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxValidatesCert" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesCertStore" ng-change="edit()" /> Validates Certificate
+                <input name="checkboxValidatesCert" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesCertStore" ng-change="edit()" ng-init="selected.validatesCertStore = false"/> Validates Certificate
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxLocalAccess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.localAccessStore" ng-change="edit()" /> Has Local Access to File(s)
+                <input name="checkboxLocalAccess" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.localAccessStore" ng-change="edit()" ng-init="selected.localAccessStore = false"/> Has Local Access to File(s)
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxValidatesInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputStore" ng-change="edit()" /> Validates Input
+                <input name="checkboxValidatesInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputStore" ng-change="edit()" ng-init="selected.validatesInputStore = false"/> Validates Input
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxUserInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.userInputStore" ng-change="edit()" /> Accepts User Input
+                <input name="checkboxUserInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.userInputStore" ng-change="edit()" ng-init="selected.userInputStore = false"/> Accepts User Input
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxThirdParty" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.thirdPartyStore" ng-change="edit()" /> Uses Third Party Libraries
+                <input name="checkboxThirdParty" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.thirdPartyStore" ng-change="edit()" ng-init="selected.thirdPartyStore = false"/> Uses Third Party Libraries
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForStore" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForStore" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForStore = false"/> Uses Privilege Levels
             </label>
         </div>
     </div>
 
     <div ng-show="elementType === 'tm.Flow'">
-        <div class="form-group">
-            <label>Protocol</label>
-            <input name="inputProtocol" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.protocol" ng-change="edit()" placeholder="Protocol" />
-        </div>
         <div class="checkbox">
             <label>
                 <input name="checkboxIsEncryptedFlow" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isEncryptedFlow" ng-change="edit()" ng-init="selected.isEncryptedFlow = false"/> Is Encrypted
@@ -317,34 +313,34 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsPublicNetwork" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isPublicNetwork" ng-change="edit()" /> Link Over Public Network
+                <input name="checkboxIsPublicNetwork" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isPublicNetwork" ng-change="edit()" ng-init="selected.isPublicNetwork = false"/> Link Over Public Network
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxBluetoothInterface" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.bluetoothInterface" ng-change="edit()" /> Bluetooth Interface Link
+                <input name="checkboxBluetoothInterface" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.bluetoothInterface" ng-change="edit()" ng-init="selected.bluetoothInterface = false"/> Bluetooth Interface Link
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxWiFiInterface" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.wifiInterface" ng-change="edit()" /> Wi-Fi Interface Link
+                <input name="checkboxWiFiInterface" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.wifiInterface" ng-change="edit()" ng-init="selected.wifiInterface = false"/> Wi-Fi Interface Link
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxCellularInterface" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.cellularInterface" ng-change="edit()" /> Cellular Interface Link
+                <input name="checkboxCellularInterface" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.cellularInterface" ng-change="edit()" ng-init="selected.cellularInterface = false"/> Cellular Interface Link
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxTLS" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesTLS" ng-change="edit()" /> Uses TLS
+                <input name="checkboxTLS" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.usesTLS" ng-change="edit()" ng-init="selected.usesTLS = false"/> Uses TLS
             </label>
         </div>
     </div>
     <div ng-show="elementType === 'tm.MobilePhone'">
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationMobilePhone" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationMobilePhone" ng-change="edit()" ng-init="selected.providesAuthenticationMobilePhone = false" /> Implements or Uses Authentication Mechanism
             </label>
         </div>
         <div class="checkbox">
@@ -387,37 +383,37 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxHasPasswordPolicy" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.hasPasswordPolicyMobilePhone" ng-change="edit()" /> Has a password Policy?
+                <input name="checkboxHasPasswordPolicy" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.hasPasswordPolicyMobilePhone" ng-change="edit()" ng-init="selected.hasPasswordPolicyMobilePhone = false"/> Has a password Policy?
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxSanitizesInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.inputSanitizationMobilePhone" ng-change="edit()" /> Is input sanitized?
+                <input name="checkboxSanitizesInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.inputSanitizationMobilePhone" ng-change="edit()" ng-init="selected.inputSanitizationMobilePhone = false"/> Is input sanitized?
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresMedicalRecords" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesMedicalRecordsMobilePhone" ng-change="edit()" /> Stores personal health information (PHI).
+                <input name="checkboxStoresMedicalRecords" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesMedicalRecordsMobilePhone" ng-change="edit()" ng-init="selected.storesMedicalRecordsMobilePhone = false"/> Stores personal health information (PHI).
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresPI" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesPIMobilePhone" ng-change="edit()" /> Stores personal information (PI).
+                <input name="checkboxStoresPI" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesPIMobilePhone" ng-change="edit()" ng-init="selected.storesPIMobilePhone = false"/> Stores personal information (PI).
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxUserInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.userInputMobilePhone" ng-change="edit()" /> Accepts User Input
+                <input name="checkboxUserInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.userInputMobilePhone" ng-change="edit()" ng-init="selected.userInputMobilePhone = false"/> Accepts User Input
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxValidateInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputMobilePhone" ng-change="edit()" /> Validates Input
+                <input name="checkboxValidateInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.validatesInputMobilePhone" ng-change="edit()" ng-init="selected.validatesInputMobilePhone = false"/> Validates Input
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForMobilePhone" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForMobilePhone" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForMobilePhone = false"/> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -425,17 +421,17 @@
     <div ng-show="elementType === 'tm.SmartWatch'">
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationSmartWatch" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationSmartWatch" ng-change="edit()" ng-init="selected.providesAuthenticationSmartWatch = false" /> Implements or Uses Authentication Mechanism
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogSmartWatch" ng-change="edit()" />Stores Event Logs
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogSmartWatch" ng-change="edit()" ng-init="selected.isALogSmartWatch = false"/>Stores Event Logs
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsSmartWatch" ng-change="edit()" /> Stores Credentials
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsSmartWatch" ng-change="edit()" ng-init="selected.storesCredentialsSmartWatch = false"/> Stores Credentials
             </label>
         </div>
         <div class="checkbox">
@@ -478,17 +474,17 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedSmartWatch" ng-change="edit()" /> Is Signed
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedSmartWatch" ng-change="edit()"  ng-init="selected.isSignedSmartWatch = false"/> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageSmartWatch" ng-change="edit()" /> Remote Storage of Medical Records
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageSmartWatch" ng-change="edit()"  ng-init="selected.remoteMedicalRecordStorageSmartWatch = false"/> Remote Storage of Medical Records
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForSmartWatch" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForSmartWatch" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForSmartWatch = false"/> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -496,17 +492,17 @@
     <div ng-show="elementType === 'tm.Laptop'">
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationLaptop" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationLaptop" ng-change="edit()" ng-init="selected.providesAuthenticationLaptop = false" /> Implements or Uses Authentication Mechanism
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogLaptop" ng-change="edit()" />Stores Event Logs
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogLaptop" ng-change="edit()" ng-init="selected.isALogLaptop = false"/>Stores Event Logs
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsLaptop" ng-change="edit()" /> Stores Credentials
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsLaptop" ng-change="edit()" ng-init="selected.storesCredentialsLaptop = false"/> Stores Credentials
             </label>
         </div>
         <div class="checkbox">
@@ -549,17 +545,17 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedLaptop" ng-change="edit()" /> Is Signed
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedLaptop" ng-change="edit()" ng-init="selected.isSignedLaptop = false"/> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageLaptop" ng-change="edit()" /> Remote Storage of Medical Records
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageLaptop" ng-change="edit()" ng-init="selected.remoteMedicalRecordStorageLaptop = false"/> Remote Storage of Medical Records
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForLaptop" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForLaptop" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForLaptop = false"/> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -567,17 +563,17 @@
     <div ng-show="elementType === 'tm.Tablet'">
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationTablet" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationTablet" ng-change="edit()" ng-init="selected.providesAuthenticationTablet = false" /> Implements or Uses Authentication Mechanism
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogTablet" ng-change="edit()" />Stores Event Logs
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogTablet" ng-change="edit()" ng-init="selected.isALogTablet = false"/>Stores Event Logs
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsTablet" ng-change="edit()" /> Stores Credentials
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsTablet" ng-change="edit()" ng-init="selected.storesCredentialsTablet = false"/> Stores Credentials
             </label>
         </div>
         <div class="checkbox">
@@ -620,17 +616,17 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedTablet" ng-change="edit()" /> Is Signed
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedTablet" ng-change="edit()" ng-init="selected.isSignedTablet = false"/> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageTablet" ng-change="edit()" /> Remote Storage of Medical Records
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageTablet" ng-change="edit()" ng-init="selected.remoteMedicalRecordStorageTablet = false"/> Remote Storage of Medical Records
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForTablet" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForTablet" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForTablet = false"/> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -638,17 +634,17 @@
     <div ng-show="elementType === 'tm.Electrocardiogram'">
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationElectrocardiogram" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationElectrocardiogram" ng-change="edit()" ng-init="selected.providesAuthenticationElectrocardiogram = false" /> Implements or Uses Authentication Mechanism
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogElectrocardiogram" ng-change="edit()" />Stores Event Logs
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogElectrocardiogram" ng-change="edit()" ng-init="selected.isALogElectrocardiogram = false"/>Stores Event Logs
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsElectrocardiogram" ng-change="edit()" /> Stores Credentials
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsElectrocardiogram" ng-change="edit()" ng-init="selected.storesCredentialsElectrocardiogram = false"/> Stores Credentials
             </label>
         </div>
         <div class="checkbox">
@@ -691,17 +687,17 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedElectrocardiogram" ng-change="edit()" /> Is Signed
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedElectrocardiogram" ng-change="edit()"  ng-init="selected.isSignedElectrocardiogram = false"/> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageElectrocardiogram" ng-change="edit()" /> Remote Storage of Medical Records
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStorageElectrocardiogram" ng-change="edit()" ng-init="selected.remoteMedicalRecordStorageElectrocardiogram = false"/> Remote Storage of Medical Records
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForElectrocardiogram" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForElectrocardiogram" ng-change="edit()" placeholder="Privilege level" ng-init="selected.privilegeLevelForElectrocardiogram = false" /> Uses Privilege Levels
             </label>
         </div>
     </div>
@@ -709,17 +705,17 @@
     <div ng-show="elementType === 'tm.Pacemaker'">
         <div class="checkbox">
             <label>
-                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationPacemaker" ng-change="edit()" ng-init="selected.providesAuthentication = false" /> Implements or Uses Authentication Mechanism
+                <input name="checkboxProvidesAuthentication" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.providesAuthenticationPacemaker" ng-change="edit()" ng-init="selected.providesAuthenticationPacemaker = false" /> Implements or Uses Authentication Mechanism
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogPacemaker" ng-change="edit()" />Stores Event Logs
+                <input name="checkboxIsALog" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isALogPacemaker" ng-change="edit()" ng-init="selected.isALogPacemaker = false"/>Stores Event Logs
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsPacemaker" ng-change="edit()" /> Stores Credentials
+                <input name="checkboxStoresCredentials" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.storesCredentialsPacemaker" ng-change="edit()" ng-init="selected.storesCredentialsPacemaker = false" /> Stores Credentials
             </label>
         </div>
         <div class="checkbox">
@@ -762,17 +758,17 @@
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedPacemaker" ng-change="edit()" /> Is Signed
+                <input name="checkboxIsSigned" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.isSignedPacemaker" ng-change="edit()" ng-init="selected.isSignedPacemaker = false" /> Is Signed
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStoragePacemaker" ng-change="edit()" /> Remote Storage of Medical Records
+                <input name="checkboxRemoteMedicalRecordStorage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.remoteMedicalRecordStoragePacemaker" ng-change="edit()" ng-init="selected.remoteMedicalRecordStoragePacemaker = false" /> Remote Storage of Medical Records
             </label>
         </div>
         <div class="checkbox">
             <label>
-            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForPacemaker" ng-change="edit()" placeholder="Privilege level" /> Uses Privilege Levels
+            <input name="privilegeLevelInput" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.privilegeLevelForPacemaker" ng-change="edit()" ng-init="selected.privilegeLevelForPacemaker = false" placeholder="Privilege level" /> Uses Privilege Levels
             </label>
         </div>
     </div>

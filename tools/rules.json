@@ -119,16 +119,6 @@ flow.rule('Logging Practices', [[Element, 'el','el.element.attributes.type == "t
 			description:'Declare Logger Object as Static and Final:It is good programming practice to share a single logger object between all of the instances of a particular class and to use the same logger for the duration of the program.Don\'t Use Multiple Loggers:It is a poor logging practice to use multiple loggers rather than logging levels in a single class.Good logging practice dictates the use of a single logger that supports different logging levels for each class.Don\'t Use System Output Stream:Using System.out or System.err rather than a dedicated logging facility makes it difficult to monitor the behavior of the program. It can also cause log messages accidentally returned to the end users, revealing internal information to attackers. While most programmers go on to learn many nuances and subtleties about Java, a surprising number hang on to this first lesson and never give up on writing messages to standard output using System.out.println().The problem is that writing directly to standard output or standard error is often used as an unstructured form of logging. Structured logging facilities provide features like logging levels, uniform formatting, a logger identifier, timestamps, and, perhaps most critically, the ability to direct the log messages to the right place. When the use of system output streams is jumbled together with the code that uses loggers properly, the result is often a well-kept log that is missing critical information. In addition, using system output streams can also cause log messages accidentally returned to end users, revealing application internal information to attackers.Developers widely accept the need for structured logging, but many continue to use system output streams in their \"pre-production\" development. If the code you are reviewing is past the initial phases of development, use of System.out or System.err may indicate an oversight in the move to a structured logging system.',
 			mitigation:'To mitigate this threat the logging system should be centralized to the program and give different levels of detail, and log/display all security successes or failures.  [17]'});});
 
-flow.rule('Portability', [[Element, 'el','el.element.attributes.type == "tm.Process"'],
-            [Threats, 'threats']
-        ], function (facts) {
-            facts.threats.collection.push({ ruleId: '2.6',
-			title:'Portability',
-			type:'Tampering',
-			status:'Open',
-			severity:'Low',
-			description:'Functions with inconsistent implementations across operating systems and operating system versions cause portability problems.The behavior of functions in this category varies by operating system, and at times, even by operating system version. Implementation differences can include:Slight differences in the way parameters are interpreted, leading to inconsistent results.Some implementations of the function carry significant security risks.The function might not be defined on all platforms.',
-			mitigation:'None for now.  COME BACK'});});
 
 flow.rule('Undefined Behavior', [[Element, 'el','el.element.attributes.type == "tm.Process"|| el.element.attributes.type == "tm.Store"'],
             [Threats, 'threats']
