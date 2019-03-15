@@ -1002,149 +1002,150 @@ angular.module('templates', [])
     '')
   $templateCache.put('diagrams/ThreatEditPane.html',
     '﻿<div data-ng-controller="TrelloController as tc" data-ng-init="getBoards()">\n' +
-      '    <div class="modal-header">\n' +
-      '        <img class="trelloLogo" name="trelloLogo" src="public/content/images/trello-mark-blue.png" alt="Add To Trello" ng-click="toggle()">\n' +
-      '        <h3>{{parameter.heading}}<span class="pull-right" ng-if="parameter.threatTotal"> ({{parameter.threatIndex}} of {{parameter.threatTotal}})</span></h3>\n' +
-      '    </div>\n' +
-      '    <div class="modal-body">\n' +
-      '        <form name="threatEditForm" >\n' +
-      '            <div class="form-group">\n' +
-      '                <label ng-if="!isTrelloActive">Title</label><label ng-if="isTrelloActive">Card Title</label>\n' +
-      '                <input name="titleInput" class="form-control" ng-required="true" type="text" ng-model="parameter.threat.title" placeholder="A short title for the threat" />\n' +
-      '                <div ng-show="!threatEditForm.titleInput.$valid && threatEditForm.titleInput.$dirty">\n' +
-      '                    <p>\n' +
-      '                        <div ng-if="!isTrelloActive" class="alert alert-danger" role="alert">\n' +
-      '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
-      '                            <span class="sr-only">Error:</span>\n' +
-      '                            The threat title cannot be empty.\n' +
-      '                        </div>\n' +
-      '                        <div ng-if="isTrelloActive" class="alert alert-danger" role="alert">\n' +
-      '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
-      '                            <span class="sr-only">Error:</span>\n' +
-      '                            The card title cannot be empty.\n' +
-      '                        </div>\n' +
-      '                    </p>\n' +
-      '                </div>\n' +
-      '            </div>\n' +
-      '            <div ng-if="isTrelloActive" class="form-group">\n' +
-      '                <label>Board</label>\n' +
-      '                <select name="boardInput" class="form-control" ng-required="true"  ng-model="threatEditForm.boardInput" ng-options="board.name for board in boards">\n' +
-      '                </select>\n' +
-      '                <button class="btn btn-primary ng-pristine" ng-disabled="!threatEditForm.boardInput.id" ng-click="goToBoard()">Go To Board</button>\n' +
-      '            </div>\n' +
-      '            <div ng-if="isTrelloActive" class="form-group">\n' +
-      '                <label>List</label>\n' +
-      '                <select name="listInput" ng-disabled="!threatEditForm.boardInput.id" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
-      '                    <option ng-repeat="list in ourLists" value="{{list.id}}">{{list.name}}</option>\n' +
-      '                </select>\n' +
-      '            </div>\n' +
-      '            <div class="form-group">\n' +
-      '                <label>STRIDE threat type</label>\n' +
-      '                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type">\n' +
-      '                    <option selected>Spoofing</option>\n' +
-      '                    <option>Tampering</option>\n' +
-      '                    <option>Repudiation</option>\n' +
-      '                    <option>Information disclosure</option>\n' +
-      '                    <option>Denial of service</option>\n' +
-      '                    <option>Elevation of privilege</option>\n' +
-      '                </select>\n' +
-      '                <div ng-show="!threatEditForm.typeInput.$valid && threatEditForm.typeInput.$dirty">\n' +
-      '                    <p>\n' +
-      '                        <div class="alert alert-danger" role="alert">\n' +
-      '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
-      '                            <span class="sr-only">Error:</span>\n' +
-      '                            The threat type cannot be empty.\n' +
-      '                        </div>\n' +
-      '                    </p>\n' +
-      '                </div>\n' +
-      '            </div>\n' +
-      '            <div class="form-group pull-left">\n' +
-      '                <label>Threat status</label>\n' +
-      '                <div>\n' +
-      '                    <div class="btn-group" name="statusInput">\n' +
-      '                        <label class="btn btn-primary" name="statusInputOpen" ng-model="parameter.threat.status" uib-btn-radio="\'Open\'">Open</label>\n' +
-      '                        <label class="btn btn-primary" name="statusInputMitigated" ng-model="parameter.threat.status" uib-btn-radio="\'Mitigated\'">Mitigated</label>\n' +
-      '                    </div>\n' +
-      '                </div>\n' +
-      '            </div>\n' +
-      '            <div class="form-group pull-right">\n' +
-      '                <label>Severity</label>\n' +
-      '                <div>\n' +
-      '                    <div class="btn-group" required>\n' +
-      '                        <label class="btn btn-default" ng-model="parameter.threat.severity" uib-btn-radio="\'High\'">High</label>\n' +
-      '                        <label class="btn btn-default" ng-model="parameter.threat.severity" uib-btn-radio="\'Medium\'">Medium</label>\n' +
-      '                        <label class="btn btn-default" ng-model="parameter.threat.severity" uib-btn-radio="\'Low\'">Low</label>\n' +
-      '                    </div>\n' +
-      '                </div>\n' +
-      '            </div>\n' +
-      '            <div class="clearfix"></div>\n' +
-      '            <div class="form-group">\n' +
-      '                <label ng-if="!isTrelloActive">Description</label><label ng-if="isTrelloActive">Card Description</label>\n' +
-      '                <textarea name="descriptionInput" ng-model="parameter.threat.description" class="form-control" rows="5" placeholder="Detailed description of the threat"></textarea>\n' +
-      '            </div>\n' +
-      '            <div class="form-group">\n' +
-      '                <label>Mitigations</label>\n' +
-      '                <textarea name="mitigationInput" ng-model="parameter.threat.mitigation" class="form-control" rows="5" placeholder="Mitigations for the threat"></textarea>\n' +
-      '            </div>\n' +
-      '            <div class="form-group">\n' +
-      '                <div class="form-group">\n' +
-      '                    <div class="pull-left padFive">\n' +
-      '                        <label>References</label>\n' +
-      '                    </div>\n' +
-      '                    <div class="pull-right">\n' +
-      '                        <tmt-reference-editor references="parameter.threat.references"></tmt-reference-editor>\n' +
-      '                    </div>\n' +
-      '                    <div class="clearfix"></div>\n' +
-      '                </div>\n' +
-      '                <div class="form-control overflowY" style="height: 100px;">\n' +
-      '                    <div name="referenceInput" ng-repeat="reference in parameter.threat.references">\n' +
-      '                        <div class="form-group form-control" style="border: 1px solid gray;">\n' +
-      '                            <a href="{{reference.link}}" target="_blank">{{reference.name}}</a>\n' +
-      '                        </div>\n' +
-      '                    </div>\n' +
-      '                </div>\n' +
-      '            </div>\n' +
-      '            <div class="form-group">\n' +
-      '                <div class="form-group">\n' +
-      '                    <div class="pull-left padFive">\n' +
-      '                        <label>Code Snippets</label>\n' +
-      '                    </div>\n' +
-      '                    <div class="pull-right">\n' +
-      '                        <tmt-example-editor examples="parameter.threat.examples"></tmt-example-editor>\n' +
-      '                    </div>\n' +
-      '                    <div class="clearfix"></div>\n' +
-      '                </div>\n' +
-      '                <div class="form-control overflowY" style="height: 400px;">\n' +
-      '                    <div ng-repeat="example in parameter.threat.examples">\n' +
-      '                        <div style="border-radius: 25px; padding: 10px; margin: 10px; border: 1px solid gray;">\n' +
-      '                            <label style="color: #507eed">Language: {{example.language.name}}</label>\n' +
-      '                            <p ng-if="example.preText">{{example.preText}}</p>\n' +
-      '                            <pre class=" language-{{example.language.highlightAlias}} line-numbers">\n' +
-      '                                <code tmt-prism-highlight class=" language-{{example.language.highlightAlias}}">{{example.code}}</code>\n' +
-      '                            </pre>\n' +
-      '                            <p ng-if="example.postText">{{example.postText}}</p>\n' +
-      '                        </div>\n' +
-      '                    </div>\n' +
-      '                </div>\n' +
-      '        </form>\n' +
-      '    </div>\n' +
-      '    <div ng-if="isTrelloActive" class="modal-footer">\n' +
-      '        <button class="btn btn-primary" ng-click="addCard(threatEditForm.titleInput.$modelValue, threatEditForm.descriptionInput.$modelValue, threatEditForm.listInput)">Add To Board</button>\n' +
-      '        <button class="btn btn-default" ng-click="toggle()">Cancel</button>\n' +
-      '    </div>\n' +
-      '    <div ng-if="parameter.editing && !isTrelloActive" class="modal-footer">\n' +
-      '        <button class="btn btn-primary" ng-disabled="!threatEditForm.$dirty || !threatEditForm.$valid" ng-click="onOK()">Save</button>\n' +
-      '        <button class="btn btn-default" ng-click="onCancel()">Cancel</button>\n' +
-      '    </div>\n' +
-      '    <div ng-if="!parameter.editing && !isTrelloActive" class="modal-footer">\n' +
-      '        <span class="pull-left">\n' +
-      '            <input type="checkbox" ng-model="applyToAll">\n' +
-      '            Do this for all remaining threats \n' +
-      '        </span>\n' +
-      '        <tmt-modal-close action="onOK(applyToAll)" new-class="fade-left" template-url="diagrams/modalAccept.html"></tmt-modal-close>\n' +
-      '        <tmt-modal-close action="onCancel(applyToAll)" new-class="fade-down" template-url="diagrams/modalIgnore.html"></tmt-modal-close>\n' +
-      '    </div>\n' +
-      '</div>\n' +
+    '    <div class="modal-header">\n' +
+    '        <img class="trelloLogo" name="trelloLogo" src="public/content/images/trello-mark-blue.png" alt="Add To Trello" ng-click="toggle()">\n' +
+    '        <h3>{{parameter.heading}}<span class="pull-right" ng-if="parameter.threatTotal"> ({{parameter.threatIndex}} of {{parameter.threatTotal}})</span></h3>\n' +
+    '    </div>\n' +
+    '    <div class="modal-body">\n' +
+    '        <form name="threatEditForm" >\n' +
+    '            <div class="form-group">\n' +
+    '                <label ng-if="!isTrelloActive">Title</label><label ng-if="isTrelloActive">Card Title</label>\n' +
+    '                <input name="titleInput" class="form-control" ng-required="true" type="text" ng-model="parameter.threat.title" placeholder="A short title for the threat" />\n' +
+    '                <div ng-show="!threatEditForm.titleInput.$valid && threatEditForm.titleInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                        <div ng-if="!isTrelloActive" class="alert alert-danger" role="alert">\n' +
+    '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                            <span class="sr-only">Error:</span>\n' +
+    '                            The threat title cannot be empty.\n' +
+    '                        </div>\n' +
+    '                        <div ng-if="isTrelloActive" class="alert alert-danger" role="alert">\n' +
+    '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                            <span class="sr-only">Error:</span>\n' +
+    '                            The card title cannot be empty.\n' +
+    '                        </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div ng-if="isTrelloActive" class="form-group">\n' +
+    '                <label>Board</label>\n' +
+    '                <select name="boardInput" class="form-control" ng-required="true"  ng-model="threatEditForm.boardInput" ng-options="board.name for board in boards">\n' +
+    '                </select>\n' +
+    '                <button class="btn btn-primary ng-pristine" ng-disabled="!threatEditForm.boardInput.id" ng-click="goToBoard()">Go To Board</button>\n' +
+    '            </div>\n' +
+    '            <div ng-if="isTrelloActive" class="form-group">\n' +
+    '                <label>List</label>\n' +
+    '                <select ng-disabled="threatEditForm.boardInput.name!=\'Choose Board\'" name="listInput" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
+    '                    <option ng-repeat="list in ourLists" value="{{list}}">{{list.name}}</option>\n' +
+    '                </select>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>STRIDE threat type</label>\n' +
+    '                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type">\n' +
+    '                    <option selected>Spoofing</option>\n' +
+    '                    <option>Tampering</option>\n' +
+    '                    <option>Repudiation</option>\n' +
+    '                    <option>Information disclosure</option>\n' +
+    '                    <option>Denial of service</option>\n' +
+    '                    <option>Elevation of privilege</option>\n' +
+    '                </select>\n' +
+    '                <div ng-show="!threatEditForm.typeInput.$valid && threatEditForm.typeInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                        <div class="alert alert-danger" role="alert">\n' +
+    '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                            <span class="sr-only">Error:</span>\n' +
+    '                            The threat type cannot be empty.\n' +
+    '                        </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group pull-left">\n' +
+    '                <label>Threat status</label>\n' +
+    '                <div>\n' +
+    '                    <div class="btn-group" name="statusInput">\n' +
+    '                        <label class="btn btn-primary" name="statusInputOpen" ng-model="parameter.threat.status" uib-btn-radio="\'Open\'">Open</label>\n' +
+    '                        <label class="btn btn-primary" name="statusInputMitigated" ng-model="parameter.threat.status" uib-btn-radio="\'Mitigated\'">Mitigated</label>\n' +
+    '                    </div>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group pull-right">\n' +
+    '                <label>Severity</label>\n' +
+    '                <div>\n' +
+    '                    <div class="btn-group" required>\n' +
+    '                        <label class="btn btn-default" ng-model="parameter.threat.severity" uib-btn-radio="\'High\'">High</label>\n' +
+    '                        <label class="btn btn-default" ng-model="parameter.threat.severity" uib-btn-radio="\'Medium\'">Medium</label>\n' +
+    '                        <label class="btn btn-default" ng-model="parameter.threat.severity" uib-btn-radio="\'Low\'">Low</label>\n' +
+    '                    </div>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="clearfix"></div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label ng-if="!isTrelloActive">Description</label><label ng-if="isTrelloActive">Card Description</label>\n' +
+    '                <textarea name="descriptionInput" ng-model="parameter.threat.description" class="form-control" rows="5" placeholder="Detailed description of the threat"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Mitigations</label>\n' +
+    '                <textarea name="mitigationInput" ng-model="parameter.threat.mitigation" class="form-control" rows="5" placeholder="Mitigations for the threat"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <div class="form-group">\n' +
+    '                    <div class="pull-left padFive">\n' +
+    '                        <label>References</label>\n' +
+    '                    </div>\n' +
+    '                    <div class="pull-right">\n' +
+    '                        <tmt-reference-editor references="parameter.threat.references"></tmt-reference-editor>\n' +
+    '                    </div>\n' +
+    '                    <div class="clearfix"></div>\n' +
+    '                </div>\n' +
+    '                <div class="form-control overflowY" style="height: 100px;">\n' +
+    '                    <div name="referenceInput" ng-repeat="reference in parameter.threat.references">\n' +
+    '                        <div class="form-group form-control" style="border: 1px solid gray;">\n' +
+    '                            <a href="{{reference.link}}" target="_blank">{{reference.name}}</a>\n' +
+    '                        </div>\n' +
+    '                    </div>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <div class="form-group">\n' +
+    '                    <div class="pull-left padFive">\n' +
+    '                        <label>Code Snippets</label>\n' +
+    '                    </div>\n' +
+    '                    <div class="pull-right">\n' +
+    '                        <tmt-example-editor examples="parameter.threat.examples"></tmt-example-editor>\n' +
+    '                    </div>\n' +
+    '                    <div class="clearfix"></div>\n' +
+    '                </div>\n' +
+    '                <div class="form-control overflowY" style="height: 400px;">\n' +
+    '                    <div ng-repeat="example in parameter.threat.examples">\n' +
+    '                        <div style="border-radius: 25px; padding: 10px; margin: 10px; border: 1px solid gray;">\n' +
+    '                            <label style="color: #507eed">Language: {{example.language.name}}</label>\n' +
+    '                            <p ng-if="example.preText">{{example.preText}}</p>\n' +
+    '                            <pre class=" language-{{example.language.highlightAlias}} line-numbers">\n' +
+    '                                <code tmt-prism-highlight class=" language-{{example.language.highlightAlias}}">{{example.code}}</code>\n' +
+    '                            </pre>\n' +
+    '                            <p ng-if="example.postText">{{example.postText}}</p>\n' +
+    '                        </div>\n' +
+    '                    </div>\n' +
+    '                </div>\n' +
+    '            </div>\n' +
+    '        </form>\n' +
+    '    </div>\n' +
+    '    <div ng-if="isTrelloActive" class="modal-footer">\n' +
+    '        <button class="btn btn-primary" ng-disabled="!threatEditForm.listInput.id || !threatEditForm.boardInput || !threatEditForm.titleInput.$modelValue" ng-click="addCard(threatEditForm.titleInput.$modelValue, threatEditForm.descriptionInput.$modelValue, threatEditForm.listInput.id)">Add To Board</button>\n' +
+    '        <button class="btn btn-default" ng-click="toggle()">Cancel</button>\n' +
+    '    </div>\n' +
+    '    <div ng-if="parameter.editing && !isTrelloActive" class="modal-footer">\n' +
+    '        <button class="btn btn-primary" ng-disabled="!threatEditForm.$dirty || !threatEditForm.$valid" ng-click="onOK()">Save</button>\n' +
+    '        <button class="btn btn-default" ng-click="onCancel()">Cancel</button>\n' +
+    '    </div>\n' +
+    '    <div ng-if="!parameter.editing && !isTrelloActive" class="modal-footer">\n' +
+    '        <span class="pull-left">\n' +
+    '            <input type="checkbox" ng-model="applyToAll">\n' +
+    '            Do this for all remaining threats \n' +
+    '        </span>\n' +
+    '        <tmt-modal-close action="onOK(applyToAll)" new-class="fade-left" template-url="diagrams/modalAccept.html"></tmt-modal-close>\n' +
+    '        <tmt-modal-close action="onCancel(applyToAll)" new-class="fade-down" template-url="diagrams/modalIgnore.html"></tmt-modal-close>\n' +
+    '    </div>\n' +
+    '</div>\n' +
     '')
   $templateCache.put('diagrams/ThreatSummaryPane.html',
     '﻿<ul id="threatSummaryPane" class="list-group">\n' +
@@ -1226,6 +1227,9 @@ angular.module('templates', [])
     '                    <th ng-click="vm.sort(\'name\')">COMPONENT\n' +
     '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'name\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
     '                    </th>\n' +
+    '                    <th ng-click="vm.sort(\'title\')">TITLE\n' +
+    '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'title\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                    </th>\n' +
     '                    <th ng-click="vm.sort(\'type\')">THREAT TYPE\n' +
     '                        <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'type\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
     '                    </th>\n' +
@@ -1253,6 +1257,7 @@ angular.module('templates', [])
     '                            </button>\n' +
     '                        </div>\n' +
     '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].title}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].description}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
@@ -1270,18 +1275,21 @@ angular.module('templates', [])
     '                            </button>\n' +
     '                        </div>\n' +
     '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].title}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].description}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
     '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>\n' +
     '                </tr>\n' +
     '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.title}}</span></td>\n' +
     '                    <td><span>{{threat.type}}</span></td>\n' +
     '                    <td><span>{{threat.description}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +
     '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[threat.severity]">{{threat.severity}}</span></td>\n' +
     '                </tr>\n' +
     '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.title}}</span></td>\n' +
     '                    <td><span>{{threat.type}}</span></td>\n' +
     '                    <td><span>{{threat.description}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +
@@ -1297,6 +1305,9 @@ angular.module('templates', [])
     '                <th>No.</th>\n' +
     '                <th ng-click="vm.sort(\'name\')">COMPONENT\n' +
     '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'name\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
+    '                </th>\n' +
+    '                <th ng-click="vm.sort(\'title\')">TITLE\n' +
+    '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'title\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
     '                </th>\n' +
     '                <th ng-click="vm.sort(\'type\')">THREAT TYPE\n' +
     '                    <span class="glyphicon sort-icon" ng-show="vm.sortKey==\'type\'" ng-class="{\'glyphicon-chevron-up\':vm.reverse,\'glyphicon-chevron-down\':!vm.reverse}"></span>\n' +
@@ -1325,6 +1336,7 @@ angular.module('templates', [])
     '                            </button>\n' +
     '                        </div>\n' +
     '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].title}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].mitigation}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
@@ -1342,18 +1354,21 @@ angular.module('templates', [])
     '                            </button>\n' +
     '                        </div>\n' +
     '                    </td>\n' +
+    '                    <td><span>{{element.threats[0].title}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].type}}</span></td>\n' +
     '                    <td><span>{{element.threats[0].mitigation}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>\n' +
     '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>\n' +
     '                </tr>\n' +
     '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.title}}</span></td>\n' +
     '                    <td><span>{{threat.type}}</span></td>\n' +
     '                    <td><span>{{threat.mitigation}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +
     '                    <td><span ng-class="{Low:\'fa fa-circle severity-low\', Medium:\'fa fa-circle severity-medium\', High:\'fa fa-circle severity-high\'}[threat.severity]">{{threat.severity}}</span></td>\n' +
     '                </tr>\n' +
     '                <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">\n' +
+    '                    <td><span>{{threat.title}}</span></td>\n' +
     '                    <td><span>{{threat.type}}</span></td>\n' +
     '                    <td><span>{{threat.mitigation}}</span></td>\n' +
     '                    <td><span ng-class="{Open:\'severity-high fa fa-exclamation-triangle\', Mitigated:\'severity-low fa fa-check\'}[threat.status]">{{threat.status}}</span></td>\n' +

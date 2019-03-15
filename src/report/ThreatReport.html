@@ -11,6 +11,9 @@
                     <th ng-click="vm.sort('name')">COMPONENT
                         <span class="glyphicon sort-icon" ng-show="vm.sortKey=='name'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
                     </th>
+                    <th ng-click="vm.sort('title')">TITLE
+                        <span class="glyphicon sort-icon" ng-show="vm.sortKey=='title'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                    </th>
                     <th ng-click="vm.sort('type')">THREAT TYPE
                         <span class="glyphicon sort-icon" ng-show="vm.sortKey=='type'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
                     </th>
@@ -38,6 +41,7 @@
                             </button>
                         </div>
                     </td>
+                    <td><span>{{element.threats[0].title}}</span></td>
                     <td><span>{{element.threats[0].type}}</span></td>
                     <td><span>{{element.threats[0].description}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
@@ -55,18 +59,21 @@
                             </button>
                         </div>
                     </td>
+                    <td><span>{{element.threats[0].title}}</span></td>
                     <td><span>{{element.threats[0].type}}</span></td>
                     <td><span>{{element.threats[0].description}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
                     <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>
                 </tr>
                 <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.title}}</span></td>
                     <td><span>{{threat.type}}</span></td>
                     <td><span>{{threat.description}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
                     <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[threat.severity]">{{threat.severity}}</span></td>
                 </tr>
                 <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.title}}</span></td>
                     <td><span>{{threat.type}}</span></td>
                     <td><span>{{threat.description}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
@@ -82,6 +89,9 @@
                 <th>No.</th>
                 <th ng-click="vm.sort('name')">COMPONENT
                     <span class="glyphicon sort-icon" ng-show="vm.sortKey=='name'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
+                </th>
+                <th ng-click="vm.sort('title')">TITLE
+                    <span class="glyphicon sort-icon" ng-show="vm.sortKey=='title'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
                 </th>
                 <th ng-click="vm.sort('type')">THREAT TYPE
                     <span class="glyphicon sort-icon" ng-show="vm.sortKey=='type'" ng-class="{'glyphicon-chevron-up':vm.reverse,'glyphicon-chevron-down':!vm.reverse}"></span>
@@ -110,6 +120,7 @@
                             </button>
                         </div>
                     </td>
+                    <td><span>{{element.threats[0].title}}</span></td>
                     <td><span>{{element.threats[0].type}}</span></td>
                     <td><span>{{element.threats[0].mitigation}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
@@ -127,18 +138,21 @@
                             </button>
                         </div>
                     </td>
+                    <td><span>{{element.threats[0].title}}</span></td>
                     <td><span>{{element.threats[0].type}}</span></td>
                     <td><span>{{element.threats[0].mitigation}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[element.threats[0].status]">{{element.threats[0].status}}</span></td>
                     <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[element.threats[0].severity]">{{element.threats[0].severity}}</span></td>
                 </tr>
                 <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$odd" class="odd" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.title}}</span></td>
                     <td><span>{{threat.type}}</span></td>
                     <td><span>{{threat.mitigation}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
                     <td><span ng-class="{Low:'fa fa-circle severity-low', Medium:'fa fa-circle severity-medium', High:'fa fa-circle severity-high'}[threat.severity]">{{threat.severity}}</span></td>
                 </tr>
                 <tr ng-repeat="threat in element.threats" ng-if="$index > 0 && $parent.$even" class="even" ng-click="vm.editThreat(element.threats[$index])">
+                    <td><span>{{threat.title}}</span></td>
                     <td><span>{{threat.type}}</span></td>
                     <td><span>{{threat.mitigation}}</span></td>
                     <td><span ng-class="{Open:'severity-high fa fa-exclamation-triangle', Mitigated:'severity-low fa fa-check'}[threat.status]">{{threat.status}}</span></td>
