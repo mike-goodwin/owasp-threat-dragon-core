@@ -19,7 +19,7 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
     vm.editThreat = editThreat;
     vm.onAddNewThreat = onAddNewThreat;
     vm.getScopedNonFlowOrBoundaryElements = getScopedNonFlowOrBoundaryElements;
-
+    vm.downloadAsPdf = downloadAsPdf();
     activate();
 
     function activate() {
@@ -108,5 +108,71 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
     function isBoundaryElement(element) {
         return element.attributes.type === 'tm.Boundary';
     }
+
+    function downloadAsPdf(){
+        log("Downloading as PDF");
+        var elements = getScopedNonFlowOrBoundaryElements();
+
+        var docDefinition = {
+            content: [
+                {
+                text: "THREAT DRAGON",
+                }
+            ]
+        };
+
+        /*
+        var docDefinition = {
+            content: [
+                {text: 'Threat Report From OWASP Threat Dragon', pageBreak: 'before', style: 'Header'},
+                {table: {
+                    headerRows: 1,
+                    body: [
+                        [{text:"No.", style:"tg"},{text:"COMPONENT", style:'tg'},{text:'THREAT TYPE', style:'tg'},{text:'DESCRIPTION', style:'tg'}, {text:'STATUS', style:'tg'},{text:'SEVERITY', style:'tg'} ]
+                    ]
+                }}
+            ],
+            styles: {
+                header: {
+                    fontSize: 26
+                },
+                tg: {
+                    //border-collapse: collapse,
+                    //border-spacing: 0,
+                    //border-color: #aabcfe,
+                    //font-family: Arial, sans-serif,
+                    fontSize: '14px',
+                    padding: "10px 5px",
+                    //border-style: solid,
+                    //border-width: 1px,
+                    overflow: 'hidden',
+                    //word-break: normal,
+                    //border-color: #aabcfe,
+                    color: "#669",
+                    fillColor: "#094490"
+                },
+                noHover: {
+                        background: '#FCF',
+                        alignment: 'left'
+                        //vertical-align: center;
+                }
+            }
+        };
+        */
+        /*
+        var i=1;
+        for(var element of elements){
+            docDefinition.content.table.body.push([{rowSpan: element.threats.length > 0 ? element.threats.length : 1, text: i, style:'noHover'},{rowSpan: element.threats.length > 0 ? element.threats.length : 1, text: element.name, style:'noHover'}, {text: element.threats[0].type, style: 'noHover'}, {text: element.threats[0].description, style: 'noHover'}, {text: element.threat[0].status, style:'noHover'}, {text: element.threat[0].severity, style: 'noHover'}]);
+            for(var threat of element.threats){
+                docDefinition.content.table.body.push(["", "", threat.type, theat.description, threat.status, threat.severity]);
+            }
+            i++;
+        }
+        */
+
+        pdfMake.createPdf(docDefinition).download("ThreatReport.pdf");
+
+    }
+
 }
 module.exports = ThreatReport;

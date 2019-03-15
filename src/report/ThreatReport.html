@@ -2,6 +2,7 @@
     <div class="tab">
         <button class="tablinks" id="defaultTab" ng-click="vm.activateTab($event, 'Threats')">Threats</button>
         <button class="tablinks" ng-click="vm.activateTab($event, 'Countermeasures')">Countermeasures</button>
+        <button class="downloadButton" ng-click="vm.downloadAsPDF($event)"><i class="glyphicon glyphicon-download"></i> Download As PDF</button>
     </div>
     <div id="Threats" class="tabcontent">
         <table class="tg" style="width:100%">

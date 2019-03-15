@@ -1217,6 +1217,7 @@ angular.module('templates', [])
     '    <div class="tab">\n' +
     '        <button class="tablinks" id="defaultTab" ng-click="vm.activateTab($event, \'Threats\')">Threats</button>\n' +
     '        <button class="tablinks" ng-click="vm.activateTab($event, \'Countermeasures\')">Countermeasures</button>\n' +
+    '        <button class="downloadButton" ng-click="vm.downloadAsPDF($event)"><i class="glyphicon glyphicon-download"></i>Download As PDF</button>\n' +
     '    </div>\n' +
     '    <div id="Threats" class="tabcontent">\n' +
     '        <table class="tg" style="width:100%">\n' +
