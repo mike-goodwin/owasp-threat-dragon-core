@@ -500,7 +500,7 @@ angular.module('templates', [])
     '            <label>\n' +
     '                <input name="checkboxProgrammingLanguage" ng-disabled="selected.outOfScope" type="checkbox" ng-model="selected.programmingLanguageMobilePhone" ng-change="edit()" ng-init="selected.programmingLanguageMobilePhone = false"/> Programming Language\n' +
     '            </label>\n' +
-    '            <select id ="checkboxProgrammingLanguageforMobilePhone" ng-if="selected.programmingLanguageMobilePhone">\n' +
+    '            <select id ="checkboxProgrammingLanguageMobilePhone" ng-if="selected.programmingLanguageMobilePhone">\n' +
     '                <option value="c" selected>C</option>\n' +
     '                <option value="c++">C++</option>\n' +
     '                <option value="c#">c#</option>\n' +
