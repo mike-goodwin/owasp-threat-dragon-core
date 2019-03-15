@@ -1166,10 +1166,10 @@ angular.module('templates', [])
     '    <div class="modal-body">\n' +
     '        You have unsaved changes and if you leave this page they will be lost!\n' +
     '        Press \'Cancel\' to stay where you are and keep the unsaved changes,\n' +
-    '        or press \'Leave\' to leave and lose the unsaved changes.\n' +
+    '        or press \'Proceed\' to leave and lose the unsaved changes.\n' +
     '    </div>\n' +
     '    <div class="modal-footer">\n' +
-    '        <button id="buttonOK" class="btn btn-default" ng-click="onOK()">Leave</button>\n' +
+    '        <button id="buttonOK" class="btn btn-default" ng-click="onOK()">Proceed</button>\n' +
     '        <button id="buttonCancel" class="btn btn-primary" ng-click="onCancel()">Cancel</button>\n' +
     '    </div>\n' +
     '</div>\n' +
