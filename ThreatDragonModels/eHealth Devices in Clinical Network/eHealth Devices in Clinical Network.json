@@ -24,34 +24,6 @@
         "diagramJson": {
           "cells": [
             {
-              "type": "tm.Actor",
-              "size": {
-                "width": 160,
-                "height": 80
-              },
-              "position": {
-                "x": 77,
-                "y": 681
-              },
-              "angle": 0,
-              "id": "01641559-690e-43cc-acfe-bc17790321e5",
-              "z": 1,
-              "hasOpenThreats": false,
-              "providesAuthentication": true,
-              "desktopDevice": true,
-              "attrs": {
-                ".element-shape": {
-                  "class": "element-shape hasNoOpenThreats isInScope"
-                },
-                "text": {
-                  "text": "Windows 10 Health\nClinic PC"
-                },
-                ".element-text": {
-                  "class": "element-text hasNoOpenThreats isInScope"
-                }
-              }
-            },
-            {
               "type": "tm.Process",
               "size": {
                 "width": 100,
@@ -64,28 +36,38 @@
               "angle": 0,
               "id": "325d6101-f63d-48b0-9783-e97171a7a310",
               "z": 2,
-              "hasOpenThreats": true,
-              "isAIPSecHostProcess": true,
+              "hasOpenThreats": false,
+              "isAIPSecHostProcess": false,
               "isASwitchingProcess": true,
               "privilegeLevel": "Restricted",
-              "threats": [
-                {
-                  "status": "Open",
-                  "severity": "Medium",
-                  "title": "MAC Address Flooding",
-                  "type": "Spoofing",
-                  "description": "An attacker may fill the L2 switches MAC address table resulting in transparent broadcast of data to all ports."
-                }
-              ],
+              "threats": [],
+              "privilegeLevelForProcess": false,
+              "isEncryptedProcess": false,
+              "programmingLanguageProcess": false,
+              "isAWebApplication": false,
+              "isANetworkSwitch": false,
+              "isARoutingProcess": false,
+              "isAWirelessAccessProcess": false,
+              "isAConfigurationProcess": false,
+              "providesAuthenticationProcess": false,
+              "isALogProcess": false,
+              "usesExternalResourcesProcess": false,
+              "usesResourcesDirectlyProcess": false,
+              "validatesCertProcess": false,
+              "localAccessProcess": false,
+              "validatesInputProcess": false,
+              "validateXMLProcess": false,
+              "userInputProcess": false,
+              "thirdPartyProcess": false,
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasOpenThreats isInScope"
+                  "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
                   "text": "CISCO CatL2\nAccess Switch"
                 },
                 ".element-text": {
-                  "class": "element-text hasOpenThreats isInScope"
+                  "class": "element-text hasNoOpenThreats isInScope"
                 }
               }
             },
@@ -219,41 +201,6 @@
               }
             },
             {
-              "type": "tm.Flow",
-              "smooth": true,
-              "source": {
-                "id": "01641559-690e-43cc-acfe-bc17790321e5"
-              },
-              "target": {
-                "id": "325d6101-f63d-48b0-9783-e97171a7a310"
-              },
-              "vertices": [],
-              "id": "eb5ccded-f073-41c0-aa1c-e9d456326fd2",
-              "labels": [
-                {
-                  "position": 0.5,
-                  "attrs": {
-                    "text": {
-                      "text": "TCP/IP",
-                      "font-weight": "400",
-                      "font-size": "small"
-                    }
-                  }
-                }
-              ],
-              "z": 7,
-              "hasOpenThreats": false,
-              "protocol": "",
-              "attrs": {
-                ".marker-target": {
-                  "class": "marker-target hasNoOpenThreats isInScope"
-                },
-                ".connection": {
-                  "class": "connection hasNoOpenThreats isInScope"
-                }
-              }
-            },
-            {
               "type": "tm.Process",
               "size": {
                 "width": 100,
@@ -266,27 +213,36 @@
               "angle": 0,
               "id": "b064aa07-6650-4252-a717-2a93466807c8",
               "z": 8,
-              "hasOpenThreats": true,
-              "isAWirelessAccessProcess": true,
-              "threats": [
-                {
-                  "status": "Open",
-                  "severity": "Medium",
-                  "title": "WPA2 User Threat",
-                  "type": "Information disclosure",
-                  "description": "If many users access a WPA2 Wi-Fi network with the same primary password, it is possible through handshake sniffing to crack WPA2.",
-                  "mitigation": "Set up multiple user acounts within the Wi-Fi network."
-                }
-              ],
+              "hasOpenThreats": false,
+              "isAWirelessAccessProcess": false,
+              "threats": [],
+              "privilegeLevelForProcess": false,
+              "isEncryptedProcess": false,
+              "programmingLanguageProcess": false,
+              "isAWebApplication": false,
+              "isANetworkSwitch": false,
+              "isARoutingProcess": false,
+              "isAConfigurationProcess": false,
+              "isAIPSecHostProcess": false,
+              "providesAuthenticationProcess": false,
+              "isALogProcess": false,
+              "usesExternalResourcesProcess": false,
+              "usesResourcesDirectlyProcess": false,
+              "validatesCertProcess": false,
+              "localAccessProcess": false,
+              "validatesInputProcess": false,
+              "validateXMLProcess": false,
+              "userInputProcess": false,
+              "thirdPartyProcess": false,
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasOpenThreats isInScope"
+                  "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
                   "text": "Guest Wi-Fi\nAccess Point"
                 },
                 ".element-text": {
-                  "class": "element-text hasOpenThreats isInScope"
+                  "class": "element-text hasNoOpenThreats isInScope"
                 }
               }
             },
@@ -964,42 +920,23 @@
                 "height": 80
               },
               "position": {
-                "x": 67,
+                "x": 70,
                 "y": 170
               },
               "angle": 0,
               "id": "d7866423-c28e-4aee-834a-e0bd3f5a5e01",
               "z": 33,
-              "hasOpenThreats": true,
-              "threats": [
-                {
-                  "ruleId": "2.7",
-                  "title": "Undefined Behavior",
-                  "type": "Tampering",
-                  "status": "Open",
-                  "severity": "Low",
-                  "description": "The behavior of this function is undefined unless its control parameter is set to a specific value.The Linux Standard Base Specification 2.0.1 for libc places constraints on the arguments to some internal functions.",
-                  "mitigation": "None for now.  COME BACK"
-                },
-                {
-                  "ruleId": "2.8",
-                  "title": "Unreleased Resource",
-                  "type": "Denial of service",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "Most unreleased resource issues result in general software reliability problems, but if an attacker can intentionally trigger a resource leak, the attacker might be able to launch a denial of service attack by depleting the resource pool.Resource leaks have at least two common causes:Error conditions and other exceptional circumstances.Confusion over which part of the program is responsible for releasing the resource.",
-                  "mitigation": "To mitigate this threat, the programming language used to program the desired program, should not allow this threat to occur.  Another suggestion is to free all resources that have been allocated and be consistent in terms of how memory is allocated and de-allocated.  To furthermore mitigate this threat, is to release all the member components of a given object [27]. "
-                }
-              ],
+              "hasOpenThreats": false,
+              "threats": [],
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasOpenThreats isInScope"
+                  "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
                   "text": "Electronic Health\nRecords"
                 },
                 ".element-text": {
-                  "class": "element-text hasOpenThreats isInScope"
+                  "class": "element-text hasNoOpenThreats isInScope"
                 }
               }
             },
@@ -1254,46 +1191,6 @@
               "type": "tm.Flow",
               "smooth": true,
               "source": {
-                "id": "40bcff5f-e039-4ba6-9426-7288beb5255b"
-              },
-              "target": {
-                "id": "b064aa07-6650-4252-a717-2a93466807c8"
-              },
-              "vertices": [],
-              "id": "34b63091-13ee-4c6f-97c4-599d1f5d03e2",
-              "labels": [
-                {
-                  "position": 0.5,
-                  "attrs": {
-                    "text": {
-                      "text": "Wi-Fi",
-                      "font-weight": "400",
-                      "font-size": "small"
-                    }
-                  }
-                }
-              ],
-              "z": 43,
-              "hasOpenThreats": false,
-              "wifiInterface": false,
-              "isEncryptedFlow": false,
-              "isPublicNetwork": false,
-              "bluetoothInterface": false,
-              "cellularInterface": false,
-              "usesTLS": false,
-              "attrs": {
-                ".marker-target": {
-                  "class": "marker-target hasNoOpenThreats isInScope"
-                },
-                ".connection": {
-                  "class": "connection hasNoOpenThreats isInScope"
-                }
-              }
-            },
-            {
-              "type": "tm.Flow",
-              "smooth": true,
-              "source": {
                 "id": "c5f10c62-1aaf-4816-ac46-fe8fbcf93dd7"
               },
               "target": {
@@ -1519,96 +1416,14 @@
               }
             },
             {
-              "type": "tm.Process",
-              "size": {
-                "width": 100,
-                "height": 100
-              },
-              "position": {
-                "x": 363,
-                "y": 688
-              },
-              "angle": 0,
-              "id": "40bcff5f-e039-4ba6-9426-7288beb5255b",
-              "z": 51,
-              "hasOpenThreats": true,
-              "threats": [
-                {
-                  "ruleId": "1.5",
-                  "title": "Least Privilege Violation",
-                  "type": "Elevation of privilege",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "The elevated privilege level required to perform operations such as chroot() should be dropped immediately after the operation is performed.When a program calls a privileged function, such as chroot(), it must first acquire root privilege. As soon as the privileged operation has completed, the program should drop root privilege and return to the privilege level of the invoking user.",
-                  "mitigation": "There are several ways to mitigate the least privilege violation:Split an individual components into several components, and assign lower privilege levels to those components [8]. Identify areas in the system which have that elevated privilege and use those  components instead to accomplish the task [8]. Create a separate environment within the system/program where only within that area or environment has an elevated privilege [8]. "
-                },
-                {
-                  "ruleId": "2.1",
-                  "title": "Double Free Error",
-                  "type": "Tampering",
-                  "status": "Open",
-                  "severity": "High",
-                  "description": "Double free errors occur when free() is called more than once with the same memory address as an argument.Calling free() twice on the same value can lead to memory leak. When a program calls free() twice with the same argument, the program's memory management data structures become corrupted and could allow a malicious user to write values in arbitrary memory spaces. This corruption can cause the program to crash or, in some circumstances, alter the execution flow. By overwriting registers or memory spaces, an attacker can trick the program into executing code of his/her own choosing, often resulting in an interactive shell with elevated permissions.When a buffer is free(), a linked list of free buffers is read to rearrange and combine the chunks of free memory (to be able to allocate larger buffers in the future). These chunks are laid out in a double linked list which points to previous and next chunks. Unlinking an unused buffer (which is what happens when free() is called) could allow an attacker to write arbitrary values in memory; essentially overwriting valuable registers, calling shellcode from its own buffer.",
-                  "mitigation": "To mitigate this threat, each allocation should only be freed once.  Once the memory has been allocated, the pointer should be set to NULL to ensure the pointer cannot be freed again.  In complicated error conditions, ensure that clean-up routines represent the state of allocation.  If the language is object oriented, that object destructors delete each allocation of memory one time only [11]. "
-                },
-                {
-                  "ruleId": "2.6",
-                  "title": "Portability",
-                  "type": "Tampering",
-                  "status": "Open",
-                  "severity": "Low",
-                  "description": "Functions with inconsistent implementations across operating systems and operating system versions cause portability problems.The behavior of functions in this category varies by operating system, and at times, even by operating system version. Implementation differences can include:Slight differences in the way parameters are interpreted, leading to inconsistent results.Some implementations of the function carry significant security risks.The function might not be defined on all platforms.",
-                  "mitigation": "None for now.  COME BACK"
-                },
-                {
-                  "ruleId": "2.9",
-                  "title": "Use of Obsolete Methods",
-                  "type": "Denial of service",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "The use of deprecated or obsolete functions may indicate neglected code.As programming languages evolve, functions occasionally become obsolete due to:Advances in the languageImproved understanding of how operations should be performed effectively and securelyChanges in the conventions that govern certain operationsFunctions that are removed are usually replaced by newer counterparts that perform the same task in some different and hopefully improved way.Refer to the documentation for this function in order to determine why it is deprecated or obsolete and to learn about alternative ways to achieve the same functionality. The remainder of this text discusses general problems that stem from the use of deprecated or obsolete functions.",
-                  "mitigation": "To mitigate this threat, the documentation for the program should be referred to, to determine the reason it is deprecated and to determine alternatives to using those methods, which may pose not only a function concern, but also a security concern.  [26]Cryptography"
-                },
-                {
-                  "ruleId": "3.1",
-                  "title": "Sensitive Parameters in URL",
-                  "type": "Information disclosure",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "Information exposure through query strings in URL is when sensitive data is passed to parameters in the URL. This allows attackers to obtain sensitive data such as usernames, passwords, tokens (authX), database details, and any other potentially sensitive data. Simply using HTTPS does not resolve this vulnerability. A very common example is in GET requests.",
-                  "mitigation": "To mitigate this threat, it is recommended to use a POST method, as those parameters that are passed in through the URL are not saved, and therefore cannot be exposed.  [28]"
-                },
-                {
-                  "ruleId": "2.8",
-                  "title": "Unreleased Resource",
-                  "type": "Denial of service",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "Most unreleased resource issues result in general software reliability problems, but if an attacker can intentionally trigger a resource leak, the attacker might be able to launch a denial of service attack by depleting the resource pool.Resource leaks have at least two common causes:Error conditions and other exceptional circumstances.Confusion over which part of the program is responsible for releasing the resource.",
-                  "mitigation": "To mitigate this threat, the programming language used to program the desired program, should not allow this threat to occur.  Another suggestion is to free all resources that have been allocated and be consistent in terms of how memory is allocated and de-allocated.  To furthermore mitigate this threat, is to release all the member components of a given object [27]. "
-                }
-              ],
-              "attrs": {
-                ".element-shape": {
-                  "class": "element-shape hasOpenThreats isInScope"
-                },
-                "text": {
-                  "text": "Google Pixel\nMobile Device"
-                },
-                ".element-text": {
-                  "class": "element-text hasOpenThreats isInScope"
-                }
-              }
-            },
-            {
               "type": "tm.SmartWatch",
               "size": {
                 "width": 80,
                 "height": 80
               },
               "position": {
-                "x": 40,
-                "y": 902
+                "x": 90,
+                "y": 899
               },
               "angle": 0,
               "id": "1acd7f91-db75-432e-a3d3-13fde3d8086c",
@@ -1679,7 +1494,7 @@
               "attrs": {
                 "text": {
                   "ref-y": 90,
-                  "text": "Pacemaker 49"
+                  "text": "Pacemaker"
                 },
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -1706,7 +1521,7 @@
               "attrs": {
                 "text": {
                   "ref-y": 90,
-                  "text": "Electrocardiogram 50"
+                  "text": "Electrocardi\nogram"
                 },
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -1725,12 +1540,7 @@
               "target": {
                 "id": "85af2678-fee5-4ba8-810f-9527cc9625fe"
               },
-              "vertices": [
-                {
-                  "x": 133,
-                  "y": 945
-                }
-              ],
+              "vertices": [],
               "id": "2c966d19-88a9-4c61-a7c1-0db1e7e5e1b6",
               "labels": [
                 {
@@ -1771,7 +1581,7 @@
                 "id": "85af2678-fee5-4ba8-810f-9527cc9625fe"
               },
               "target": {
-                "id": "40bcff5f-e039-4ba6-9426-7288beb5255b"
+                "id": "b064aa07-6650-4252-a717-2a93466807c8"
               },
               "vertices": [],
               "id": "e7323212-fdc4-44c3-b8e1-ae689b330efc",
@@ -1780,7 +1590,7 @@
                   "position": 0.5,
                   "attrs": {
                     "text": {
-                      "text": "flow 52",
+                      "text": "Wi-Fi",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -1789,6 +1599,12 @@
               ],
               "z": 58,
               "hasOpenThreats": false,
+              "isEncryptedFlow": false,
+              "isPublicNetwork": false,
+              "bluetoothInterface": false,
+              "wifiInterface": false,
+              "cellularInterface": false,
+              "usesTLS": false,
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -1805,7 +1621,7 @@
                 "id": "7a066e3f-89df-40bf-a6bb-37048338de7a"
               },
               "target": {
-                "id": "40bcff5f-e039-4ba6-9426-7288beb5255b"
+                "id": "b064aa07-6650-4252-a717-2a93466807c8"
               },
               "vertices": [],
               "id": "9bf02789-af5c-45d0-a00f-0e0cb2fa8701",
@@ -1814,7 +1630,7 @@
                   "position": 0.5,
                   "attrs": {
                     "text": {
-                      "text": "flow 53",
+                      "text": "Wi-Fi",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -1839,7 +1655,7 @@
                 "id": "eb78b692-cfa5-4a1f-9a02-cc8e4efe0291"
               },
               "target": {
-                "id": "40bcff5f-e039-4ba6-9426-7288beb5255b"
+                "id": "b064aa07-6650-4252-a717-2a93466807c8"
               },
               "vertices": [],
               "id": "71336937-0cc3-4810-9a41-2cd5a91d605d",
@@ -1848,7 +1664,7 @@
                   "position": 0.5,
                   "attrs": {
                     "text": {
-                      "text": "flow 54",
+                      "text": "Wi-Fi",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -1857,6 +1673,532 @@
               ],
               "z": 60,
               "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Laptop",
+              "size": {
+                "width": 80,
+                "height": 80
+              },
+              "position": {
+                "x": 109,
+                "y": 695
+              },
+              "angle": 0,
+              "id": "5340b184-d533-4ec8-ade9-02fcf480c3d2",
+              "z": 61,
+              "hasOpenThreats": true,
+              "providesAuthenticationLaptop": true,
+              "isALogLaptop": true,
+              "storesCredentialsLaptop": true,
+              "validatesInputLaptop": false,
+              "isEncryptedLaptop": true,
+              "programmingLanguageLaptop": false,
+              "isSignedLaptop": false,
+              "remoteMedicalRecordStorageLaptop": true,
+              "privilegeLevelForLaptop": true,
+              "threats": [
+                {
+                  "ruleId": "0.2",
+                  "title": "Compliance in the Collection and Storage of Electronic Health Records",
+                  "type": "Information disclosure",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "Depending on the nation and region of subject data collection and storage (local or remote), specific operating rules may apply. For example: In the storage of electronic health records in Canada, specific rules and legislation are put into place varying by province or territory and continuously change over time. The legislation is written through discussion of principles of consent to collection, limited use, security safeguards, and patient participation.",
+                  "mitigation": "Legal council is required when defining User Agreements and when engineering specific rules of collection or storage to ensure all defined standards and criterion are met for the region(s) of operation.",
+                  "references": []
+                },
+                {
+                  "ruleId": "10.4",
+                  "title": "Incorrect Privilege Assignment",
+                  "type": "Elevation of privilege",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "A product incorrectly assigns a privilege to a particular actor, creating an unintended sphere of control for that actor [87].",
+                  "mitigation": "To mitigate this threat, the settings, management sand handling of privileges must be managed carefully. There should be accounts with limited privileges if there is a task that needs to be done,with very specific privilege levels. [87]",
+                  "references": [
+                    {
+                      "name": "CWE-266: Incorrect Privilege Assignment",
+                      "link": "https://cwe.mitre.org/data/definitions/266.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "Java",
+                        "highlightAlias": "java"
+                      },
+                      "preText": "Evidence of privilege change:",
+                      "code": "AccessController.doPrivileged(new PrivilegedAction() {\npublic Object run() {\n\n// privileged code goes here, for example: \nSystem.loadLibrary(\"awt\");\nreturn null;\n// nothing to return \n}"
+                    },
+                    {
+                      "language": {
+                        "name": "Java",
+                        "highlightAlias": "java"
+                      },
+                      "preText": "This application sends a special intent with a flag that allows the receiving application to read a data file for backup purposes.",
+                      "postText": "Any malicious application can register to receive this intent. Because of the FLAG_GRANT_READ_URI_PERMISSION included with the intent, the malicious receiver code can read the user's data.",
+                      "code": "Intent intent = new Intent();\nintent.setAction(\"com.example.BackupUserData\");\nintent.setData(file_uri);\nintent.addFlags(FLAG_GRANT_READ_URI_PERMISSION);\nsendBroadcast(intent);"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "10.9",
+                  "title": "Privilege Dropping or Lowering Errors",
+                  "type": "Elevation of privilege",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "The software does not drop privileges before passing control of a resource to an actor that does not have those privileges [92].",
+                  "mitigation": "To mitigate this threat, three techniques a possible counter measures to properly manage privileges in different contexts. There should be specific trust zones in the system, the least privilege principle should be in effect where the access rights of each user are given the minimum privilege level to do their task as well, privileges should be separated where multiple conditions need to be met to access [92].",
+                  "references": [
+                    {
+                      "name": "CWE-271: Privilege Dropping / Lowering Errors",
+                      "link": "https://cwe.mitre.org/data/definitions/271.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "C",
+                        "highlightAlias": "c"
+                      },
+                      "preText": "The following code calls chroot() to restrict the application to a subset of the filesystem below APP_HOME in order to prevent an attacker from using the program to gain unauthorized access to files located elsewhere. The code then opens a file specified by the user and processes the contents of the file.",
+                      "postText": "Constraining the process inside the application's home directory before opening any files is a valuable security measure. However, the absence of a call to setuid() with some non-zero value means the application is continuing to operate with unnecessary root privileges. Any successful exploit carried out by an attacker against the application can now result in a privilege escalation attack because any malicious operations will be performed with the privileges of the superuser. If the application drops to the privilege level of a non-root user, the potential for damage is substantially reduced.",
+                      "code": "chroot(APP_HOME);\nchdir(\"/\");\nFILE* data = fopen(argv[1], \"r+\");\n..."
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "10.11",
+                  "title": "Incorrect Default Permissions",
+                  "type": "Elevation of privilege",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "The software, upon installation, sets incorrect permissions for an object that exposes it to an unintended actor [94].",
+                  "mitigation": "To mitigate the threat of default permissions the settings, management and handling of privileges should be carefully managed [94].",
+                  "references": [
+                    {
+                      "name": "CWE-276: Incorrect Default Permissions",
+                      "link": "https://cwe.mitre.org/data/definitions/276.html"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "8.3",
+                  "title": "Information Exposure Through Log Files",
+                  "type": "Information disclosure",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "Information written to log files can be of a sensitive nature and give valuable guidance to an attacker or expose sensitive user information.",
+                  "mitigation": "To mitigate this threat, there are a few mitigations that can be implemented. Firstly, any sensitive/secret information should not be written into any log files. Any debug log files should be removed prior to code being deployed in a production environment. Log files should be protected from unauthorized read/write access. Configurations should be changed when an application is transitioning to a production environment.",
+                  "references": [
+                    {
+                      "name": "CWE-532: Information Exposure Through Log Files",
+                      "link": "https://cwe.mitre.org/data/definitions/532.html"
+                    },
+                    {
+                      "name": "CWE-779: Logging of Excessive Data",
+                      "link": "https://cwe.mitre.org/data/definitions/779.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "Java",
+                        "highlightAlias": "java"
+                      },
+                      "preText": "In the following code snippet, a user's full name and credit card number are written to a log file.",
+                      "code": "logger.info(\"Username: \" + usernme + \", CCN: \" + ccn);"
+                    },
+                    {
+                      "language": {
+                        "name": "Java",
+                        "highlightAlias": "java"
+                      },
+                      "preText": "This code stores location information about the current user:",
+                      "postText": "When the application encounters an exception it will write the user object to the log. Because the user object contains location information, the user's location is also written to the log.",
+                      "code": "locationClient = new LocationClient(this, this, this);\nlocationClient.connect();\ncurrentUser.setLocation(locationClient.getLastLocation());\n... \n\ncatch (Exception e) {\nAlertDialog.Builder builder = new AlertDialog.Builder(this);\nbuilder.setMessage(\"Sorry, this application has experienced an error.\");\nAlertDialog alert = builder.create();\nalert.show();\nLog.e(\"ExampleActivity\", \"Caught exception: \" + e + \" While on User:\" + User.toString());\n}"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "8.4",
+                  "title": "Logging of Excessive Data",
+                  "type": "Repudiation",
+                  "status": "Open",
+                  "severity": "Low",
+                  "description": "The software logs too much information, making log files hard to process and possibly hindering recovery efforts or forensic analysis after an attack.",
+                  "mitigation": "To mitigate this threat, there are a few mitigations that can be implemented. Firstly, large log files should be replaced with regularly commissioned summaries. Lastly, The log file’s size should be restricted and controlled by a system administrator.[64]",
+                  "references": [
+                    {
+                      "name": "CWE-779: Logging of Excessive Data",
+                      "link": "https://cwe.mitre.org/data/definitions/779.html"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "3.4",
+                  "title": "Hard-coded Cryptographic Key",
+                  "type": "Information disclosure",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "The use of a hard-coded cryptographic key tremendously increases the possibility that encrypted data may be recovered.If hard-coded cryptographic keys are used, it is almost certain that malicious users will gain access through the account in question.",
+                  "mitigation": "To mitigate against this threat, this practice of hardcoding the cryptographic key should be avoided to avoid exposing the cryptographic key to a potential adversary for exploitation.",
+                  "references": [
+                    {
+                      "name": "CWE-321: Use of Hard-coded Cryptographic Key",
+                      "link": "https://cwe.mitre.org/data/definitions/321.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "C",
+                        "highlightAlias": "c"
+                      },
+                      "preText": "Attempt to verify a password using a hardcoded cryptographic Key in C:",
+                      "postText": "The cryptographic key is within a hard-coded string value that is compared to the password. It is likely that an attacker will be able to read the key and compromise the system.",
+                      "code": "int VerifyAdmin(char *password) {\nif (strcmp(password,\"68af404b513073584c4b6f22b6c63e6b\")) {\n\nprintf(\"Incorrect Password!\\n\");\nreturn(0);\n}\nprintf(\"Entering Diagnostic Mode...\\n\");\nreturn(1);\n}"
+                    },
+                    {
+                      "language": {
+                        "name": "Java",
+                        "highlightAlias": "java"
+                      },
+                      "preText": "Attempt to verify a password using a hardcoded cryptographic Key in Java:",
+                      "postText": "The cryptographic key is within a hard-coded string value that is compared to the password. It is likely that an attacker will be able to read the key and compromise the system.",
+                      "code": "public boolean VerifyAdmin(String password) {\nif (password.equals(\"68af404b513073584c4b6f22b6c63e6b\")) {\nSystem.out.println(\"Entering Diagnostic Mode...\");\nreturn true;\n}\nSystem.out.println(\"Incorrect Password!\");\nreturn false;"
+                    },
+                    {
+                      "language": {
+                        "name": "C#",
+                        "highlightAlias": "csharp"
+                      },
+                      "preText": "Attempt to verify a password using a hardcoded cryptographic Key in C#:",
+                      "postText": "The cryptographic key is within a hard-coded string value that is compared to the password. It is likely that an attacker will be able to read the key and compromise the system.",
+                      "code": "int VerifyAdmin(String password) {\nif (password.Equals(\"68af404b513073584c4b6f22b6c63e6b\")) {\nConsole.WriteLine(\"Entering Diagnostic Mode...\");\nreturn(1);\n}\nConsole.WriteLine(\"Incorrect Password!\");\nreturn(0);\n}"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "8.2",
+                  "title": "Insufficient Logging ",
+                  "type": "Repudiation",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "When a security-critical event occurs, the software either does not record the event or omits important details about the event when logging it.",
+                  "mitigation": "To mitigate this threat, there are 2countermeasures that can be implemented. Firstly,logging should be centralized with different levels of details. However, in a production environment there should be sufficient logging to allow system administrators to see attacks, diagnose and recover from errors.",
+                  "references": [
+                    {
+                      "name": "CWE-778: Insufficient Logging",
+                      "link": "https://cwe.mitre.org/data/definitions/778.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "Markup",
+                        "highlightAlias": "markup"
+                      },
+                      "preText": "The example below shows a configuration for the service security audit feature in the Windows Communication Foundation (WCF).",
+                      "postText": "The previous configuration file has effectively disabled the recording of security-critical events, which would force the administrator to look to other sources during debug or recovery efforts.",
+                      "code": "<system.serviceModel>\n<behaviors>\n<serviceBehaviors>\n<behavior name=\"NewBehavior\">\n<serviceSecurityAudit auditLogLocation=\"Default\"\nsuppressAuditFailure=\"false\"\nserviceAuthorizationAuditLevel=\"None\"\nmessageAuthenticationAuditLevel=\"None\" />\n\n...\n</system.serviceModel>"
+                    },
+                    {
+                      "language": {
+                        "name": "Markup",
+                        "highlightAlias": "markup"
+                      },
+                      "preText": "Logging failed authentication attempts can warn administrators of potential brute force attacks. Similarly, logging successful authentication events can provide a useful audit trail when a legitimate account is compromised. The following configuration shows appropriate settings, assuming that the site does not have excessive traffic, which could fill the logs if there are a large number of success or failure events.",
+                      "code": "<system.serviceModel>\n<behaviors>\n<serviceBehaviors>\n<behavior name=\"NewBehavior\">\n<serviceSecurityAudit auditLogLocation=\"Default\"\nsuppressAuditFailure=\"false\"\nserviceAuthorizationAuditLevel=\"SuccessAndFailure\"\nmessageAuthenticationAuditLevel=\"SuccessAndFailure\" />\n\n...\n</system.serviceModel>"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "10.5",
+                  "title": "Privilege Defined With Unsafe Actions",
+                  "type": "Elevation of privilege",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "A particular privilege, role, capability, or right can be used to perform unsafe actions that were not intended, even when it is assigned to the correct entity.",
+                  "mitigation": "To mitigate this threat, the settings, managements and handling of privileges must be managed carefully. There should be accounts with limited privileges if there is a task that needs to be done,with very specific privilege levels [88].",
+                  "references": [
+                    {
+                      "name": "CWE-267: Privilege Defined With Unsafe Actions",
+                      "link": "https://cwe.mitre.org/data/definitions/267.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "Java",
+                        "highlightAlias": "java"
+                      },
+                      "preText": "This code intends to allow only Administrators to print debug information about a system.",
+                      "postText": "While the intention was to only allow Administrators to print the debug information, the code as written only excludes those the with the role of \"GUEST\". Someone with the role of \"ADMIN\" or \"USER\" will be allowed access, which goes against the original intent. An attacker may be able to use this debug information to craft an attack on the system.",
+                      "code": "public enum Roles {\nADMIN,USER,GUEST\n}\n\npublic void printDebugInfo(User requestingUser){\nif(isAuthenticated(requestingUser)){\nswitch(requestingUser.role){\ncase GUEST:\nSystem.out.println(\"You are not authorized to perform this command\");\nbreak;\n\ndefault:\nSystem.out.println(currentDebugState());\nbreak;\n}\n}\nelse{\nSystem.out.println(\"You must be logged in to perform this command\");\n}\n}"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "7.4",
+                  "title": "Insecure Authentication",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "Authentication vulnerabilities are exploited through automated attacks that use available or custom-built tools.Once the adversary understands how the authentication scheme is vulnerable, they fake or bypass authentication by submitting service requests to the mobile app's backend server and bypass any direct interaction with the mobile app.This submission process is typically done via mobile malware within the device or botnets owned by the attacker.",
+                  "mitigation": "Avoid weak authentication patterns:If you are porting a web application to its mobile equivalent,authentication requirements of mobile applications should match that of the web application component. Therefore, it should not be possible to authenticate with less authentication factors than the web browser.Authenticating a user locally can lead to client-side bypass vulnerabilities. If the application stores data locally, the authentication routine can be bypassed on jailbroken devices through run-time manipulation or modification of the binary.If there is a compelling business requirement for offline authentication, see M10 for additional guidance on preventing binary attacks against the mobile app; Where possible, ensure that all authentication requests are performed server-side. Upon successful authentication,application data will be loaded onto the mobile device. This will ensure that application data will only be available after successful authentication;If client-side storage of data is required, the data will need tobe encrypted using an encryption key that is securely derived from the user's login credentials. This will ensure that the stored application data will only be accessible upon successfully entering the correct credentials. There are additional risks that the data will be decrypted via binary attacks. See M9 for additional guidance on preventing binary attacks that lead to local data theft; Persistent authentication (Remember Me) functionality implemented within mobile applications should never store a user's password on the device;Ideally, mobile applications should utilize a device-specific authentication token that can be revoked within the mobile application by the user. This will ensure that the app can mitigate unauthorized access from a stolen/lost device; Do not use any spoof-able values for authenticating a user. This includes device identifiers or geo-location; Persistent authentication within mobile applications should be implemented as opt-in and not be enabled by default; If possible, do not allow users to provide 4-digit PIN numbers for authentication passwords. Reinforce Authentication: Developers should assume all client-side authorization and authentication controls can be bypassed by malicious users. Authorization and authentication controls must be re-enforced on the server-side whenever possible. Due to offline usage requirements, mobile apps may be required to perform local authentication or authorization checks within the mobile app's code. If this is the case, developers should instrument local integrity checks within their code to detect any unauthorized code changes. See M9for more information about detecting and reacting to binaryattacks.[49]",
+                  "references": [
+                    {
+                      "name": "Insecure Authentication",
+                      "link": "https://www.owasp.org/index.php/Mobile_Top_10_2016-M4-Insecure_Authentication [51] https://www.owasp.org/index.php/Mobile_Top_10_2014-M4"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.3",
+                  "title": "Authentication Bypass Using an Alternate Path orChannel",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "A product requires authentication, but the product has an alternate path or channel that does not require authentication.",
+                  "mitigation": "To mitigate this threat, all access is suggested to go through a centralized point of access, where each access of a resource requires a check to see if the user has permission to access that resource [68].",
+                  "references": [
+                    {
+                      "name": "CWE-288: Authentication Bypass Using an Alternate Path or Channel",
+                      "link": "https://cwe.mitre.org/data/definitions/288.html"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.5",
+                  "title": "Authentication Bypass by Capture-Replay",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "A capture-replay flaw exists when the design of the software makes it possible for a malicious user to sniff network traffic and bypass authentication by replaying it to the server in question to the same effect as the original message (or with minor changes).",
+                  "mitigation": "To mitigate this threat, a timestamp and or checksum with each response and check to see if it’s an old request to stop a replay of the same authentication process.",
+                  "references": [
+                    {
+                      "name": "CWE-294: Authentication Bypass by Capture-replay",
+                      "link": "https://cwe.mitre.org/data/definitions/294.html"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.6",
+                  "title": "Reflection Attack in an Authentication Protocol",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "Simple authentication protocols are subject to reflection attacks if a malicious user can use the target machine to impersonate a trusted user.",
+                  "mitigation": "To mitigate this threat, there a few mitigations that can be used. Firstly, it is recommended to have different keys for the requestor and responder of a challenge. Another suggestion is to provide different challenges for the requestor and responder. Prior to the challenge, it is recommended to have the requestor prove it’s identity.",
+                  "references": [
+                    {
+                      "name": "CWE-301: Reflection Attack in an Authentication Protocol",
+                      "link": "https://cwe.mitre.org/data/definitions/301.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "C",
+                        "highlightAlias": "c"
+                      },
+                      "preText": "The following example demonstrates the weakness.",
+                      "code": "unsigned char *simple_digest(char *alg,char *buf,unsigned int len, int *olen) {\nconst EVP_MD *m;\nEVP_MD_CTX ctx;\nunsigned char *ret;\nOpenSSL_add_all_digests();\nif (!(m = EVP_get_digestbyname(alg))) return NULL;\nif (!(ret = (unsigned char*)malloc(EVP_MAX_MD_SIZE))) return NULL;\nEVP_DigestInit(&ctx, m);\nEVP_DigestUpdate(&ctx,buf,len);\nEVP_DigestFinal(&ctx,ret,olen);\nreturn ret;\n}\nunsigned char *generate_password_and_cmd(char *password_and_cmd) {\nsimple_digest(\"sha1\",password,strlen(password_and_cmd)\n...\n);\n}"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.7",
+                  "title": "Authentication Bypass by Assumed-ImmutableData",
+                  "type": "Tampering",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "The authentication scheme or implementation uses key data elements that are assumed to be immutable, but can be controlled or modified by the attacker.",
+                  "mitigation": "To mitigate this threat, any immutable data fields should be properly protected such as environment variables, and form fields to ensure that those fields are not tempered with.",
+                  "references": [
+                    {
+                      "name": "CWE-302: Authentication Bypass by Assumed-Immutable Data",
+                      "link": "https://cwe.mitre.org/data/definitions/302.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "Java",
+                        "highlightAlias": "java"
+                      },
+                      "preText": "In the following example, an \"authenticated\" cookie is used to determine whether or not a user should be granted access to a system.",
+                      "postText": "Of course, modifying the value of a cookie on the client-side is trivial, but many developers assume that cookies are essentially immutable.",
+                      "code": "boolean authenticated = new Boolean(getCookieValue(\"authenticated\")).booleanValue();\nif (authenticated) {\n...\n}"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.8",
+                  "title": "Incorrect Implementation of AuthenticationAlgorithm",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "Low",
+                  "description": "The requirements for the software dictate the use of an established authentication algorithm, but the implementation of the algorithm is incorrect. [74]",
+                  "mitigation": "To mitigate this threat, the algorithm should be fully tested, from endpoint to endpoint in a pre-production environment prior to being deployed ina production environment.",
+                  "references": [
+                    {
+                      "name": "CWE-303: Incorrect Implementation of Authentication Algorithm",
+                      "link": "https://cwe.mitre.org/data/definitions/303.html"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.10",
+                  "title": "Improper Restriction of Excessive Authentication Attempts",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "The software does not implement sufficient measures to prevent multiple failed authentication attempts within in a short time frame, making it more susceptible to brute force attacks [76].",
+                  "mitigation": "To mitigate this threat, there are multiple techniques can be used such as disconnecting the user after a certain number of failed attempts,having a timeout after a certain number of attempts or locking out a targeted account [76].",
+                  "references": [
+                    {
+                      "name": "CWE-307: Improper Restriction of Excessive Authentication Attempts",
+                      "link": "https://cwe.mitre.org/data/definitions/307.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "PHP",
+                        "highlightAlias": "php"
+                      },
+                      "preText": "This code attempts to limit the number of login attempts by causing the process to sleep before completing the authentication.",
+                      "postText": "However, there is no limit on parallel connections, so this does not increase the amount of time an attacker needs to complete an attack.",
+                      "code": "$username = $_POST['username'];\n$password = $_POST['password'];\nsleep(2000);\n$isAuthenticated = authenticateUser($username, $password);"
+                    },
+                    {
+                      "language": {
+                        "name": "C",
+                        "highlightAlias": "c"
+                      },
+                      "preText": "In the following C/C++ example the validateUser method opens a socket connection, reads a username and password from the socket and attempts to authenticate the username and password.",
+                      "postText": "The validateUser method will continuously check for a valid username and password without any restriction on the number of authentication attempts made. The method should limit the number of authentication attempts made to prevent brute force attacks.",
+                      "code": "int validateUser(char *host, int port)\n{\nint socket = openSocketConnection(host, port);\nif (socket < 0) {\nprintf(\"Unable to open socket connection\");\nreturn(FAIL);\n}\n\nint isValidUser = 0;\nchar username[USERNAME_SIZE];\nchar password[PASSWORD_SIZE];\n\nwhile (isValidUser == 0) {\nif (getNextMessage(socket, username, USERNAME_SIZE) > 0) {\nif (getNextMessage(socket, password, PASSWORD_SIZE) > 0) {\nisValidUser = AuthenticateUser(username, password);\n}\n}\n}\nreturn(SUCCESS);"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.11",
+                  "title": "Use of Single-Factor Authentication",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "The use of single-factor authentication can lead to unnecessary risk of compromise when compared with the benefits of a dual-factor authentication scheme.",
+                  "mitigation": "To mitigate this threat, the system or application should use an extra method of authentication (multi-factor authentication). This ensures if one method is compromised, the system or application is still safe.",
+                  "references": [
+                    {
+                      "name": "CWE-308: Use of Single-factor Authentication",
+                      "link": "https://cwe.mitre.org/data/definitions/308.html"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "language": {
+                        "name": "C",
+                        "highlightAlias": "c"
+                      },
+                      "preText": "In this example a user is logged in if their given password matches a stored password:",
+                      "postText": "This code fails to incorporate more than one method of authentication. If an attacker can steal or guess a user's password, they are given full access to their account. Note this code also exhibits Reversible One-Way Hash and Use of a One-Way Hash without a Salt.",
+                      "code": "unsigned char *check_passwd(char *plaintext) {\nctext = simple_digest(\"sha1\",plaintext,strlen(plaintext), ... );\n//Login if hash matches stored hash \nif (equal(ctext, secret_password())) {\nlogin_user();\n}\n}"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.12",
+                  "title": "Key Exchange with Entity Authentication",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "The software performs a key exchange with an actor without verifying the identity of that actor.",
+                  "mitigation": "There are two ways to mitigate this threat. Firstly,ensure when designing the system there is authentication involved. Lastly, validate that the checks that are actually verifying the identify of the user when communicating between identities.",
+                  "references": [
+                    {
+                      "name": "CWE-322: Key Exchange without Entity Authentication",
+                      "link": "https://cwe.mitre.org/data/definitions/322.html"
+                    }
+                  ]
+                },
+                {
+                  "ruleId": "9.13",
+                  "title": "Weak Password Requirements",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "The product does not require that users should have strong passwords, which makes it easier for attackers to compromise user accounts.",
+                  "mitigation": "To mitigate this threat, a password policy must be in place to have strong passwords. A password policy (rules to make strong passwords) should in place to make a password much harder to guess for an attacker.Such an example of a password policy is as follows: All passwords should be reasonably complex and difficult for unauthorized people to guess. Employees and pupils should choose passwords that are at least eight characters long and contain a combination of upper-and lower-case letters, numbers, and punctuation marks and other special characters. These requirements will been forced with software when possible.",
+                  "references": [
+                    {
+                      "name": "Password Policy",
+                      "link": "https://www.gloucestershire.gov.uk/media/8868/password_policy-67251.docx"
+                    },
+                    {
+                      "name": "CWE-521: Weak Password Requirements",
+                      "link": "https://cwe.mitre.org/data/definitions/521.html"
+                    }
+                  ]
+                }
+              ],
+              "attrs": {
+                "text": {
+                  "ref-y": 90,
+                  "text": "Windows 10\nPC"
+                },
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "5340b184-d533-4ec8-ade9-02fcf480c3d2"
+              },
+              "target": {
+                "id": "325d6101-f63d-48b0-9783-e97171a7a310"
+              },
+              "vertices": [],
+              "id": "44ac40a0-871a-4f48-a5a9-accce8aed911",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "TCP/IP",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 63,
+              "hasOpenThreats": false,
+              "isEncryptedFlow": false,
+              "isPublicNetwork": false,
+              "bluetoothInterface": false,
+              "wifiInterface": false,
+              "cellularInterface": false,
+              "usesTLS": false,
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
