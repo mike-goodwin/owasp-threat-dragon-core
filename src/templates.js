@@ -1059,8 +1059,8 @@ angular.module('templates', [])
     '            </div>\n' +
     '            <div ng-if="isTrelloActive" class="form-group">\n' +
     '                <label>List</label>\n' +
-    '                <select ng-disabled="threatEditForm.boardInput.name!=\'Choose Board\'" name="listInput" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
-    '                    <option ng-repeat="list in ourLists" value="{{list}}">{{list.name}}</option>\n' +
+    '                <select ng-disabled="!threatEditForm.boardInput.id" name="listInput" class="form-control" ng-required="true" ng-model="threatEditForm.listInput">\n' +
+    '                    <option ng-repeat="list in ourLists" value="{{list.id}}">{{list.name}}</option>\n' +
     '                </select>\n' +
     '            </div>\n' +
     '            <div class="form-group">\n' +
@@ -1155,7 +1155,7 @@ angular.module('templates', [])
     '        </form>\n' +
     '    </div>\n' +
     '    <div ng-if="isTrelloActive" class="modal-footer">\n' +
-    '        <button class="btn btn-primary" ng-disabled="!threatEditForm.listInput.id || !threatEditForm.boardInput || !threatEditForm.titleInput.$modelValue" ng-click="addCard(threatEditForm.titleInput.$modelValue, threatEditForm.descriptionInput.$modelValue, threatEditForm.listInput.id)">Add To Board</button>\n' +
+    '        <button class="btn btn-primary" ng-click="addCard(threatEditForm.titleInput.$modelValue, threatEditForm.descriptionInput.$modelValue, threatEditForm.listInput)">Add To Board</button>\n' +
     '        <button class="btn btn-default" ng-click="toggle()">Cancel</button>\n' +
     '    </div>\n' +
     '    <div ng-if="parameter.editing && !isTrelloActive" class="modal-footer">\n' +
