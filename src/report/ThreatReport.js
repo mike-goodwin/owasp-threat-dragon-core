@@ -125,10 +125,10 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
             ],
             styles: {
                 header: {
-                    fontSize: 30,
+                    fontSize: 28,
                     alignment: "center",
                     bold: true,
-                    color: "#ff7742",
+                    color: "#000",
                 },
                 tg: {
                     fontSize: 14,
