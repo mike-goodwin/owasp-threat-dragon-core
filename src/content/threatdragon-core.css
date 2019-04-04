@@ -9161,13 +9161,6 @@ text.hasOpenThreats {
   }
 }
 
-.trelloLogo {
-  float: right;
-  height: 80%;
-  width: auto;
-  max-height: 60px;
-}
-
 .tab button.downloadButton {
   float: right;
   color: white;

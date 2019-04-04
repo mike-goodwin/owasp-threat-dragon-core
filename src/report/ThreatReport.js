@@ -162,9 +162,9 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
         var j;
         var colour;
         var i=1;
-        for(var element of elements){
+        elements.forEach(function (element) {
             j=1;
-            if(element.threats != undefined) {
+            if(element.threats !== undefined) {
                 docDefinition.content[1].table.body.push([{
                     rowSpan: element.threats.length+1,
                     text: i
@@ -177,14 +177,14 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
                     text: element.threats[0].severity
                 }]);
                 j++;
-                for (var threat of element.threats) {
-                    if(j%2==0){ colour="overEasy";} else{colour="easy";}
+                element.threats.forEach(function (threat) {
+                    if(j%2 === 0){ colour="overEasy";} else{colour="easy";}
                     docDefinition.content[1].table.body.push(["", "", {text: threat.type, style: colour}, {text: threat.description, style: colour}, {text: threat.status, style:colour}, {text: threat.severity, style:colour}]);
                     j++;
-                }
+                });
                 i++;
             }
-        }
+        });
 
         pdfMake.createPdf(docDefinition).download("ThreatReport.pdf");
 

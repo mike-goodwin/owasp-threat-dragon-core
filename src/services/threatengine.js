@@ -2070,10 +2070,10 @@ return nools.flow(flowName, function (flow) {
                 {
                     language: {name: 'Java', highlightAlias: 'java'},
                     preText: 'The following Java code snippet reads a string from an HttpServletRequest and sets it as the active catalog for a database Connection.',
-                    postText: '...\n' +
+                    postText: 'In this example, an attacker could cause an error by providing a nonexistent catalog name or connect to an unauthorized portion of the database.',
+                    code: '...\n' +
                         'conn.setCatalog(request.getParameter("catalog"));\n' +
-                        '...',
-                    code: 'In this example, an attacker could cause an error by providing a nonexistent catalog name or connect to an unauthorized portion of the database.'
+                        '...'
                 }
             ]
         });});

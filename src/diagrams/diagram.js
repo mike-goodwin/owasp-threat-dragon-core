@@ -267,6 +267,7 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
                 dialogs.confirm('diagrams/ThreatEditPane.html',
                     function (applyToAll) {
                         if (applyToAll) {
+                            addThreatToElement(currentThreat, vm.selected);
                             threatList.forEach(function (threat) {
                                 addThreatToElement(threat, vm.selected);
                             });

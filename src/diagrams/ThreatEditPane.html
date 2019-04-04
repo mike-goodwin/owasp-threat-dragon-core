@@ -114,9 +114,10 @@
                 <div class="form-control overflowY" style="height: 400px;">
                     <div ng-repeat="example in parameter.threat.examples">
                         <div style="border-radius: 25px; padding: 10px; margin: 10px; border: 1px solid gray;">
-                            <label style="color: #507eed">Language: {{example.language.name}}</label>
+                            <label ng-if="example.language.name" style="color: #507eed">Language: {{example.language.name}}</label>
+                            <label ng-if="!example.language.name" style="color: #507eed">Language: Plain Text</label>
                             <p ng-if="example.preText">{{example.preText}}</p>
-                            <pre class=" language-{{example.language.highlightAlias}} line-numbers">
+                            <pre ng-if="example.code" class=" language-{{example.language.highlightAlias}} line-numbers">
                                 <code tmt-prism-highlight class=" language-{{example.language.highlightAlias}}">{{example.code}}</code>
                             </pre>
                             <p ng-if="example.postText">{{example.postText}}</p>

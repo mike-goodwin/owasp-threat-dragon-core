@@ -126,7 +126,7 @@ angular.module('templates', [])
     '            </p>\n' +
     '        </div>\n' +
     '    </div>\n' +
-    '    \n' +
+    '\n' +
     '    <div ng-if="vm.generatingThreats">\n' +
     '        <div class="spinner"></div>\n' +
     '    </div>\n' +
@@ -1142,9 +1142,10 @@ angular.module('templates', [])
     '                <div class="form-control overflowY" style="height: 400px;">\n' +
     '                    <div ng-repeat="example in parameter.threat.examples">\n' +
     '                        <div style="border-radius: 25px; padding: 10px; margin: 10px; border: 1px solid gray;">\n' +
-    '                            <label style="color: #507eed">Language: {{example.language.name}}</label>\n' +
+    '                            <label ng-if="example.language.name" style="color: #507eed">Language: {{example.language.name}}</label>\n' +
+    '                            <label ng-if="!example.language.name" style="color: #507eed">Language: Plain Text</label>\n' +
     '                            <p ng-if="example.preText">{{example.preText}}</p>\n' +
-    '                            <pre class=" language-{{example.language.highlightAlias}} line-numbers">\n' +
+    '                            <pre ng-if="example.code" class=" language-{{example.language.highlightAlias}} line-numbers">\n' +
     '                                <code tmt-prism-highlight class=" language-{{example.language.highlightAlias}}">{{example.code}}</code>\n' +
     '                            </pre>\n' +
     '                            <p ng-if="example.postText">{{example.postText}}</p>\n' +
@@ -1243,7 +1244,7 @@ angular.module('templates', [])
     '    <div class="tab">\n' +
     '        <button class="tablinks" id="defaultTab" ng-click="vm.activateTab($event, \'Threats\')">Threats</button>\n' +
     '        <button class="tablinks" ng-click="vm.activateTab($event, \'Countermeasures\')">Countermeasures</button>\n' +
-    '        <button class="downloadButton" ng-click="vm.downloadAsPDF()"><i class="glyphicon glyphicon-download"></i>Download As PDF</button>\n' +
+    '        <button class="downloadButton" ng-click="vm.downloadAsPDF()"><i class="glyphicon glyphicon-download"></i> Download As PDF</button>\n' +
     '    </div>\n' +
     '    <div id="Threats" class="tabcontent">\n' +
     '        <table class="tg" style="width:100%">\n' +
