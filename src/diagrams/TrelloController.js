@@ -47,8 +47,7 @@ function TrelloController($scope, $window, common) {
 
     $scope.$watch('threatEditForm.boardInput', function(newVal, oldVal){
         if(newVal!=oldVal) {
-            log(newVal);
-            if (newVal.id) {
+            if (newVal && newVal.id) {
                 log("new value had id: " + newVal);
                 $scope.getListsFromDictionary(newVal.id);
                 $scope.shortUrl = newVal.shortUrl;
@@ -67,15 +66,21 @@ function TrelloController($scope, $window, common) {
     };
 
     $scope.addCard = function (cardName, cardDescription, listId){
-
-        trello.addCard(cardName, cardDescription, listId, function (error, cardAdded) {
-            if (error) {
-                log("Could Not Add Card: ", error);
-            } else {
-                log("Card added: ", cardAdded.name);
-                $scope.toggle();
-            }
-        });
+        log("List ID: "+listId);
+        if(cardName==""  || !listId){
+            log("Card Error: undefined parameters");
+            return;
+        }else{
+            trello.addCard(cardName, cardDescription, listId, function (error, cardAdded) {
+                if (error) {
+                    log("Could Not Add Card: "+ error);
+                } else if(cardAdded) {
+                    log("Card added: " + cardAdded.name);
+                    $scope.toggle();
+                    $scope.$apply();
+                }
+            });
+        }
     };
 
     $scope.goToBoard = function () {

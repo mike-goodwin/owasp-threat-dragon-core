@@ -1,4 +1,4 @@
-<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">
+﻿<div data-ng-controller="diagram as vm" class="container-fluid diagram-container">
     <div ng-show="!vm.errored">
         <div class="col-lg-2">
             <!--Diagram stencil-->
@@ -107,5 +107,9 @@
                 <a href="#">Take me home</a>
             </p>
         </div>
+    </div>
+    
+    <div ng-if="vm.generatingThreats">
+        <div class="spinner"></div>
     </div>
 </div>
