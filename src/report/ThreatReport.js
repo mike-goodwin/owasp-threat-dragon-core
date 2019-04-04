@@ -20,6 +20,9 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
     vm.activateTab = activateTab;
     vm.editThreat = editThreat;
     vm.onAddNewThreat = onAddNewThreat;
+
+    vm.getScopedNonFlowOrBoundaryElements = getScopedNonFlowOrBoundaryElements;
+    vm.downloadAsPDF = downloadAsPDF;
     vm.reportElements = [];
     vm.sortKey = '';
     vm.reverse = false;
@@ -115,6 +118,76 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
 
     function isBoundaryElement(element) {
         return element.attributes.type === 'tm.Boundary';
+    }
+
+    function downloadAsPDF(){
+        log("Downloading as PDF");
+        var elements = getScopedNonFlowOrBoundaryElements();
+
+        var docDefinition = {
+            content: [
+                {text: 'Threat Report From OWASP Threat Dragon', style: 'header', decoration: 'underline'},
+                {table: {
+                    headerRows: 1,
+                    body: [
+                        [{text:"No.", style:"tg"},{text:"COMPONENT", style:'tg'},{text:'THREAT TYPE', style:'tg'},{text:'DESCRIPTION', style:'tg'}, {text:'STATUS', style:'tg'},{text:'SEVERITY', style:'tg'} ]
+                    ]
+                }}
+            ],
+            styles: {
+                header: {
+                    fontSize: 30,
+                    alignment: "center",
+                    bold: true,
+                    color: "#ff7742",
+                },
+                tg: {
+                    fontSize: 14,
+                    padding: "10",
+                    overflow: 'hidden',
+                    color: "#ffffff",
+                    fillColor: "#094490"
+                },
+                easy: {
+                        fillColor: '#ffffff',
+                        alignment: 'left'
+                },
+                overEasy: {
+                       fillColor: '#a0b2e9',
+                        alignment: 'left'
+                }
+            }
+        };
+
+        var j;
+        var colour;
+        var i=1;
+        for(var element of elements){
+            j=1;
+            if(element.threats != undefined) {
+                docDefinition.content[1].table.body.push([{
+                    rowSpan: element.threats.length+1,
+                    text: i
+                }, {
+                    rowSpan: element.threats.length+1,
+                    text: element.name
+                }, {text: element.threats[0].type, style: 'noHover'}, {
+                    text: element.threats[0].description
+                }, {text: element.threats[0].status, style: 'noHover'}, {
+                    text: element.threats[0].severity
+                }]);
+                j++;
+                for (var threat of element.threats) {
+                    if(j%2==0){ colour="overEasy";} else{colour="easy";}
+                    docDefinition.content[1].table.body.push(["", "", {text: threat.type, style: colour}, {text: threat.description, style: colour}, {text: threat.status, style:colour}, {text: threat.severity, style:colour}]);
+                    j++;
+                }
+                i++;
+            }
+        }
+
+        pdfMake.createPdf(docDefinition).download("ThreatReport.pdf");
+
     }
 
     function sort(sortKey) {
