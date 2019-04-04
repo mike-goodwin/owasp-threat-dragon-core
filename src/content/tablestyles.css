@@ -47,7 +47,7 @@
     border-style: solid;
     border-width: 1px;
     overflow: hidden;
-    word-break: normal;
+    white-space: nowrap;
     border-color: #aabcfe;
     color: white;
     background-color: #094490;
@@ -68,6 +68,25 @@
 .tg .odd:hover td:not(.noHover) { background: #FCF; cursor: pointer;}
 .tg .even:hover td:not(.noHover) { background: #FCF; cursor: pointer;}
 
+.tab button.downloadButton {
+    float: right;
+    color: white;
+    background-color: dodgerblue;
+    border-radius: 15%;
+    height: 80%;
+}
+
+.tab button:hover.downloadButton {
+    background-color: royalblue;
+}
+
+.trelloLogo {
+    float: right;
+    height: 80%;
+    width: auto;
+    max-height: 60px;
+}
+
 /* Style the tab */
 .tab {
     overflow: hidden;
@@ -80,6 +99,15 @@
     float: left;
     border: none;
     outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 14px;
+    color: white;
+}
+
+.tab form {
+    float: left;
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;

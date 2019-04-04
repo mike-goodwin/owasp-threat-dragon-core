@@ -9,6 +9,8 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
     var log = getLogFn(controllerId);
     var logError = getLogFn(controllerId, 'error');
     var scope = $scope;
+    var severityOrder = ['low', 'medium', 'high'];
+    var statusOrder = ['mitigated', 'open'];
 
     vm.title = 'Threat Model Report';
     vm.dirty = false;
@@ -18,8 +20,14 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
     vm.activateTab = activateTab;
     vm.editThreat = editThreat;
     vm.onAddNewThreat = onAddNewThreat;
+
     vm.getScopedNonFlowOrBoundaryElements = getScopedNonFlowOrBoundaryElements;
     vm.downloadAsPDF = downloadAsPDF;
+    vm.reportElements = [];
+    vm.sortKey = '';
+    vm.reverse = false;
+    vm.sort = sort;
+
     activate();
 
     function activate() {
@@ -45,11 +53,11 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
             }
             $timeout(function() {
                 document.getElementById("defaultTab").click();
+                vm.sort('name');
             });
         }
 
         function onError(error) {
-            // vm.errored = true;
             logError(error);
         }
     }
@@ -98,6 +106,9 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
     }
 
     function onSave() {
+        var oldKey = vm.sortKey;
+        vm.sortKey = ''; //Change sort key to avoid reversing order
+        vm.sort(oldKey);
         log('Saved Changes');
     }
 
@@ -179,5 +190,106 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
 
     }
 
+    function sort(sortKey) {
+        updateSortKeyAndOrder(sortKey);
+        if (vm.sortKey === 'name') {
+            sortReportElementsByElementProperty();
+        }
+        else if (vm.sortKey === 'status') {
+            sortReportElementsByThreatProperty(statusOrder);
+        }
+        else if (vm.sortKey === 'severity') {
+            sortReportElementsByThreatProperty(severityOrder);
+        }
+        else if (vm.sortKey !== '') {
+            sortReportElementsByThreatProperty();
+        }
+    }
+
+    function sortReportElementsByElementProperty() {
+        var elements = getScopedNonFlowOrBoundaryElements();
+        sortArray(elements);
+        if (vm.reverse && !isEmptyArray(elements)) {
+            elements.reverse();
+        }
+        vm.reportElements = elements;
+    }
+
+    function sortReportElementsByThreatProperty(sortOrder) {
+        var elements = getScopedNonFlowOrBoundaryElements();
+        elements.forEach(function (element) {
+            sortArray(element.threats, sortOrder);
+            if (vm.reverse && !isEmptyArray(element.threats)) {
+                element.threats.reverse();
+            }
+        });
+        elements.sort(function(a, b) {
+            if (isEmptyArray(a.threats)) {
+                if (isEmptyArray(b.threats)) {
+                    return 0;
+                }
+                else {
+                    return -1;
+                }
+            }
+            if (isEmptyArray(b.threats)) {
+                if (isEmptyArray(a.threats)) {
+                    return 0;
+                }
+                else {
+                    return 1;
+                }
+            }
+            var x;
+            var y;
+            if (sortOrder) {
+                x = sortOrder.indexOf(a.threats[0][vm.sortKey].toLowerCase());
+                y = sortOrder.indexOf(b.threats[0][vm.sortKey].toLowerCase());
+            }
+            else {
+                x = a.threats[0][vm.sortKey].toLowerCase();
+                y = b.threats[0][vm.sortKey].toLowerCase();
+            }
+            if (x < y) {return -1;}
+            if (x > y) {return 1;}
+            return 0;
+        });
+        if (vm.reverse && !isEmptyArray(elements)) {
+            elements.reverse();
+        }
+        vm.reportElements = elements;
+    }
+
+    function sortArray(array, sortOrder) {
+        if (isEmptyArray(array)) {
+            return;
+        }
+        array.sort(function(a, b) {
+            var x;
+            var y;
+            if (sortOrder) {
+                x = sortOrder.indexOf(a[vm.sortKey].toLowerCase());
+                y = sortOrder.indexOf(b[vm.sortKey].toLowerCase());
+            }
+            else {
+                x = a[vm.sortKey].toLowerCase();
+                y = b[vm.sortKey].toLowerCase();
+            }
+            if (x < y) {return -1;}
+            if (x > y) {return 1;}
+            return 0;
+        });
+    }
+
+    function updateSortKeyAndOrder(sortKey) {
+        if (vm.sortKey === sortKey) { // If the key is the same, reverse the order
+            vm.reverse = !vm.reverse; //if true make it false and vice versa
+        }
+        vm.sortKey = sortKey;
+    }
+
+    function isEmptyArray(array) {
+        return (!array || array.length <= 0);
+    }
 }
 module.exports = ThreatReport;
