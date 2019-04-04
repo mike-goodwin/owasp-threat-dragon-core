@@ -124,13 +124,15 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
         log("Downloading as PDF");
         var elements = getScopedNonFlowOrBoundaryElements();
 
+        var threatDescriptionColumnNumber = 5;
+
         var docDefinition = {
             content: [
                 {text: 'Threat Report From OWASP Threat Dragon', style: 'header', decoration: 'underline'},
                 {table: {
                     headerRows: 1,
                     body: [
-                        [{text:"No.", style:"tg"},{text:"COMPONENT", style:'tg'},{text:'THREAT TYPE', style:'tg'},{text:'DESCRIPTION', style:'tg'}, {text:'STATUS', style:'tg'},{text:'SEVERITY', style:'tg'} ]
+                        [{text:"No.", style:"tg"},{text:"COMPONENT", style:'tg'},{text:'THREAT TITLE', style:'tg'},{text:'THREAT TYPE', style:'tg'},{text:'DESCRIPTION', style:'tg'}, {text:'STATUS', style:'tg'},{text:'SEVERITY', style:'tg'}]
                     ]
                 }}
             ],
@@ -159,31 +161,83 @@ function ThreatReport($scope, $location, $routeParams, $timeout, dialogs, common
             }
         };
 
-        var j;
+        var j=0;
         var colour;
-        var i=1;
-        elements.forEach(function (element) {
-            j=1;
-            if(element.threats !== undefined) {
+        elements.forEach(function(element, i){
+            if(element.threats == undefined || element.threats.length == 0) {
+                if(++j %2 == 0){
+                    colour="overEasy";
+                } else{
+                    colour="easy";
+                }
                 docDefinition.content[1].table.body.push([{
-                    rowSpan: element.threats.length+1,
-                    text: i
+                    rowSpan: 1,
+                    text: i+1
                 }, {
-                    rowSpan: element.threats.length+1,
+                    rowSpan: 1,
                     text: element.name
-                }, {text: element.threats[0].type, style: 'noHover'}, {
-                    text: element.threats[0].description
-                }, {text: element.threats[0].status, style: 'noHover'}, {
-                    text: element.threats[0].severity
+                }, {
+                    colSpan: threatDescriptionColumnNumber,
+                    text: "There are no threats to display for this " + element.attributes.type.substr(3) + " there may still be vulnerabilities, remain vigilant",
+                    style: colour
                 }]);
-                j++;
-                element.threats.forEach(function (threat) {
-                    if(j%2 === 0){ colour="overEasy";} else{colour="easy";}
-                    docDefinition.content[1].table.body.push(["", "", {text: threat.type, style: colour}, {text: threat.description, style: colour}, {text: threat.status, style:colour}, {text: threat.severity, style:colour}]);
-                    j++;
-                });
-                i++;
             }
+            else {
+
+                element.threats.forEach(function(threat, k){
+                    //dont print the first element
+                    if(++j % 2 == 0) {
+                        colour = "overEasy";
+                    } else {
+                        colour = "easy";
+                    }
+                    if (k==0){
+                        docDefinition.content[1].table.body.push([{
+                            rowSpan: element.threats.length,
+                            text: i+1
+                        }, {
+                            rowSpan: element.threats.length,
+                            text: element.name
+                        }, {
+                            text: threat.title,
+                            style: colour
+                        },{
+                            text: threat.type,
+                            style: colour
+                        }, {
+                            text: threat.description,
+                            style: colour
+                        }, {
+                            text: threat.status,
+                            style: colour
+                        }, {
+                            text: threat.severity,
+                            style: colour
+                        }]);
+                        //log(docDefinition.content[1].table.body[docDefinition.content[1].table.body.length-1]+ "and Elements length "+ element.threats.length+1);
+                    }
+                    else if (k!=0) {
+                        docDefinition.content[1].table.body.push(["", "",
+                        {
+                            text: threat.title,
+                            style: colour
+                        },{
+                            text: threat.type,
+                            style: colour
+                        }, {
+                            text: threat.description,
+                            style: colour
+                        }, {
+                            text: threat.status,
+                            style: colour
+                        }, {
+                            text: threat.severity,
+                            style: colour
+                        }]);
+                    }
+                });
+            }
+            i++;
         });
 
         pdfMake.createPdf(docDefinition).download("ThreatReport.pdf");

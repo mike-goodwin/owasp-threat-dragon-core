@@ -9161,8 +9161,16 @@ text.hasOpenThreats {
   }
 }
 
-.tab button.downloadButton {
+.trelloLogo {
   float: right;
+  height: 80%;
+  width: auto;
+  max-height: 60px;
+}
+
+
+.tab button.downloadButton {
+float: right;
   color: white;
   background-color: dodgerblue;
   border-radius: 15%;
@@ -9171,4 +9179,5 @@ text.hasOpenThreats {
 
 .tab button:hover.downloadButton {
   background-color: royalblue;
+
 }
