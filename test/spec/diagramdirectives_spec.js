@@ -183,7 +183,7 @@ describe('diagram directive: ', function () {
             elem = angular.element($('tmt-diagram')[0]);
             $compile(elem)($scope);
             $scope.$digest();
-            diagramSvg = $(elem).children('svg');
+            diagramSvg = $(elem).find('svg');
             viewport = diagramSvg.children('.joint-viewport');
 
         });
@@ -200,7 +200,7 @@ describe('diagram directive: ', function () {
 
             expect(elem.isolateScope().height).toEqual(height);
             //jasmine-jquery toHaveAttr does not work for SVG
-            expect(diagramSvg.attr('height')).toEqual((height - 10).toString());
+            expect(diagramSvg.attr('height')).toEqual('100%');
 
         });
 
@@ -208,7 +208,7 @@ describe('diagram directive: ', function () {
 
             expect(elem.isolateScope().width).toEqual(width);
             //jasmine-jquery toHaveAttr does not work for SVG
-            expect(diagramSvg.attr('width')).toEqual((width - 10).toString());
+            expect(diagramSvg.attr('width')).toEqual('100%');
 
         });
 
@@ -411,10 +411,10 @@ describe('diagram directive: ', function () {
                 var cell;
                 var cellView;
                 var parent;
-                var x = 10;
+                var x = 80;
                 var y = 20;
-                var elWidth = 50;
-                var elHeight = 50;
+                var elWidth = 100;
+                var elHeight = 100;
 
                 beforeEach(function () {
 
@@ -457,7 +457,7 @@ describe('diagram directive: ', function () {
                     spyOn(cellView, 'getBBox').and.returnValue({ x: bboxx, y: 50 });
 
                     diagram.trigger('cell:pointermove', cellView, null, x, y);
-                    expect(parent.scrollLeft()).toEqual(bboxx);
+                    expect(Math.round(parent.scrollLeft())).toEqual(bboxx);
 
                 });
 
@@ -468,31 +468,30 @@ describe('diagram directive: ', function () {
                     spyOn(cellView, 'getBBox').and.returnValue({ x: 50, y: bboxy });
 
                     diagram.trigger('cell:pointermove', cellView, null, x, y);
-                    expect(parent.scrollTop()).toEqual(bboxy);
+                    expect(Math.round(parent.scrollTop())).toEqual(bboxy);
 
                 });
 
+                //this test behaves differently on firefox
+                //on ff parent.width() = 100, on other browser it = 70
                 it('should scroll the diagram to the right', function () {
 
                     parent.scrollLeft(50);
-                    var bboxx = 10;
                     var bboxwidth = 100;
-                    spyOn(cellView, 'getBBox').and.returnValue({ x: bboxx, y: 50, width: bboxwidth });
-
+                    spyOn(cellView, 'getBBox').and.returnValue({ x: x, y: 50, width: bboxwidth });
                     diagram.trigger('cell:pointermove', cellView, null, x, y);
-                    expect(parent.scrollLeft()).toEqual(bboxx + bboxwidth - elWidth);
+                    expect(Math.round(parent.scrollLeft())).toEqual(x + bboxwidth - parent.width());
 
                 });
 
                 it('should scroll down', function () {
 
                     parent.scrollTop(50);
-                    var bboxy = 10;
                     var bboxheight = 100;
-                    spyOn(cellView, 'getBBox').and.returnValue({ x: 50, y: bboxy, height: bboxheight });
+                    spyOn(cellView, 'getBBox').and.returnValue({ x: x, y: y, height: bboxheight });
 
                     diagram.trigger('cell:pointermove', cellView, null, x, y);
-                    expect(parent.scrollTop()).toEqual(bboxy + bboxheight - elHeight);
+                    expect(Math.round(parent.scrollTop())).toEqual(y + bboxheight - parent.height());
 
                 });
 
@@ -505,7 +504,7 @@ describe('diagram directive: ', function () {
                     spyOn(diagram, 'setDimensions').and.callThrough();
 
                     diagram.trigger('cell:pointermove', cellView, null, x, y);
-                    expect(parent.scrollLeft()).toEqual(bboxx + bboxwidth - width);
+                    expect(Math.round(parent.scrollLeft())).toEqual(bboxx + bboxwidth - width);
                     expect(diagram.setDimensions).toHaveBeenCalled();
                     expect(diagram.setDimensions.calls.argsFor(0)).toEqual([bboxx + bboxwidth, height - 10]);
 
@@ -522,7 +521,7 @@ describe('diagram directive: ', function () {
                     var y = 20;
 
                     diagram.trigger('cell:pointermove', cellView, null, x, y);
-                    expect(parent.scrollTop()).toEqual(bboxy + bboxheight - height);
+                    expect(Math.round(parent.scrollTop())).toEqual(bboxy + bboxheight - height);
                     expect(diagram.setDimensions).toHaveBeenCalled();
                     expect(diagram.setDimensions.calls.argsFor(0)).toEqual([width - 10, bboxy + bboxheight]);
 
