@@ -46,6 +46,9 @@
                     <form name="diagramEditToolBar">
                         <div class="col-md-12">
                             <div class="btn-group pull-left" role="group">
+                                <button type="button" class="btn btn-default" ng-model="vm.showGrid" uib-btn-checkbox ng-click="vm.setGrid()" data-toggle="tooltip" data-placement="top" title="Toggle Gridlines">
+                                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                                </button>
                                 <a class="btn btn-default" ng-href="#/threatmodel/{{vm.getThreatModelPath()}}" role="button" data-toggle="tooltip" data-placement="top" title="Cancel Edit">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </a>

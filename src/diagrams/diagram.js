@@ -13,6 +13,8 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
     var logError = getLogFn(controllerId, 'error');
     var scope = $scope;
     var threatWatchers = [];
+    var gridSizeOn = 10;
+    var gridSizeOff = 1;
 
     // Bindable properties and functions are placed on vm.
     vm.errored = false;
@@ -30,6 +32,8 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
     vm.select = select;
     vm.edit = edit;
     vm.generateThreats = generateThreats;
+    vm.setGrid = setGrid;
+    vm.showGrid = false;
     vm.selected = null;
     vm.viewStencil = true;
     vm.viewThreats = false;
@@ -38,6 +42,12 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
     vm.zoomOut = zoomOut;
     vm.reload = reload;
     vm.save = save;
+    //fix, maybe hack (?) for desktop app issue https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/43
+    //is setting values on parent scope code smell?
+    //the reason is that the menu is defined on the shell controller whereas the save needs to be aware of the diagram controller
+    if ($scope.$parent.$parent) {
+        $scope.$parent.$parent.vm.saveDiagram = vm.save;
+    }
     vm.clear = clear;
     vm.currentDiagram = {};
     vm.diagramId = $routeParams.diagramId;
@@ -166,6 +176,16 @@ function diagram($scope, $location, $routeParams, $timeout, dialogs, common, dat
         if (vm.currentZoomLevel > -vm.maxZoom) {
             vm.currentZoomLevel--;
             vm.currentDiagram.zoom(vm.currentZoomLevel);
+        }
+    }
+
+    function setGrid() {
+        if (vm.showGrid) {
+            vm.currentDiagram.setGridSize(gridSizeOn);
+            vm.currentDiagram.drawGrid();
+        } else {
+            vm.currentDiagram.clearGrid();
+            vm.currentDiagram.setGridSize(gridSizeOff);
         }
     }
 
