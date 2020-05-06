@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.14.0
+version: v1.14.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -9,3 +9,14 @@ patch:
   'npm:mime:20170907':
     - rework-npm-cli > rework > mime:
         patched: '2020-02-16T14:29:10.334Z'
+  SNYK-JS-LODASH-567746:
+    - jointjs > lodash:
+        patched: '2020-05-06T07:43:22.550Z'
+    - lodash:
+        patched: '2020-05-06T07:43:22.550Z'
+    - jointjs > dagre > lodash:
+        patched: '2020-05-06T07:43:22.550Z'
+    - jointjs > graphlib > lodash:
+        patched: '2020-05-06T07:43:22.550Z'
+    - jointjs > dagre > graphlib > lodash:
+        patched: '2020-05-06T07:43:22.550Z'
