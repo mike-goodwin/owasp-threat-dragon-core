@@ -45,6 +45,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
     vm.zoomOut = zoomOut;
     vm.reload = reload;
     vm.save = save;
+    vm.updateDiagramType = updateDiagramType;
     //fix, maybe hack (?) for desktop app issue https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/43
     //is setting values on parent scope code smell?
     //the reason is that the menu is defined on the shell controller whereas the save needs to be aware of the diagram controller
@@ -217,9 +218,9 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         return threatmodellocator.getModelPathFromRouteParams($routeParams);
     }
 
-    function generateThreats() {
+    function generateThreats(type) {
         if (vm.selected) {
-            threatengine.generateForElement(vm.selected).then(onGenerateThreats);
+            threatengine.generatePerElement(vm.selected, type).then(onGenerateThreats);
         }
     }
 
@@ -259,12 +260,14 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         var threatTotal = threats.length;
         var threatList = threats;
         var currentThreat;
+        var template;
         suggestThreat();
 
         function suggestThreat() {
             if (threatList.length > 0) {
                 currentThreat = threatList.shift();
-                dialogs.confirm('diagrams/ThreatEditPane.html',
+                selectTemplate(currentThreat.modelType);
+                dialogs.confirm(template,
                     addThreat,
                     function () {
                         return {
@@ -304,6 +307,18 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         function ignoreThreat(applyToAll) {
             if (!applyToAll) {
                 $timeout(suggestThreat, 500);
+            }
+        }
+
+        function selectTemplate(type) {
+            if (type == null) {
+                template = 'diagrams/StrideEditPane.html';
+            } else if (type == 'CIA') {
+                template = 'diagrams/CiaEditPane.html';
+            } else if (type == 'LINDDUN') {
+                template = 'diagrams/LinddunEditPane.html';
+            } else {
+                template = 'diagrams/StrideEditPane.html';
             }
         }
     }
@@ -440,6 +455,19 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
                 vm.select(vm.copied);
                 vm.duplicateElement();
             }
+        }
+    }
+
+    function updateDiagramType() {
+        var type = vm.diagram.diagramType;
+        if (type == null) {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.stride.jpg';
+        } else if (type == 'CIA') {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.cia.jpg';
+        } else if (type == 'LINDDUN') {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.linddun.jpg';
+        } else {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.stride.jpg';
         }
     }
 }
