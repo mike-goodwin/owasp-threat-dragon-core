@@ -1,6 +1,15 @@
 ﻿'use strict';
 
 var _ = require('lodash');
+var ipc;
+
+try {
+    //In the desktop version, a renderer will be created to listen for unsaved changes
+    ipc = window.require("electron").ipcRenderer;
+  } catch (er) {
+    ipc = {};
+    ipc.send = function(){};
+  }
 
 function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, common, datacontext, threatengine, diagramming, threatmodellocator, hotkeys) {
 
@@ -45,6 +54,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
     vm.zoomOut = zoomOut;
     vm.reload = reload;
     vm.save = save;
+    vm.updateDiagramType = updateDiagramType;
     //fix, maybe hack (?) for desktop app issue https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/43
     //is setting values on parent scope code smell?
     //the reason is that the menu is defined on the shell controller whereas the save needs to be aware of the diagram controller
@@ -56,6 +66,8 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
     vm.diagramId = $routeParams.diagramId;
     vm.currentZoomLevel = 0;
     vm.maxZoom = 4;
+    vm.setDirty = setDirty;
+    vm.setClean = setClean;
 
     hotkeys('Escape', escapeHotkey);
     hotkeys('Cmd+C, Ctrl+C', copyHotkey);
@@ -68,7 +80,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         var absPathPrevious = previous.split('?')[0];
 
         if (vm.dirty && absPathCurrent != absPathPrevious) {
-            dialogs.structuredExit(event, function () { }, function () { vm.dirty = false; });
+            dialogs.structuredExit(event, function () { }, function () { vm.setClean(); });
         }
     });
 
@@ -116,7 +128,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
     }
 
     function onSaveDiagram() {
-        vm.dirty = false;
+        vm.setClean();
         addDirtyEventHandlers();
     }
 
@@ -143,7 +155,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
             vm.graph.on('remove', removeElement);
             addDirtyEventHandlers();
             vm.diagram = data;
-            vm.dirty = false;
+            vm.setClean();
 
             if ($routeParams.element) {
                 var element = vm.graph.getCellById($routeParams.element);
@@ -210,16 +222,16 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
     }
 
     function edit() {
-        vm.dirty = true;
+        vm.setDirty();
     }
 
     function getThreatModelPath() {
         return threatmodellocator.getModelPathFromRouteParams($routeParams);
     }
 
-    function generateThreats() {
+    function generateThreats(type) {
         if (vm.selected) {
-            threatengine.generateForElement(vm.selected).then(onGenerateThreats);
+            threatengine.generatePerElement(vm.selected, type).then(onGenerateThreats);
         }
     }
 
@@ -259,12 +271,14 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         var threatTotal = threats.length;
         var threatList = threats;
         var currentThreat;
+        var template;
         suggestThreat();
 
         function suggestThreat() {
             if (threatList.length > 0) {
                 currentThreat = threatList.shift();
-                dialogs.confirm('diagrams/ThreatEditPane.html',
+                selectTemplate(currentThreat.modelType);
+                dialogs.confirm(template,
                     addThreat,
                     function () {
                         return {
@@ -282,7 +296,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         }
 
         function addThreat(applyToAll) {
-            vm.dirty = true;
+            vm.setDirty();
 
             if (_.isUndefined(vm.selected.threats)) {
                 vm.selected.threats = [];
@@ -304,6 +318,18 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         function ignoreThreat(applyToAll) {
             if (!applyToAll) {
                 $timeout(suggestThreat, 500);
+            }
+        }
+
+        function selectTemplate(type) {
+            if (type == null) {
+                template = 'diagrams/StrideEditPane.html';
+            } else if (type == 'CIA') {
+                template = 'diagrams/CiaEditPane.html';
+            } else if (type == 'LINDDUN') {
+                template = 'diagrams/LinddunEditPane.html';
+            } else {
+                template = 'diagrams/StrideEditPane.html';
             }
         }
     }
@@ -340,7 +366,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
     }
 
     function removeElement(element, graph, state) {
-        vm.dirty = true;
+        vm.setDirty();
         vm.selected = null;
         unWatchThreats(element);
         $location.search('element', null);
@@ -381,7 +407,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
         vm.graph.on('change add', setDirty);
 
         function setDirty() {
-            vm.dirty = true;
+            vm.setDirty();
             vm.graph.off('change add', setDirty);
             //throws exception (digest already in progress)
             //but removing causes failure to enable save button in diagram editor when moving an element
@@ -441,6 +467,32 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
                 vm.duplicateElement();
             }
         }
+    }
+
+    function updateDiagramType() {
+        var type = vm.diagram.diagramType;
+        if (type == null) {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.stride.jpg';
+        } else if (type == 'CIA') {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.cia.jpg';
+        } else if (type == 'LINDDUN') {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.linddun.jpg';
+        } else {
+            vm.diagram.thumbnail = './public/content/images/thumbnail.stride.jpg';
+        }
+        vm.setDirty();
+    }
+
+    function setDirty() {
+        vm.dirty = true;
+        //Use to communicate with ipcMain on Threat-Dragon-Desktop to listen for unsaved Changes
+        ipc.send('vmIsDirty', true);
+    }
+
+    function setClean() {
+        vm.dirty = false;
+        //Use to communicate with ipcMain on Threat-Dragon-Desktop to listen for unsaved Changes
+        ipc.send('vmIsDirty', false);
     }
 }
 
